@@ -17,7 +17,10 @@ class ServiceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title'=>fake()->name(),
+            'description'=>fake()->text(),
+            'price'=>fake()->numberBetween(1,9234),
+            'expert_id'=>rand(1,9),
         ];
     }
 }

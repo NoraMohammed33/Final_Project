@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
     public function Contract()
     {
         return $this->belongsTo(Contract::class);
