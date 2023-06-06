@@ -2,25 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreContractRequest;
-use App\Http\Requests\UpdateContractRequest;
-use App\Models\Contract;
-use App\Models\Service;
-use App\Models\User;
-use App\Http\Resources\ContractResource;
+use App\Http\Requests\StoreExpertRequest;
+use App\Http\Requests\UpdateExpertRequest;
 use App\Models\Expert;
 
-class ContractController extends Controller
+class ExpertController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users=User::all();
-        $services=Service::all();
-        $experts=Expert::all();
-        return ContractResource::collection(Contract::all());
+        //
     }
 
     /**
@@ -28,13 +21,13 @@ class ContractController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreContractRequest $request)
+    public function store(StoreExpertRequest $request)
     {
         //
     }
@@ -42,7 +35,7 @@ class ContractController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Contract $contract)
+    public function show(Expert $expert)
     {
         //
     }
@@ -50,7 +43,7 @@ class ContractController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contract $contract)
+    public function edit(Expert $expert)
     {
         //
     }
@@ -58,7 +51,7 @@ class ContractController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContractRequest $request, Contract $contract)
+    public function update(UpdateExpertRequest $request, Expert $expert)
     {
         //
     }
@@ -66,7 +59,7 @@ class ContractController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contract $contract)
+    public function destroy(Expert $expert)
     {
         //
     }

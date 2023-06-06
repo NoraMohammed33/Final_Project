@@ -16,9 +16,9 @@ class ContractResource extends JsonResource
     {
         return[
             'id' => $this->id,
-            'user_id' => $this->users->id,
-            'service_id' => $this->email,
-            'expert_id' => $this->email,
+            'user_id' =>  new UserResource($this->user),
+            'service_id' => new ServiceResource($this->service),
+            'expert_id' => new ExpertResource($this->expert),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

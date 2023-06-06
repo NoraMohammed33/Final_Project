@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContractController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {return view('welcome');});
-
+Route::resource('contracts',ContractController::class);
 
 //=====================posts routes==========================
 use App\Http\Controllers\PostController;
