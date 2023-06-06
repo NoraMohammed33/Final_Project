@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StorePostRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; // Set to true if authorization is not required
     }
 
     /**
@@ -22,7 +24,27 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title" => 'required',
+            "body" => 'required',
+        ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'success' => false,
+                'message' => 'Validation errors',
+                'data' => $validator->errors()
+            ], 400)
+        );
+    }
+
+    public function messages()
+    {
+        return [
+            "title" => "The title field is required.",
+            "body" => "The body field is required."
         ];
     }
 }
