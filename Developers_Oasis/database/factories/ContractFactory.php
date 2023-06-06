@@ -17,7 +17,9 @@ class ContractFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'expert_id'=>rand(1,9),
+            'user_id'=>rand(1,9),
+            'service_id'=>rand(12,20),
         ];
     }
 }
