@@ -15,8 +15,8 @@ return new class extends Migration
 
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
+            $table->string('title')->default('');
+            $table->string('description')->default('');
             $table->bigInteger('price');
             $table->bigInteger('expert_id');
             $table->foreign('expert_id')->references('id')->on('experts');

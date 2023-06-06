@@ -2,65 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Department;
+use App\Models\Service;
+use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
+use App\Http\Requests\StorePostRequest;
+use Exception;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // function __construct()
+    // {
+
+    //     $this->middleware('auth:sanctum')->only('create', 'store', 'edit', 'update',);
+    // }
     public function index()
     {
-        //
+
+    return  PostResource::collection(Post::all());
+        // return csrf_token();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('createpost');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePostRequest $request)
     {
-        //
+        $post = Post::create($request->all());
+        return new  PostResource($post);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Post $post)
     {
-        //
+        if ($post) {
+            return new PostResource($post);
+        }
+        return response('', 404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Post $post)
     {
-        //
+        if ($post) {
+            return view('editpost');
+        } else {
+            return response('', 404);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        try {
+            $post->update($request->all());
+            return new PostResource($post);
+
+        }catch(Exception $e ){
+
+            return $e;
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
-        //
+        if($post){
+            $post->delete();
+            return new Response('', 204);
+        }else{
+            return response()->json('', 404);
+        }
+
     }
+
 }
