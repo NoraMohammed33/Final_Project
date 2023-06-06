@@ -52,4 +52,9 @@ class User extends Authenticatable
         return $this->morphMany(Comment::class,'commentable');
 
    }
+    public function Contract()
+    {
+        return $this->belongsTo(Contract::class);
+    }
+
 }
