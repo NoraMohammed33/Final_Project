@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expert;
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
@@ -13,7 +17,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::all();
+        return response()->json($services);
     }
 
     /**
@@ -21,7 +26,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('services.create');
     }
 
     /**
@@ -29,7 +34,23 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'description'=>'required',
+            'image'=>'required|image',
+            'price'=>'required|numeric'
+        ]);
+
+        $service = new Service();
+        $service->title = $request->input('title');
+        $service->description = $request->input('description');
+        $service->image = $request->file('image')->store('services_images');
+        $user = Auth::user();
+        $expert = Expert::find($user->id);
+        $expert_id = $expert->id;
+        $service->expert_id = $expert_id;
+        $service->save();
+        return redirect()->route('services.index');
     }
 
     /**
@@ -37,7 +58,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return view('services.show', compact('service'));
     }
 
     /**
@@ -45,7 +66,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('services.edit', compact('service'));
     }
 
     /**
@@ -53,7 +74,19 @@ class ServiceController extends Controller
      */
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'description'=>'required',
+            'image'=>'required|image',
+            'price'=>'required|numeric'
+        ]);
+
+        $service->title = $request->input('title');
+        $service->description = $request->input('description');
+        $service->image = $request->file('image')->store('services_images');
+        $service->save();
+        return redirect()->route('services.index');
+
     }
 
     /**
@@ -61,6 +94,7 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+        return redirect()->route('services.index');
     }
 }

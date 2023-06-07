@@ -11,10 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('experts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('dept_id');
+            $table->longText('bio');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('dept_id')->references('id')->on('departments');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
