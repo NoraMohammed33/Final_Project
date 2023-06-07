@@ -4,17 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Expert extends Model
+
+class Comment extends Model
 {
     use HasFactory;
-    public function Contract()
+
+
+
+    public function commentable(): MorphTo
     {
-        return $this->belongsTo(Contract::class);
+        return $this->morphTo();
     }
 
-    public function user()
-    {
+    public function user() {
+        
         return $this->belongsTo(User::class);
     }
 }

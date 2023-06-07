@@ -5,16 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expert extends Model
+class Service extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
+    protected $fillable = ['title', 'price', 'description', 'image', 'expert_id'];
+
     public function Contract()
     {
         return $this->belongsTo(Contract::class);
     }
 
-    public function user()
+    public function expert()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Expert::class);
     }
+
+
+
 }
