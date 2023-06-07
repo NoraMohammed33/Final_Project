@@ -18,16 +18,15 @@ use Exception;
 
 class PostController extends Controller
 {
-    // function __construct()
-    // {
+    function __construct()
+    {
 
-    //     $this->middleware('auth:sanctum')->only('create', 'store', 'edit', 'update',);
-    // }
+        $this->middleware('auth:sanctum')->only('create', 'store', 'edit', 'update',);
+    }
     public function index()
     {
 
     return  PostResource::collection(Post::all());
-        // return csrf_token();
     }
 
     public function create()
@@ -61,6 +60,7 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
+        if($post)
         try {
             $post->update($request->all());
             return new PostResource($post);
@@ -68,14 +68,21 @@ class PostController extends Controller
         }catch(Exception $e ){
 
             return $e;
+        }else{
+            return response('', 404);
         }
     }
 
     public function destroy(Post $post)
     {
         if($post){
-            $post->delete();
-            return new Response('', 204);
+            try{
+                $post->delete();
+                return new Response('', 204);
+            }catch(Exception $e){
+                return $e;
+
+            }
         }else{
             return response()->json('', 404);
         }
