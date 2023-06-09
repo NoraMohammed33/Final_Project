@@ -21,12 +21,12 @@ class PostController extends Controller
     function __construct()
     {
 
-        $this->middleware('auth:sanctum')->only('create', 'store', 'edit', 'update',);
+        $this->middleware('auth:sanctum')->only('create', 'store', 'edit', 'update','destroy');
     }
     public function index()
     {
 
-    return  PostResource::collection(Post::all());
+    return PostResource::collection(Post::all());
     }
 
     public function create()

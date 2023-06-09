@@ -14,6 +14,10 @@ use Illuminate\Http\Response;
 class CommentController extends Controller
 {
 
+    function __construct(){
+           $this->middleware('auth:sanctum')->except(['index']);
+    }
+
     public function index()
     {
         return CommentResource::collection(Comment::all());
@@ -21,14 +25,10 @@ class CommentController extends Controller
 
     public function store(StoreCommentRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'body' => 'required|string',
-            'commentable_id' => 'required|integer',
-            'commentable_type' => 'required|string',
-        ]);
         $comment = Comment::create($request->all());
         $comment->save();
+        return new CommentResource($comment);
+
     }
 
     public function update(UpdateCommentRequest $request, Comment $comment)
