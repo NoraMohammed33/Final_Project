@@ -22,8 +22,8 @@ class PostFactory extends Factory
         return [
                  'title' => fake()->name(),
                  'body' => fake()->name(),
-                 'user_id'=>rand(1,10),
-                 'dep_id'=>1,
+                 'user_id'=>rand(3,10),
+                 'dep_id'=>rand(10,20),
             //
         ];
     }

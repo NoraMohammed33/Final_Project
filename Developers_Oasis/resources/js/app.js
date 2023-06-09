@@ -18,6 +18,10 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
+import PostComponent from './components/PostComponent.vue';
+app.component('post-component',PostComponent);
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -27,7 +31,8 @@ app.component('example-component', ExampleComponent);
  */
 
 // Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
+//     app.componeimport { vue } from '@vitejs/plugin-vue';
+nt(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
 // });
 
 /**
