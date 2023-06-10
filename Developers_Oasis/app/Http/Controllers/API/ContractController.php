@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Http\Requests\StoreContractRequest;
 use App\Http\Requests\UpdateContractRequest;
@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Http\Resources\ContractResource;
 use App\Models\Expert;
+use APP\HTTP\Controllers\Controller;
 
 class ContractController extends Controller
 {
@@ -28,7 +29,7 @@ class ContractController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**

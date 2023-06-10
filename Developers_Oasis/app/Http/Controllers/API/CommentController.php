@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 
 use App\Models\Comment;
@@ -9,18 +9,22 @@ use App\Http\Requests\UpdateCommentRequest;
 use App\Http\Resources\CommentResource;
 use Exception;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 
 
 class CommentController extends Controller
 {
 
-    function __construct(){
-           $this->middleware('auth:sanctum')->except(['index']);
+    function __construct()
+    {
+
+        $this->middleware('auth:sanctum')->only('create', 'store', 'edit', 'update','destroy');
     }
 
     public function index()
     {
-        return CommentResource::collection(Comment::all());
+
+    return CommentResource::collection(Comment::all());
     }
 
     public function store(StoreCommentRequest $request)

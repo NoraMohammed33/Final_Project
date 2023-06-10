@@ -19,7 +19,7 @@ class CommentResource extends JsonResource
                'id' => $this->id,
                'body' => $this->body,
                'user_id' => new UserResource($this->user),
-               'post_id'=>new PostResource($this->post),
+               'post_id'=>$this->post_id,
                'commentable_type'=>$this->commentable_type,
                'commentable_id'=>$this->commentable_id,
         ];

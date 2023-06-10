@@ -20,7 +20,6 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'body' => $this->body,
             'user_id' => new UserResource($this->user),
-            'comments'=>$this->comments,
         ];
 
         // return parent::toArray($request);

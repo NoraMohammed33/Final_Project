@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdatePostRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Department;
 use App\Models\Service;
+use App\Models\Expert;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Requests\StorePostRequest;

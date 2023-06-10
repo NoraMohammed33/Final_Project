@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Expert;
 use App\Models\Service;
@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\HTTP\Controllers\Controller;
+
 
 class ServiceController extends Controller
 {
