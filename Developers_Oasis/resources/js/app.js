@@ -32,7 +32,7 @@ app.component('post-component',PostComponent);
 
 // Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
 //     app.componeimport { vue } from '@vitejs/plugin-vue';
-nt(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
+// nt(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
 // });
 
 /**

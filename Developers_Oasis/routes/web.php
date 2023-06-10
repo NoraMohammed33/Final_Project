@@ -17,11 +17,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {return view('home');});
-
+Route::get('/', function () {return view('welcome');});
+Route::get('/posts', function () {return view('posts');});
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
