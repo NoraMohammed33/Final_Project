@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
+<h1>dfhbdf</h1>
+<div id="app">
 
-    <example-component></example-component>
-
+    <post-component></post-component>
 </div>
 @endsection
