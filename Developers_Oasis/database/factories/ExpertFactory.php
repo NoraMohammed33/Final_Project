@@ -17,6 +17,9 @@ class ExpertFactory extends Factory
     public function definition(): array
     {
         return [
+                 'bio' => fake()->name(),
+                 'user_id'=>rand(3,10),
+                 'dept_id'=>rand(5,15),
             //
         ];
     }

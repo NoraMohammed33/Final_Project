@@ -17,8 +17,13 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-             //
 
+            'body' => fake()->name(),
+            'user_id'=>rand(3,10),
+            'post_id'=>rand(5,15),
+            'commentable_type'=>fake()->name(),
+            'commentable_id'=>rand(5,15),
+             //
         ];
     }
 }

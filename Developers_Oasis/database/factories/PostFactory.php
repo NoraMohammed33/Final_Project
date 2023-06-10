@@ -23,7 +23,7 @@ class PostFactory extends Factory
                  'title' => fake()->name(),
                  'body' => fake()->name(),
                  'user_id'=>rand(3,10),
-                 'dep_id'=>rand(10,20),
+                 'dep_id'=>rand(5,15),
             //
         ];
     }
