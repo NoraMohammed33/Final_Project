@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\ExpertController;
+use App\Http\Controllers\API\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ use App\Http\Controllers\API\ExpertController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::apiResource('admin',AdminController::class);
 
 //=====================contracts routes ======================
 Route::apiResource('contracts',ContractController::class);

@@ -5,8 +5,17 @@
  */
 
 import './bootstrap';
+import 'vuetify/styles';
 import { createApp } from 'vue';
+// Vuetify
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
+const vuetify = createVuetify({
+    components,
+    directives,
+})
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -21,7 +30,11 @@ app.component('example-component', ExampleComponent);
 import PostComponent from './components/PostComponent.vue';
 app.component('post-component',PostComponent);
 
+import MenuBarComponent from "./components/MenuBarComponent.vue";
+app.component('menubar-component',MenuBarComponent)
 
+import LoginComponent from "./components/AdminComponents/LoginComponent.vue";
+app.component('login-component',LoginComponent)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -41,4 +54,4 @@ app.component('post-component',PostComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+app.use(vuetify).mount('#app');
