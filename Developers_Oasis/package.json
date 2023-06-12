@@ -14,5 +14,10 @@
         "sass": "^1.56.1",
         "vite": "^4.0.0",
         "vue": "^3.2.37"
+    },
+    "dependencies": {
+        "vue-axios": "^3.5.2",
+        "vue-router": "^4.2.2",
+        "vuetify": "^3.3.3"
     }
 }

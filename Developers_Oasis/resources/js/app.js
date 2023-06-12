@@ -5,8 +5,22 @@
  */
 
 import './bootstrap';
+import 'vuetify/styles';
+import * as Vue from 'vue';
 import { createApp } from 'vue';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
+
+// Vuetify
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+    components,
+    directives,
+})
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -18,6 +32,20 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
+import PostComponent from './components/UserComponents/PostComponent.vue';
+app.component('post-component',PostComponent);
+
+import MenuBarComponent from "./components/MenuBarComponent.vue";
+app.component('menubar-component',MenuBarComponent);
+
+import LoginComponent from "./components/AdminComponents/LoginComponent.vue";
+app.component('login-component',LoginComponent);
+
+import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
+app.component('dashboard-component',DashBoardComponent);
+
+import AddPostComponent from "./components/UserComponents/AddPostComponent.vue";
+app.component('addpost-component',AddPostComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -27,7 +55,8 @@ app.component('example-component', ExampleComponent);
  */
 
 // Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
+//     app.componeimport { vue } from '@vitejs/plugin-vue';
+// nt(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
 // });
 
 /**
@@ -35,5 +64,5 @@ app.component('example-component', ExampleComponent);
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
-
-app.mount('#app');
+app.use(VueAxios, axios);
+app.use(vuetify).mount('#app');

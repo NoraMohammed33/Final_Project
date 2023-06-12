@@ -12,6 +12,7 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
+          
         //
     }
 }
