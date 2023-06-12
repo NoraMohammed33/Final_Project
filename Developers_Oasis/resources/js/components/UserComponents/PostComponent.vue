@@ -37,9 +37,6 @@
                   <button type="submit" class="btn btn-primary">Add Comment</button>
                 </div>
               </form>
-              <!-- v-if="post.comments.length > 0"
-                v-else
-              -->
               <div>
                 <div class="card" v-for="comment in post.comments" :key="comment.id">
                   <div class="card-header">{{comment.user.name }}:</div>

@@ -4,7 +4,7 @@
             <a class="nav-link" href="/posts"> posts<span class="sr-only"></span></a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#"> <span class="sr-only">Ask me </span></a>
+            <a class="nav-link" href="/addpost"> <span class="sr-only">Ask me </span></a>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="#">experts<span class="sr-only"></span></a>
