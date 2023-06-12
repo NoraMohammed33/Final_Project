@@ -23,9 +23,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                 <span>Developers</span>
-                    <img src="../../images/logo.jpg" width="50px"/>
-                    <span>Oasis</span>
+                 <span>Developers Oasis</span>
                 </a>
 
 

@@ -6,7 +6,12 @@
 
 import './bootstrap';
 import 'vuetify/styles';
+import * as Vue from 'vue';
 import { createApp } from 'vue';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+
 // Vuetify
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -27,17 +32,20 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
-import PostComponent from './components/PostComponent.vue';
+import PostComponent from './components/UserComponents/PostComponent.vue';
 app.component('post-component',PostComponent);
 
 import MenuBarComponent from "./components/MenuBarComponent.vue";
-app.component('menubar-component',MenuBarComponent)
+app.component('menubar-component',MenuBarComponent);
 
 import LoginComponent from "./components/AdminComponents/LoginComponent.vue";
-app.component('login-component',LoginComponent)
+app.component('login-component',LoginComponent);
 
 import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
-app.component('dashboard-component',DashBoardComponent)
+app.component('dashboard-component',DashBoardComponent);
+
+import AddPostComponent from "./components/UserComponents/AddPostComponent.vue";
+app.component('addpost-component',AddPostComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -56,5 +64,5 @@ app.component('dashboard-component',DashBoardComponent)
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
-
+app.use(VueAxios, axios);
 app.use(vuetify).mount('#app');
