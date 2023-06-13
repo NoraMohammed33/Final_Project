@@ -1,12 +1,14 @@
 <template>
     <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-success text-light" data-bs-toggle="modal" data-bs-target="#mymodal">+ Add</button>
+        <v-col cols="auto" data-bs-toggle="modal" data-bs-target="#mymodal">
+            <v-btn color="green" density="comfortable">Add New Service</v-btn>
+        </v-col>
     </div>
-    <div class="modal fade" id="mymodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog">
+    <div  class="modal fade" id="mymodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered mod" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title text-center w-100 fw-bold">Add New Service</h5>
+                    <h3 class="modal-title text-center w-100 fw-bold">Add New Service</h3>
                 </div>
                 <div class="modal-body">
                     <input type="text" v-model="service_title" class="form-control my-3 border" name="service_title" placeholder="Service Title" >
@@ -20,8 +22,8 @@
                     <img v-if="imagePreview" :src="imagePreview" alt="Image Preview" class="img-fluid" style="width: 60%;height: 210px">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-bs-dismiss="modal" class="btn btn-secondary text-light" @click="emptyForm">Cancel</button>
-                    <button type="button" data-bs-dismiss="modal" class="btn btn-primary text-light" @click="saveService">Save Service</button>
+                    <button type="button" id="dismiss" data-bs-dismiss="modal" class="btn btn-secondary text-light" @click="emptyForm">Cancel</button>
+                    <button type="button" class="btn btn-primary text-light" id="dismissBtn" @click="saveService">Save Service</button>
                 </div>
             </div>
 
@@ -63,7 +65,11 @@ export default {
                         text: 'Service saved successfully!'
                     });
                     this.$emit('service-saved')
+                    const close = document.getElementById('dismiss')
+                    close.click()
                     this.emptyForm()
+
+
                 }).catch(error => {
                     console.log(error.response.data)
                 })
@@ -82,6 +88,7 @@ export default {
             this.service_description=''
             this.service_price=''
             this.imagePreview=''
+            this.errors={}
         },
         validateForm() {
             let isValid = true;

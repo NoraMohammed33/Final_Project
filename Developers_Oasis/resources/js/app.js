@@ -3,11 +3,6 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-import './bootstrap';
-import { createApp } from 'vue';
-
-// Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -17,6 +12,9 @@ const vuetify = createVuetify({
     components,
     directives
 })
+
+import './bootstrap';
+import { createApp } from 'vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -29,11 +27,23 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
-import PostComponent from './components/PostComponent.vue';
+import PostComponent from './components/UserComponents/PostComponent.vue';
 app.component('post-component',PostComponent);
 
 import ServicesComponent from "./components/services/ServicesComponent.vue";
 app.component('services-component', ServicesComponent)
+import AddPostComponent from "./components/UserComponents/AddPostComponent.vue";
+app.component('addpost-component',AddPostComponent);
+
+import MenuBarComponent from "./components/MenuBarComponent.vue";
+app.component('menubar-component',MenuBarComponent);
+
+import LoginComponent from "./components/AdminComponents/LoginComponent.vue";
+app.component('login-component',LoginComponent);
+
+import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
+app.component('dashboard-component',DashBoardComponent);
+
 
 /**
  * The following block of code may be used to automatically register your

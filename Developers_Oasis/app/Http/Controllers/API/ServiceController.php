@@ -48,10 +48,9 @@ class ServiceController extends Controller
             $imagePath = $image->storeAs('services_images', $imageName, 'public');
             $service->image = $imagePath;
         }
-       // $user_id = Auth::id();
-//        $expert = Expert::where('user_id', $user_id)->first();
-//        $expertID = $expert->id;
-        $service->expert_id = 1;
+
+        $service->expert_id = 2;
+
         $service->save();
         return response()->json('Service saved successfully');
     }
@@ -89,10 +88,6 @@ class ServiceController extends Controller
             $imagePath = $image->storeAs('services_images', $imageName, 'public');
             $service->image = $imagePath;
         }
-        // $user_id = Auth::id();
-//        $expert = Expert::where('user_id', $user_id)->first();
-//        $expertID = $expert->id;
-        $service->expert_id = 1;
         $service->save();
         return response()->json('Service updated successfully');
 
