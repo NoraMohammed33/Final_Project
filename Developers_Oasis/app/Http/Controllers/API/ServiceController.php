@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Resources\ServiceResource;
 use App\Models\Expert;
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\HTTP\Controllers\Controller;
 
@@ -19,7 +21,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::with('expert.user')->get();
         return response()->json($services);
     }
 
@@ -36,23 +38,21 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
-        $request->validate([
-            'title'=>'required',
-            'description'=>'required',
-            'image'=>'required|image',
-            'price'=>'required|numeric'
-        ]);
-
         $service = new Service();
         $service->title = $request->input('title');
         $service->description = $request->input('description');
-        $service->image = $request->file('image')->store('services_images');
-        $user = Auth::user();
-        $expert = Expert::find($user->id);
-        $expert_id = $expert->id;
-        $service->expert_id = $expert_id;
+        $service->price = $request->input('price');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs('services_images', $imageName, 'public');
+            $service->image = $imagePath;
+        }
+
+        $service->expert_id = 2;
+
         $service->save();
-        return redirect()->route('services.index');
+        return response()->json('Service saved successfully');
     }
 
     /**
@@ -74,29 +74,35 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateServiceRequest $request, Service $service)
+    public function update(UpdateServiceRequest $request, $id)
     {
-        $request->validate([
-            'title'=>'required',
-            'description'=>'required',
-            'image'=>'required|image',
-            'price'=>'required|numeric'
-        ]);
-
+        $service = Service::findOrFail($id);
         $service->title = $request->input('title');
         $service->description = $request->input('description');
-        $service->image = $request->file('image')->store('services_images');
+        $service->price = $request->input('price');
+        if ($request->hasFile('image')) {
+            $imagePath = 'public/' . $service->image;
+            Storage::delete($imagePath);
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs('services_images', $imageName, 'public');
+            $service->image = $imagePath;
+        }
         $service->save();
-        return redirect()->route('services.index');
+        return response()->json('Service updated successfully');
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Service $service)
+    public function destroy($id)
     {
+        $service = Service::findOrFail($id);
+        $imagePath = 'public/' . $service->image;
+        Storage::delete($imagePath);
         $service->delete();
-        return redirect()->route('services.index');
+        return response()->json('Service deleted successfully');
     }
 }
+
