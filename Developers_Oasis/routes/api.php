@@ -40,7 +40,7 @@ Route::apiResource('posts',PostController::class);
 
 //========================comments routes==================
 
-Route::apiResource('comments',CommentController::class);
+Route::apiResource('posts.comments',CommentController::class);
 
 //==============experts====================================
 
