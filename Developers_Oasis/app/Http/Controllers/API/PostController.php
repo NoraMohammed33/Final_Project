@@ -19,21 +19,25 @@ use Exception;
 
 class PostController extends Controller
 {
-    function __construct()
-    {
+    // function __construct()
+    // {
 
-        $this->middleware('auth:sanctum')->only('create', 'store', 'edit', 'update','destroy');
-    }
+    //     $this->middleware('auth:sanctum')->only('create', 'store', 'update','destroy');
+    // }
     public function index()
     {
-
-    return PostResource::collection(Post::all());
+        return PostResource::collection(Post::all());
     }
 
-    public function create()
-    {
-        return view('createpost');
-    }
+
+//     public function index(Request $request)
+// {
+//     $departmentIds = $request->input('department_ids', []);
+
+//     $posts = Post::whereIn('department_id', $departmentIds)->get();
+
+//     return PostResource::collection($posts);
+// }
 
     public function store(StorePostRequest $request)
     {
@@ -50,44 +54,32 @@ class PostController extends Controller
     }
 
 
-    public function edit(Post $post)
-    {
-        if ($post) {
-            return view('editpost');
-        } else {
-            return response('', 404);
-        }
-    }
-
     public function update(UpdatePostRequest $request, Post $post)
     {
-        if($post)
-        try {
-            $post->update($request->all());
-            return new PostResource($post);
+        if ($post)
+            try {
+                $post->update($request->all());
+                return new PostResource($post);
+            } catch (Exception $e) {
 
-        }catch(Exception $e ){
-
-            return $e;
-        }else{
+                return $e;
+            }
+        else {
             return response('', 404);
         }
     }
 
     public function destroy(Post $post)
     {
-        if($post){
-            try{
+        if ($post) {
+            try {
                 $post->delete();
                 return new Response('', 204);
-            }catch(Exception $e){
+            } catch (Exception $e) {
                 return $e;
-
             }
-        }else{
+        } else {
             return response()->json('', 404);
         }
-
     }
-
 }
