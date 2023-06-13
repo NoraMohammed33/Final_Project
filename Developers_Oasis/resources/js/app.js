@@ -47,7 +47,8 @@ app.component('login-component',LoginComponent);
 import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
 app.component('dashboard-component',DashBoardComponent);
 
-
+import AdminHeaderComponent from "./components/AdminComponents/AdminHeaderComponent.vue";
+app.component('adminheader-component',AdminHeaderComponent)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
