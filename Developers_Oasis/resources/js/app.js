@@ -3,24 +3,19 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-import './bootstrap';
-import 'vuetify/styles';
-import * as Vue from 'vue';
-import { createApp } from 'vue';
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-
-// Vuetify
+import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
 const vuetify = createVuetify({
     components,
-    directives,
+    directives
 })
+
+import './bootstrap';
+import { createApp } from 'vue';
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -35,6 +30,8 @@ app.component('example-component', ExampleComponent);
 import PostComponent from './components/UserComponents/PostComponent.vue';
 app.component('post-component',PostComponent);
 
+import ServicesComponent from "./components/services/ServicesComponent.vue";
+app.component('services-component', ServicesComponent)
 import AddPostComponent from "./components/UserComponents/AddPostComponent.vue";
 app.component('addpost-component',AddPostComponent);
 
@@ -66,5 +63,5 @@ app.component('dashboard-component',DashBoardComponent);
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
-app.use(VueAxios, axios);
+
 app.use(vuetify).mount('#app');
