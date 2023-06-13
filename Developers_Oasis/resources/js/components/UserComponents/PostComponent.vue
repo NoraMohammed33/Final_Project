@@ -37,9 +37,11 @@
                   <button type="submit" class="btn btn-primary">Add Comment</button>
                 </div>
               </form>
+              <!-- v-if="post.comments.length > 0"
+              -->
               <div>
                 <div class="card" v-for="comment in post.comments" :key="comment.id">
-                  <div class="card-header">{{comment.user.name }}:</div>
+                  <div class="card-header">{{ comment.user.name }}:</div>
 
                   <div class="card-body">
                     <div>
@@ -76,10 +78,8 @@
   </div>
 </template>
 
-    <script>
-    import * as Vue from 'vue';
-    import axios from 'axios';
-
+      <script>
+import axios from "axios";
 
 export default {
   data() {
@@ -92,9 +92,9 @@ export default {
     this.fetchPosts();
   },
   methods: {
-    fetchPosts() {
-     this.axios
-        .get(`http://localhost:8000/api/posts`)
+    fetchPosts(id) {
+      axios
+        .get(`http://localhost:8000/api/posts/7`)
         .then(response => {
           this.posts = response.data;
         })
@@ -103,8 +103,8 @@ export default {
         });
     },
     deletePost(id) {
-        this.axios
-        .delete(`http://localhost:8000/api/posts/${id}`)
+      axios
+        .delete(`http://localhost:8000/api/posts/7`)
         .then(response => {
           this.fetchPosts();
         })
@@ -113,7 +113,7 @@ export default {
         });
     },
     deleteComment(commentId) {
-      this.axios
+      axios
         .delete(`http://localhost:8000/api/comments/${commentId}`)
         .then(response => {
           this.fetchPosts();
@@ -123,7 +123,7 @@ export default {
         });
     },
     addComment(postId) {
-     this.axios
+      axios
         .post(`http://localhost:8000/api/posts/${postId}/comments`, {
           body: this.newCommentBody
         })
@@ -142,6 +142,6 @@ export default {
 };
 </script>
 
-<style>
-
+    <style>
 </style>
+

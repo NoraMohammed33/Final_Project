@@ -10,55 +10,62 @@
         <label for="body">Body:</label>
         <textarea id="body" v-model="newPost.body" class="form-control" required></textarea>
       </div>
+      <div class="form-group">
+        <label for="dep_id">Department ID:</label>
+        <input type="number" id="dep_id" v-model="newPost.dep_id" class="form-control" required />
+      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </template>
 
-    <script>
+        <script>
 import axios from "axios";
 
 export default {
   data() {
     return {
-      posts: [],
+      departments: [],
       newPost: {
         title: "",
-        body: ""
+        body: "",
+        user_id: this.user_id,
+        dep_id: null
       }
     };
   },
-  created() {
-    this.fetchPosts();
-  },
+  props: ["user_id"],
   methods: {
-    fetchPosts() {
-      axios
-        .get("http://localhost:8000/api/posts/")
-        .then(response => {
-          this.posts = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
     addPost() {
       axios
         .post("http://localhost:8000/api/posts/", this.newPost)
         .then(response => {
-          this.fetchPosts();
-          this.newPost.title = "";
-          this.newPost.body = "";
+          console.log(response.data);
+          this.resetForm();
         })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
     },
-
-    mounted() {
-      console.log("Component mounted.");
+    resetForm() {
+      this.newPost = {
+        title: "",
+        body: "",
+        user_id: null,
+        dep_id: null
+      };
     }
+  },
+  mounted() {
+    axios
+      .get(`http://localhost:8000/api/departments`)
+      .then(response => {
+        this.departments = response.data;
+        console.log(this.departments);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 </script>
-

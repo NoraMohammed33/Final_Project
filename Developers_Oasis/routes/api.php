@@ -9,6 +9,7 @@ use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\ExpertController;
 use App\Http\Controllers\API\AdminController;
+use App\Http\Controllers\API\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +45,7 @@ Route::apiResource('comments',CommentController::class);
 //==============experts====================================
 
 Route::apiResource('expersts',ExpertController::class);
+//====================departments========================
+
+Route::apiResource('departments',DepartmentController::class);
 
