@@ -19,7 +19,8 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
-            'user_id' => new UserResource($this->user)
+            'user_id' => new UserResource($this->user),
+            'dep_id'=>new DepartmentResource($this->department),
         ];
 
         // return parent::toArray($request);
