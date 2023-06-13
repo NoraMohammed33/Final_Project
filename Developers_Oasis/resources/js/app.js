@@ -7,6 +7,17 @@
 import './bootstrap';
 import { createApp } from 'vue';
 
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+    components,
+    directives
+})
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -21,6 +32,8 @@ app.component('example-component', ExampleComponent);
 import PostComponent from './components/PostComponent.vue';
 app.component('post-component',PostComponent);
 
+import ServicesComponent from "./components/services/ServicesComponent.vue";
+app.component('services-component', ServicesComponent)
 
 /**
  * The following block of code may be used to automatically register your
@@ -41,4 +54,4 @@ app.component('post-component',PostComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+app.use(vuetify).mount('#app');

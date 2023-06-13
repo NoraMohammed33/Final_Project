@@ -1,25 +1,27 @@
 <template>
     <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#mymodal">+ Add</button>
+        <button type="button" class="btn btn-success text-light" data-bs-toggle="modal" data-bs-target="#mymodal">+ Add</button>
     </div>
     <div class="modal fade" id="mymodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered mod" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-success">
                     <h5 class="modal-title text-center w-100 fw-bold">Add New Service</h5>
                 </div>
                 <div class="modal-body">
                     <input type="text" v-model="service_title" class="form-control my-3 border" name="service_title" placeholder="Service Title" >
-                    <div v-if="errors.length>0" class="alert alert-danger">
-                        {{errors['title']}}
-                    </div>
-                    <textarea type="text" v-model="service_description" class="form-control my-3" name="service_title" placeholder="Service Description" ></textarea>
+                    <div v-if="errors.service_title" class="text-danger">{{ errors.service_title }}</div>
+                    <textarea type="text" v-model="service_description" class="form-control my-3" maxlength="200" name="service_title" placeholder="Service Description" ></textarea>
+                    <div v-if="errors.service_description" class="text-danger">{{ errors.service_description }}</div>
                     <input type="number" v-model="service_price" class="form-control my-3 w-25" name="service_price" min="1">
-<!--                    <input type="file" class="form-control my-3 w-50" name="service_image">-->
+                    <div v-if="errors.service_price" class="text-danger">{{ errors.service_price }}</div>
+                    <input type="file" ref="service_name" class="form-control my-3 w-50" name="service_image" @change="previewImage">
+                    <div v-if="errors.imagePreview" class="text-danger">{{ errors.imagePreview }}</div>
+                    <img v-if="imagePreview" :src="imagePreview" alt="Image Preview" class="img-fluid" style="width: 60%;height: 210px">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Cancel</button>
-                    <button type="button" data-bs-dismiss="modal" class="btn btn-primary" @click="saveService">Save Service</button>
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-secondary text-light" @click="emptyForm">Cancel</button>
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-primary text-light" @click="saveService">Save Service</button>
                 </div>
             </div>
 
@@ -37,43 +39,73 @@ export default {
             service_title:'',
             service_description:'',
             service_price:'',
-            errors:[]
+            imagePreview: '',
+            errors:{}
         }
     },
     methods:{
         saveService(){
-            axios.post('api/services',{
-                title:this.service_title,
-                description:this.service_description,
-                price:this.service_price
-            }).then(response=>{
+            this.errors={}
+            if(this.validateForm()) {
+                const formData = new FormData();
+                formData.append('title', this.service_title);
+                formData.append('description', this.service_description);
+                formData.append('price', this.service_price);
+                formData.append('image', this.$refs.service_name.files[0]);
+                axios.post('api/services', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                    }).then(() => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Success',
                         text: 'Service saved successfully!'
                     });
                     this.$emit('service-saved')
-                    this.service_title = ''
-                    this.service_description = ''
-                    this.service_price = ''
-            }).catch(error=>{
-                if (error.response.status === 422) {
-                    this.errors = error.response.data;
-                }
-            })
-
-        }
+                    this.emptyForm()
+                }).catch(error => {
+                    console.log(error.response.data)
+                })
+            }
+        },
+        previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.imagePreview = reader.result;
+            };
+            reader.readAsDataURL(file);
+        },
+        emptyForm(){
+            this.service_title=''
+            this.service_description=''
+            this.service_price=''
+            this.imagePreview=''
+        },
+        validateForm() {
+            let isValid = true;
+            if (!this.service_title.trim()) {
+                this.errors.service_title = 'Please enter a title';
+                isValid = false;
+            }
+            if (!this.service_description.trim()) {
+                this.errors.service_description = 'Please enter a description';
+                isValid = false;
+            }
+            if (!this.service_price || this.service_price <= 0) {
+                this.errors.service_price = 'Please enter a valid price';
+                isValid = false;
+            }
+            if (!this.imagePreview) {
+                this.errors.imagePreview = 'Please upload image';
+                isValid = false;
+            }
+            return isValid;
+        },
     },
     emits: ['service-saved'],
-    computed: {
-        isFormEmpty() {
-            return (
-                this.service_title === '' ||
-                this.service_description === '' ||
-                this.service_price === ''
-            );
-        },
-    }
+
 }
 </script>
 
