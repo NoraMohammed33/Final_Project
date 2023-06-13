@@ -15,6 +15,7 @@ return new class extends Migration
             //
             $table->boolean('isadmin')->default(false);
             $table->string('image')->nullable()->default('users/default.jpg');
+
         });
     }
 
