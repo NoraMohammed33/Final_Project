@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <addexpert-component></addexpert-component >
+    <addexpert-component user_id="{{Auth::user()->id}}></addexpert-component >
 
 @endsection

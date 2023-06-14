@@ -37,39 +37,30 @@
                   <button type="submit" class="btn btn-primary">Add Comment</button>
                 </div>
               </form>
-              <!-- v-if="post.comments.length > 0"
-              -->
               <div>
-                <div class="card" v-for="comment in post.comments" :key="comment.id">
-                  <div class="card-header">{{ comment.user.name }}:</div>
-
-                  <div class="card-body">
-                    <div>
-                      <span style="font-size: 1.2rem; font-weight: bold">Comment:</span>
-                      {{ comment.body }}
-                    </div>
-                    <div>
-                      <span style="font-size: 1rem; font-weight: bold">Created At:</span>
-                      {{ comment.created_at }}
-                      <td>
-                        <a :href="`/comments/edit/${comment.id}`" class="btn btn-warning">Edit</a>
-                      </td>
-                      <form
-                        :action="`/comments/destroy/${comment.id}`"
-                        method="POST"
-                        style="display: inline;"
-                      >
-                        <button
-                          type="submit"
-                          class="btn btn-danger"
-                          @click="deleteComment(comment.id)"
-                        >Delete</button>
-                      </form>
+                <div class="card" v-for="comment in comments.data" :key="comment.id">
+                  <div>
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                      <div>
+                        <span style="font-size: 1.2rem; font-weight: bold">Comment:</span>
+                        {{ comment.body }}
+                      </div>
+                      <div>
+                        <span style="font-size: 1rem; font-weight: bold">Created At:</span>
+                        {{ comment.created_at }}
+                      </div>
+                      <div>
+                        <form :action="`/comments/destroy/${comment.id}`" method="POST" style="display: inline;">
+                          <button type="submit"  class="btn btn-danger" @click="deleteComment(comment.id)"
+                          >Delete</button>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <!-- <div v-else>No comments yet </div> -->
               </div>
-              <div>No comments yet</div>
             </div>
           </div>
         </div>
@@ -78,25 +69,29 @@
   </div>
 </template>
 
-          <script>
+  <script>
 import axios from "axios";
 
 export default {
   data() {
     return {
       posts: [],
-      newCommentBody: ""
+      comments: [],
+      newCommentBody: "",
+      post_id: this.id
     };
   },
   created() {
     this.fetchPosts();
   },
+  props: ["post_id"],
   methods: {
-    fetchPosts(id) {
+    fetchPosts() {
       axios
         .get(`http://localhost:8000/api/posts/7`)
         .then(response => {
           this.posts = response.data;
+          console.log(response.data);
         })
         .catch(error => {
           console.log(error);
@@ -104,8 +99,9 @@ export default {
     },
     deletePost(id) {
       axios
-        .delete(`http://localhost:8000/api/posts/7`)
+        .delete(`http://localhost:8000/api/posts/${id}`)
         .then(response => {
+          console.log(id);
           this.fetchPosts();
         })
         .catch(error => {
@@ -114,7 +110,7 @@ export default {
     },
     deleteComment(commentId) {
       axios
-        .delete(`http://localhost:8000/api/comments/${commentId}`)
+        .delete(`http://localhost:8000/api/posts/{post}/comments/${commentId}`)
         .then(response => {
           this.fetchPosts();
         })
@@ -124,7 +120,7 @@ export default {
     },
     addComment(postId) {
       axios
-        .post(`http://localhost:8000/api/posts/${postId}/comments`, {
+        .post(`http://localhost:8000/api/posts/7/comments `, {
           body: this.newCommentBody
         })
         .then(response => {
@@ -137,11 +133,20 @@ export default {
     }
   },
   mounted() {
-    console.log("Component mounted.");
+    axios
+      .get(`http://127.0.0.1:8000/api/comments/7`)
+      .then(response => {
+        this.comments = response.data;
+        // console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 </script>
 
-        <style>
+<style>
 </style>
+
 

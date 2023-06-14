@@ -3,7 +3,7 @@
         <h2>Expert List</h2>
         <div class="expert-card-container">
             <v-card v-for="expert in experts" :key="expert.id" class="expert-card">
-                <v-img class="align-end text-white" height="200" :src="expert.imageUrl" cover>
+                <v-img class="align-end text-white" height="200" :src="'public/images/'+expert.user.image" cover>
                     <v-card-title>{{ expert.name }}</v-card-title>
                 </v-img>
                 <v-card-subtitle class="pt-4">
@@ -12,13 +12,14 @@
 
                 <v-card-text>
                     <div>{{ expert.bio }}</div>
-                    <div>Department: {{ expert.department }}</div>
+                    <div>Department: {{ expert.user.name }}</div>
                 </v-card-text>
 
+                <router-link :to="`/expert/${expert.id}`">
+                    View Details
+                </router-link>
+
                 <v-card-actions>
-                    <v-btn color="orange" @click="shareExpert(expert)">
-                        Share
-                    </v-btn>
                     <v-btn color="orange" @click="exploreExpert(expert)">
                         Explore
                     </v-btn>
