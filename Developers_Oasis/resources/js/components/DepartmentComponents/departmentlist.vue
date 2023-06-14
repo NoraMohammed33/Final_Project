@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Expert List</h2>
+        <h2>Departments List</h2>
         <div v-for="expert in experts" :key="expert.id">
             <v-card class="mx-auto" max-width="400">
                 <v-img class="align-end text-white" height="200" :src="expert.imageUrl" cover>

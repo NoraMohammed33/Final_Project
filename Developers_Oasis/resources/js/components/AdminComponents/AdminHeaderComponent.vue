@@ -24,11 +24,11 @@
                         <span> posts</span>
                     </router-link>
 
-                    <router-link :to="'/post'" class="list-group-item mx-4  py-2 ripple ">
+                    <router-link :to="'/allposts'" class="list-group-item mx-4  py-2 ripple ">
                         <span>experts</span>
                     </router-link>
 
-                <router-link :to="'/post'" class="list-group-item mx-4  py-2 ripple ">
+                <router-link :to="'/departments'" class="list-group-item mx-4  py-2 ripple ">
                     <span>departments</span>
                 </router-link>
 

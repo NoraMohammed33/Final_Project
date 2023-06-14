@@ -10,6 +10,7 @@ import * as Vue from 'vue';
 import { createApp } from 'vue';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import router from "./routes/index.js";
 
 
 // Vuetify
@@ -38,7 +39,7 @@ app.component('post-component',PostComponent);
 import AddPostComponent from "./components/PostComponents/AddPostComponent.vue";
 app.component('addpost-component',AddPostComponent);
 
-import AllpostsComponent from "./components/PostComponents/AddPostComponent.vue";
+import AllpostsComponent from "./components/PostComponents/AllpostsComponent.vue";
 app.component('allposts-component',AllpostsComponent);
 
 
@@ -84,5 +85,6 @@ app.component('services-component',ServicesComponent);
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
+app.use(router);
 app.use(VueAxios, axios);
 app.use(vuetify).mount('#app');
