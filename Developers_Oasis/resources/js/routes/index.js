@@ -12,7 +12,7 @@ const routes=[
         component:MainComponent
     },
     {
-        path:'/post',
+        path:'/posts',
         component:PostComponent
     },
     {
