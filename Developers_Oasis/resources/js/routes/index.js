@@ -1,33 +1,37 @@
-import {createRouter,createWebHistory} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import MainComponent from '../components/MainComponent.vue';
 import ServicesComponent from "../components/services/ServicesComponent.vue";
 import PostComponent from '../components/UserComponents/PostComponent.vue';
 import AddPostComponent from '../components/UserComponents/AddPostComponent.vue'
 
 
-const routes=[
+const routes = [
 
     {
-        path:'/',
-        component:MainComponent
+        path: '/',
+        component: MainComponent
     },
     {
-        path:'/posts',
-        component:PostComponent
+        path: '/posts',
+        component: PostComponent
     },
     {
-        path:'/services',
-        component:ServicesComponent
+        path: '/services',
+        component: ServicesComponent
     },
 
     {
-        path:'/addpost',
-        component:AddPostComponent
+        path: '/addpost',
+        component: AddPostComponent
+    },
+    {
+        path: '/departments',
+        component: departmentlist
     },
 
 ]
-const router=createRouter({
-    routes:routes,
-    history:createWebHistory()
+const router = createRouter({
+    routes: routes,
+    history: createWebHistory()
 })
 export default router;
