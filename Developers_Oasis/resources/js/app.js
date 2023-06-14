@@ -50,7 +50,10 @@ import AdminHeaderComponent from "./components/AdminComponents/AdminHeaderCompon
 app.component('adminheader-component',AdminHeaderComponent)
 
 import MainComponent from './components/MainComponent.vue'
-app.component('main-component',MainComponent)
+app.component('main-component', MainComponent)
+
+import departmentlist from './components/DepartmentComponents/departmentlist.vue'
+app.component('department-component', departmentlist)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
