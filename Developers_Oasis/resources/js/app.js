@@ -32,11 +32,15 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
-import PostComponent from './components/UserComponents/PostComponent.vue';
+import PostComponent from './components/PostComponents/PostComponent.vue';
 app.component('post-component',PostComponent);
 
-import AddPostComponent from "./components/UserComponents/AddPostComponent.vue";
+import AddPostComponent from "./components/PostComponents/AddPostComponent.vue";
 app.component('addpost-component',AddPostComponent);
+
+import AllpostsComponent from "./components/PostComponents/AddPostComponent.vue";
+app.component('allposts-component',AllpostsComponent);
+
 
 import MenuBarComponent from "./components/MenuBarComponent.vue";
 app.component('menubar-component',MenuBarComponent);
@@ -46,8 +50,6 @@ app.component('login-component',LoginComponent);
 
 import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
 app.component('dashboard-component',DashBoardComponent);
-
-
 
 import MainComponent from './components/MainComponent.vue'
 app.component('main-component', MainComponent)

@@ -20,13 +20,12 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {return view('welcome');});
 Route::get('/posts', function () {return view('posts');});
 Route::get('/services', function () {return view('services');});
-<<<<<<< HEAD
+
 Route::view('/admin/login','auth.loginAdmin');
-=======
+
 Route::get('/departments', function () {return view('departments');});
 
 
->>>>>>> 804762ec8d9fbda7bac369dfd94ae785369e8aab
 
 Auth::routes();
 
