@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longText('bio');
             $table->unsignedBigInteger('user_id');
             $table->foreign('dept_id')->references('id')->on('departments');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->timestamps();
         });
 
