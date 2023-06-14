@@ -3,10 +3,9 @@
         <h2>Expert List</h2>
         <div v-for="expert in experts" :key="expert.id">
             <v-card class="mx-auto" max-width="400">
-                <v-img class="align-end text-white" height="200" :src="expert.imageUrl" cover>
+                <v-img class="align-end text-white" height="200" :src="expert.user_id.image" cover>
                     <v-card-title>{{ expert.name }}</v-card-title>
                 </v-img>
-<!--                <img :src="expert.user.image" alt="Expert Image" />-->
                 <v-card-subtitle class="pt-4">
                     Expert ID: {{ expert.id }}
                 </v-card-subtitle>
