@@ -32,8 +32,6 @@ Route::apiResource('contracts',ContractController::class);
 
 //=====================services routes ======================
 Route::apiResource('services',ServiceController::class);
-
-
 //=====================posts routes==========================
 
 Route::apiResource('posts',PostController::class);

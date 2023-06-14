@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainComponent from '../components/MainComponent.vue';
 import ServicesComponent from "../components/services/ServicesComponent.vue";
-import PostComponent from '../components/UserComponents/PostComponent.vue';
-import AddPostComponent from '../components/UserComponents/AddPostComponent.vue'
+import PostComponent from '../components/PostComponents/PostComponent.vue';
+import AddPostComponent from '../components/PostComponents/AddPostComponent.vue';
+import AllpostsComponent from '../components/PostComponents/AllpostsComponent.vue';
 import ExpertList from "../components/ExpertComponents/ExpertList.vue";
 import ExpertForm from "../components/ExpertComponents/ExpertForm.vue";
 import ExpertDetail from "../components/ExpertComponents/ExpertDetail.vue";
@@ -26,6 +27,10 @@ const routes = [
     {
         path: '/addpost',
         component: AddPostComponent
+    },
+    {
+        path: '/allposts',
+        component: AllpostsComponent
     },
     {
         path: '/departments',
