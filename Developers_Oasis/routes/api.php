@@ -44,7 +44,7 @@ Route::apiResource('posts.comments',CommentController::class);
 
 //==============experts====================================
 
-Route::apiResource('expersts',ExpertController::class);
+Route::apiResource('experts',ExpertController::class);
 //====================departments========================
 
 Route::apiResource('departments',DepartmentController::class);
