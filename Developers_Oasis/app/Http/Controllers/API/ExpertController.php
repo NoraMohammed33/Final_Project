@@ -11,7 +11,7 @@ class ExpertController extends Controller
     public function index()
     {
         $experts = Expert::all();
-        return view('experts.index', compact('experts'));
+        return response()->json($experts);
     }
 
     public function create()

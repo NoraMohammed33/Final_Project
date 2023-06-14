@@ -24,3 +24,12 @@ Route::get('/posts', function () {return view('posts');});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+//expert
+Route::get('/experts', function () {return view('expert');});
+Route::get('/addexpert', function () {return view('addexpert');});
+Route::get('/expert/{id}', function ($id) {
+    return view('expertdetail', ['id' => $id]);
+});
