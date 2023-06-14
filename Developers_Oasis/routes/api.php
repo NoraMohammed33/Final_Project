@@ -41,6 +41,7 @@ Route::apiResource('posts',PostController::class);
 //========================comments routes==================
 
 Route::apiResource('posts.comments',CommentController::class);
+Route::get('/comments/{post}', [CommentController::class, 'commentsForPost']);
 
 //==============experts====================================
 
