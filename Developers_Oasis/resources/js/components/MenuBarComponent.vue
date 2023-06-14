@@ -7,7 +7,7 @@
             <a class="nav-link" href="/addpost"> <span class="sr-only">Ask me </span></a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#">experts<span class="sr-only"></span></a>
+            <a class="nav-link" href="/experts">experts<span class="sr-only"></span></a>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="#">Departments<span class="sr-only"></span></a>
