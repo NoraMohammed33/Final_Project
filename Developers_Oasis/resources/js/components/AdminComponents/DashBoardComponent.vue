@@ -1,21 +1,23 @@
 <template>
-    <v-app>
-        <v-app-bar>
-            <v-app-bar-nav-icon>
-<!--             we need icon not image-->
-            </v-app-bar-nav-icon>
+   <v-container class="fs-4 my-5">
+<adminheader-component></adminheader-component>
+   </v-container>
 
-            <v-app-bar-title>
-                Admin Dashboard
-            </v-app-bar-title>
-        </v-app-bar>
-            <h1>dfgre</h1>
-    </v-app>
+
+
+<v-container class="d-flex justify-content-center py-5">
+<main-component></main-component>
+</v-container>
+
+    <footer class="text-center bg-black fixed-bottom">all copy rights saved</footer>
 </template>
 <script>
 
+import {defineComponent} from "vue";
+import AdminheaderComponent from "./AdminHeaderComponent.vue";
+
+export default defineComponent({
+    components: {AdminheaderComponent}
+})
 </script>
 
-<style>
-
-</style>
