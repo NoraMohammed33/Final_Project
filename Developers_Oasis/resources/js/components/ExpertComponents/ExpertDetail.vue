@@ -27,7 +27,7 @@ export default {
         fetchExpert() {
             const expertId = this.$route.params.id;
             axios
-                .get(`/api/experts/${expertId}`)
+                .get(`/api/expert/${expertId}`)
                 .then((response) => {
                     this.expert = response.data.expert;
                 })
@@ -40,5 +40,5 @@ export default {
 </script>
 
 <style>
-/* Component styles go here */
+/* Styles */
 </style>

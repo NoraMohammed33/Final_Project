@@ -28,7 +28,7 @@ const routes=[
         path:'/addexpert',
         component:ExpertForm
     },    {
-        path:'/expert/',
+        path:'/expert/:id',
         component:ExpertDetail
     },
 
