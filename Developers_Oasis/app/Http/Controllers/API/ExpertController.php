@@ -26,7 +26,7 @@ class ExpertController extends Controller
 
     public function show(Expert $expert)
     {
-        return view('experts.show', compact('expert'));
+        return view('expertdetail', compact('expert'));
     }
 
     public function edit(Expert $expert)

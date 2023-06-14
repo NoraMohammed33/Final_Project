@@ -1,19 +1,17 @@
 <template>
-    <div>
+    <div class="expert-list">
         <h2>Expert List</h2>
-        <div v-for="expert in experts" :key="expert.id">
-            <v-card class="mx-auto" max-width="400">
+        <div class="expert-card-container">
+            <v-card v-for="expert in experts" :key="expert.id" class="expert-card">
                 <v-img class="align-end text-white" height="200" :src="expert.imageUrl" cover>
                     <v-card-title>{{ expert.name }}</v-card-title>
                 </v-img>
-<!--                <img :src="expert.user.image" alt="Expert Image" />-->
                 <v-card-subtitle class="pt-4">
                     Expert ID: {{ expert.id }}
                 </v-card-subtitle>
 
                 <v-card-text>
                     <div>{{ expert.bio }}</div>
-
                     <div>Department: {{ expert.department }}</div>
                 </v-card-text>
 
@@ -21,7 +19,6 @@
                     <v-btn color="orange" @click="shareExpert(expert)">
                         Share
                     </v-btn>
-
                     <v-btn color="orange" @click="exploreExpert(expert)">
                         Explore
                     </v-btn>
@@ -30,13 +27,14 @@
         </div>
     </div>
 </template>
+
 <script>
 import axios from "axios";
 
 export default {
     data() {
         return {
-            experts: [],
+            experts: [], // Add back the experts data property
         };
     },
     mounted() {
@@ -56,12 +54,29 @@ export default {
         exploreExpert(expert) {
             // Assuming you want to navigate to the expert's detail page
             // Use the router to navigate to the expert detail route
-            this.$router.push(`/expert/${expert.id}`);
+            this.$router.push({ path: `/expert/${expert.id}` });
         },
     },
 };
 </script>
 
 <style>
-/* Component styles go here */
+.expert-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.expert-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -10px;
+}
+
+.expert-card {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+}
 </style>

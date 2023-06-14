@@ -48,6 +48,19 @@ import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.
 app.component('dashboard-component',DashBoardComponent);
 
 
+import MainComponent from './components/MainComponent.vue'
+app.component('main-component', MainComponent)
+
+
+import ExpertList from "./components/ExpertComponents/ExpertList.vue";
+app.component('expert-component',ExpertList);
+
+import ExpertForm from "./components/ExpertComponents/ExpertForm.vue";
+app.component('addexpert-component',ExpertForm);
+
+import ExpertDetail from "./components/ExpertComponents/ExpertDetail.vue";
+app.component('expert-detail-component',ExpertDetail);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
