@@ -37,7 +37,8 @@ const routes = [
     },    {
         path:'/addexpert',
         component:ExpertForm
-    },    {
+    },
+    {
         path:'/expert/:id',
         component:ExpertDetail
     },
