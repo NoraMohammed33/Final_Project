@@ -10,16 +10,22 @@
         <label for="body">Body:</label>
         <textarea id="body" v-model="newPost.body" class="form-control" required></textarea>
       </div>
-      <div class="form-group">
-        <label for="dep_id">Department ID:</label>
-        <input type="number" id="dep_id" v-model="newPost.dep_id" class="form-control" required />
+      <div>
+        <label for="dep_id">Department Name:</label>
+        <select class="form-control" v-model="newPost.dep_id" name="dep_id" id="dep_id">
+          <option
+            v-for="department in departments.data"
+            :key="department.id"
+            :value="department.id"
+          >{{ department.name}}</option>
+        </select>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </template>
 
-        <script>
+            <script>
 import axios from "axios";
 
 export default {
@@ -30,7 +36,7 @@ export default {
         title: "",
         body: "",
         user_id: this.user_id,
-        dep_id: null
+        dep_id: ""
       }
     };
   },
@@ -51,9 +57,12 @@ export default {
       this.newPost = {
         title: "",
         body: "",
-        user_id: null,
+        user_id: this.user_id,
         dep_id: null
       };
+      const postId = response.data.id;
+      //   window.location.href = '/addpost'
+      this.$router.push({ name: "addpost", params: { id: post.id } });
     }
   },
   mounted() {
@@ -61,7 +70,7 @@ export default {
       .get(`http://localhost:8000/api/departments`)
       .then(response => {
         this.departments = response.data;
-        console.log(this.departments);
+        // console.log(this.departments);
       })
       .catch(error => {
         console.log(error);
