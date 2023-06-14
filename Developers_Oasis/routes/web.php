@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {return view('welcome');});
 Route::get('/posts', function () {return view('posts');});
 Route::get('/services', function () {return view('services');});
-
+Route::view('/admin/login','auth.loginAdmin');
 
 Auth::routes();
 

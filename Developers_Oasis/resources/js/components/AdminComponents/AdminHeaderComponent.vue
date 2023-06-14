@@ -6,10 +6,10 @@
 
 
                 <!-- Brand -->
-                <a class="navbar-brand" href="/api/admin">
+                <a class="navbar-brand" href="/">
                    <span class="text-green fw-bold fs-2">Developers Oasis</span>
                 </a>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/api/admin">
                     <span class="text-green ">Admin dashboard</span>
                 </a>
 

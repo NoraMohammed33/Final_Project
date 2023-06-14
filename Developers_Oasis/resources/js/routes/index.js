@@ -3,6 +3,7 @@ import MainComponent from '../components/MainComponent.vue';
 import ServicesComponent from "../components/services/ServicesComponent.vue";
 import PostComponent from '../components/UserComponents/PostComponent.vue';
 import AddPostComponent from '../components/UserComponents/AddPostComponent.vue'
+import dashBoardComponent from "../components/AdminComponents/DashBoardComponent.vue";
 
 
 const routes=[
@@ -12,7 +13,7 @@ const routes=[
         component:MainComponent
     },
     {
-        path:'/posts',
+        path:'/post',
         component:PostComponent
     },
     {
@@ -23,7 +24,7 @@ const routes=[
     {
         path:'/addpost',
         component:AddPostComponent
-    },
+    }
 
 ]
 const router=createRouter({
