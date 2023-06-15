@@ -1,7 +1,7 @@
 <template>
-   <v-container class="fs-4 my-5">
-<adminheader-component></adminheader-component>
-   </v-container>
+<!--   <v-container class="fs-4 my-5">-->
+<!--<adminheader-component></adminheader-component>-->
+<!--   </v-container>-->
 
 
 

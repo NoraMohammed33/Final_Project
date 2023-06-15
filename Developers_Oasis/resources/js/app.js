@@ -49,6 +49,10 @@ app.component('menubar-component',MenuBarComponent);
 import LoginComponent from "./components/AdminComponents/LoginComponent.vue";
 app.component('login-component',LoginComponent);
 
+import AdminHeaderComponent from "./components/AdminComponents/AdminHeaderComponent.vue";
+app.component('adminheader-component',AdminHeaderComponent);
+
+
 import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
 app.component('dashboard-component',DashBoardComponent);
 

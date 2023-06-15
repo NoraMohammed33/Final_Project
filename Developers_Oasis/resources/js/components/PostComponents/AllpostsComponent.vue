@@ -3,7 +3,7 @@
     <div v-for="post in posts.data" :key="post.id" class="post">
       <h2>{{ post.title }}</h2>
       <p>{{ post.body }}</p>
-        <p>Posted by: {{ post.user.name }}</p>
+        <p>Posted by: {{ post.user_id.name }}</p>
     </div>
   </div>
 </template>

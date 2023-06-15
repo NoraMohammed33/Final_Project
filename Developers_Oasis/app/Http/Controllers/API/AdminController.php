@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,7 +15,19 @@ class AdminController extends Controller
     {
        return view('homeAdmin');
     }
+    public function adminLogin()
+    {
+        $credentials = $this->validate(request(), [
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
+        if (auth()->attempt($credentials)) {
+            return "a";
+        }
+
+        return "z";
+    }
     /**
      * Store a newly created resource in storage.
      */
