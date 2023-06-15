@@ -36,7 +36,6 @@ class UserController extends Controller
         }
         return response('', 404);
     }
-
     public function update(UpdateUserRequest $request, User $user)
     {
         if ($user)
@@ -50,7 +49,6 @@ class UserController extends Controller
             return response('', 404);
         }
     }
-
     public function destroy(User $user)
     {
         if ($user) {
@@ -65,5 +63,6 @@ class UserController extends Controller
         }
     }
 }
+
 
 

@@ -3,22 +3,24 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-import PrimeVue from 'primevue/config';
-import ToastService from 'primevue/toastservice';
 
-import 'primevue/resources/themes/lara-light-indigo/theme.css'; // Replace with the desired PrimeVue theme
-import 'primevue/resources/primevue.min.css';
-
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
+import './bootstrap';
+import 'vuetify/styles';
+import * as Vue from 'vue';
+import { createApp } from 'vue';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import router from "./routes/index.js";
 
+
+// Vuetify
+import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
 const vuetify = createVuetify({
     components,
-    directives
+    directives,
 })
 
 import './bootstrap';
@@ -26,7 +28,7 @@ import { createApp } from 'vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance, so they are ready
+ * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
 
@@ -35,13 +37,15 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
-import PostComponent from './components/UserComponents/PostComponent.vue';
+import PostComponent from './components/PostComponents/PostComponent.vue';
 app.component('post-component',PostComponent);
 
-import ServicesComponent from "./components/services/ServicesComponent.vue";
-app.component('services-component', ServicesComponent)
-import AddPostComponent from "./components/UserComponents/AddPostComponent.vue";
+import AddPostComponent from "./components/PostComponents/AddPostComponent.vue";
 app.component('addpost-component',AddPostComponent);
+
+import AllpostsComponent from "./components/PostComponents/AllpostsComponent.vue";
+app.component('allposts-component',AllpostsComponent);
+
 
 import MenuBarComponent from "./components/MenuBarComponent.vue";
 app.component('menubar-component',MenuBarComponent);
@@ -56,7 +60,20 @@ import AdminHeaderComponent from "./components/AdminComponents/AdminHeaderCompon
 app.component('adminheader-component',AdminHeaderComponent)
 
 import MainComponent from './components/MainComponent.vue'
-app.component('main-component',MainComponent)
+app.component('main-component', MainComponent)
+
+
+import ExpertList from "./components/ExpertComponents/ExpertList.vue";
+app.component('expert-component',ExpertList);
+
+import ExpertForm from "./components/ExpertComponents/ExpertForm.vue";
+app.component('addexpert-component',ExpertForm);
+
+import ExpertDetail from "./components/ExpertComponents/ExpertDetail.vue";
+app.component('expert-detail-component',ExpertDetail);
+
+import ServicesComponent from "./components/services/ServicesComponent.vue";
+app.component('services-component',ServicesComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -71,13 +88,10 @@ app.component('main-component',MainComponent)
 // });
 
 /**
- * Finally, we will attach the application instance to an HTML element with
+ * Finally, we will attach the application instance to a HTML element with
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 app.use(router);
-app.use(PrimeVue);
-app.use(ToastService);
-app.use(vuetify);
-
-app.mount('#app');
+app.use(VueAxios, axios);
+app.use(vuetify).mount('#app');

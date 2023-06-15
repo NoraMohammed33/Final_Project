@@ -32,8 +32,6 @@ Route::apiResource('contracts',ContractController::class);
 
 //=====================services routes ======================
 Route::apiResource('services',ServiceController::class);
-
-
 //=====================posts routes==========================
 
 Route::apiResource('posts',PostController::class);
@@ -41,10 +39,11 @@ Route::apiResource('posts',PostController::class);
 //========================comments routes==================
 
 Route::apiResource('posts.comments',CommentController::class);
+Route::get('/comments/{post}', [CommentController::class, 'commentsForPost']);
 
 //==============experts====================================
 
-Route::apiResource('expersts',ExpertController::class);
+Route::apiResource('experts',ExpertController::class);
 //====================departments========================
 
 Route::apiResource('departments',DepartmentController::class);
