@@ -1,9 +1,12 @@
 <template>
     <div class="d-flex justify-content-center">
-        <v-col cols="auto" data-bs-toggle="modal" data-bs-target="#mymodal">
-            <v-btn color="green" density="comfortable">Add New Service</v-btn>
+        <v-col cols="auto" class="ms-auto" data-bs-toggle="modal" data-bs-target="#mymodal">
+            <v-btn color="green" density="comfortable">
+                <i class="fas fa-plus fs-5 me-1"></i>
+                Add New Service</v-btn>
         </v-col>
     </div>
+
     <div  class="modal fade" id="mymodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered mod" role="document">
             <div class="modal-content">
@@ -19,7 +22,7 @@
                     <div v-if="errors.service_price" class="text-danger">{{ errors.service_price }}</div>
                     <input type="file" ref="service_name" class="form-control my-3 w-50" name="service_image" @change="previewImage">
                     <div v-if="errors.imagePreview" class="text-danger">{{ errors.imagePreview }}</div>
-                    <img v-if="imagePreview" :src="imagePreview" alt="Image Preview" class="img-fluid" style="width: 60%;height: 210px">
+                    <img v-if="imagePreview" :src="imagePreview" alt="Image Preview" class="img-fluid rounded-5" style="width: 60%;height: 210px">
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="dismiss" data-bs-dismiss="modal" class="btn btn-secondary text-light" @click="emptyForm">Cancel</button>
@@ -30,11 +33,14 @@
         </div>
 
     </div>
+
 </template>
 
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+
+
 export default {
     data (){
         return{

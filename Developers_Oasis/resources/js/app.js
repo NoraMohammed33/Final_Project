@@ -3,6 +3,12 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
+
+import 'primevue/resources/themes/lara-light-indigo/theme.css'; // Replace with the desired PrimeVue theme
+import 'primevue/resources/primevue.min.css';
+
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import router from "./routes/index.js";
@@ -20,7 +26,7 @@ import { createApp } from 'vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
+ * registering components with the application instance, so they are ready
  * to use in your application's views. An example is included for you.
  */
 
@@ -65,9 +71,13 @@ app.component('main-component',MainComponent)
 // });
 
 /**
- * Finally, we will attach the application instance to a HTML element with
+ * Finally, we will attach the application instance to an HTML element with
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 app.use(router);
-app.use(vuetify).mount('#app');
+app.use(PrimeVue);
+app.use(ToastService);
+app.use(vuetify);
+
+app.mount('#app');

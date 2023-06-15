@@ -15,10 +15,7 @@ const routes=[
         path:'/posts',
         component:PostComponent
     },
-    {
-        path:'/services',
-        component:ServicesComponent
-    },
+
 
     {
         path:'/addpost',

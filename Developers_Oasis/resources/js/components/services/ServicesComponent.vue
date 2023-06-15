@@ -4,7 +4,7 @@
 
 <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
     <template v-for="service in services" :key="service.id">
-        <v-card class="col-8 col-sm-5 col-md-4 col-lg-3 m-3" color="grey-lighten-4">
+        <v-card class="col-8 col-sm-5 col-md-4 col-lg-3 m-3 rounded-4">
             <div class="image-container">
                 <v-img cover :src="'storage/' + service.image" style="width: 100%; height: 190px;"></v-img>
                 <div class="hover-overlay fs-1 font-weight-bold">
@@ -14,11 +14,11 @@
 
             <v-card-text class="pt-2">
                 <h2 class="font-weight-bold text-orange mb-2">{{ service.title }}</h2>
-                <div class=" text-grey">{{ service.description }}</div>
+                <div class=" text-grey">{{ service.expert.department.name }}</div>
             </v-card-text>
 
             <v-card-actions>
-                <v-btn color="blue">Explore</v-btn>
+                <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
                 <div class="ms-auto">
                     <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"
                        data-bs-toggle="modal"
@@ -29,6 +29,9 @@
             </v-card-actions>
         </v-card>
     </template>
+<!--    <div class="card">-->
+<!--        <Paginator :rows="6" :totalRecords="services.length" :rowsPerPageOptions="[10, 20, 30]"></Paginator>-->
+<!--    </div>-->
     <div class="modal fade" id="update_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered mod" role="document">
             <div class="modal-content">
@@ -44,7 +47,7 @@
                     <div v-if="errors.service_price" class="text-danger">{{ errors.service_price }}</div>
                     <input type="file" ref="service_name" class="form-control my-3 w-50" name="service_image" @change="previewImage">
                     <div v-if="errors.imagePreview" class="text-danger">{{ errors.imagePreview }}</div>
-                    <img v-if="imagePreview" :src="imagePreview" alt="Image Preview" class="img-fluid" style="width: 60%;height: 210px">
+                    <img v-if="imagePreview" :src="imagePreview" alt="Image Preview" class="img-fluid rounded-5" style="width: 60%;height: 210px">
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="dismissUpdate" data-bs-dismiss="modal" class="btn btn-secondary text-light">Cancel</button>
@@ -67,7 +70,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import AddServiceComponent from "./AddServiceComponent.vue";
 import '@fortawesome/fontawesome-free/css/all.css';
-import {el} from "vuetify/locale";
+import Paginator from 'primevue/paginator';
 
 export default {
 
@@ -195,7 +198,8 @@ export default {
             }
             return isValid;
         },
-    }}
+    }
+}
 
 </script>
 
@@ -224,7 +228,11 @@ export default {
 }
 i:hover{
     scale: 1.2;
-    transition: 2ms;
+    transition: 5ms;
     cursor: pointer;
+}
+#explore:hover{
+    background-color: #e2e8f0;
+
 }
 </style>
