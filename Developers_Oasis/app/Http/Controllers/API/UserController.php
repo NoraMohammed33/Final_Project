@@ -19,7 +19,7 @@ use Exception;
 
 class UserController extends Controller
 {
-    
+
     public function index()
     {
         return UserResource::collection(User::all());
@@ -27,7 +27,12 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
-        return new  UserResource($user);
+        $expert = Expert::create([
+            'dept_id' => $request->input('dept_id'),
+            'bio' => $request->input('bio'),
+            'user_id' => $user->id,
+        ]);
+        return new UserResource($user);
     }
     public function show(User $user)
     {

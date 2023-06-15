@@ -22,10 +22,18 @@ Route::get('/posts', function () {return view('posts');});
 Route::get('/services', function () {return view('services');});
 
 Route::view('/admin/login','auth.loginAdmin');
+//departments
+Route::get('/departments', function () {return view('departments');})->middleware('auth');
+Route::get('/adddepartments', function () {
+    return view('adddepartments');
+})->middleware('auth');
+Route::get('/departments/{id}', function ($id) {
+    return view('departmentsdetail', ['id' => $id]);
+})->middleware('auth');
 
-Route::get('/departments', function () {return view('departments');});
 
 
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
 Auth::routes();
 
@@ -34,8 +42,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //expert
-Route::get('/experts', function () {return view('expert');});
-Route::get('/addexpert', function () {return view('addexpert');});
+Route::get('/experts', function () {return view('expert');})->middleware('auth');
+Route::get('/addexpert', function () {
+    return view('addexpert');
+})->middleware('auth');
 Route::get('/expert/{id}', function ($id) {
     return view('expertdetail', ['id' => $id]);
-});
+})->middleware('auth');
