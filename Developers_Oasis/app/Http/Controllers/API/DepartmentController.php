@@ -27,7 +27,8 @@ class DepartmentController extends Controller
 
     public function show(Department $department)
     {
-
+        $experts = Expert::where('dept_id','=',$department->id)->get();
+        dd($experts);
     }
     public function update(UpdateDepartmentRequest $request, Department $department)
     {
