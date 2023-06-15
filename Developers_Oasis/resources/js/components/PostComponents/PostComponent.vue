@@ -14,14 +14,14 @@
             <button
               type="button"
               class="btn btn-danger btn-sm"
-              @click="deletePost(post.id)"
+              @click="deletePost()"
             >Delete Your post</button>
             <button type="button" class="btn btn-warning btn-sm">Edit Your post</button>
           </div>
           <div class="card mt-4">
             <h5 class="card-header">Comments</h5>
             <div class="card-body">
-              <form @submit.prevent="addComment(post.id)">
+              <form @submit.prevent="addNewComment()">
                 <div class="form-group">
                   <textarea
                     v-model="newCommentBody"
@@ -50,16 +50,14 @@
                         <span style="font-size: 1rem; font-weight: bold">Created At:</span>
                         {{ comment.created_at }}
                       </div>
-                      <div>
-                        <form :action="`/comments/destroy/${comment.id}`" method="POST" style="display: inline;">
-                          <button type="submit"  class="btn btn-danger" @click="deleteComment(comment.id)"
-                          >Delete</button>
-                        </form>
-                      </div>
+                      <button
+                        type="submit"
+                        class="btn btn-danger"
+                        @click="deleteComment(comment.id)"
+                      >Delete</button>
                     </div>
                   </div>
                 </div>
-                <!-- <div v-else>No comments yet </div> -->
               </div>
             </div>
           </div>
@@ -69,7 +67,7 @@
   </div>
 </template>
 
-  <script>
+    <script>
 import axios from "axios";
 
 export default {
@@ -77,32 +75,31 @@ export default {
     return {
       posts: [],
       comments: [],
+      commentCount: 0,
+      user_id: this.user_id,
       newCommentBody: "",
-      post_id: this.id
+      post_id: 7
     };
   },
   created() {
     this.fetchPosts();
   },
-  props: ["post_id"],
   methods: {
     fetchPosts() {
       axios
-        .get(`http://localhost:8000/api/posts/7`)
+        .get(`http://localhost:8000/api/posts/5`)
         .then(response => {
           this.posts = response.data;
-          console.log(response.data);
         })
         .catch(error => {
           console.log(error);
         });
     },
-    deletePost(id) {
+    deletePost() {
       axios
-        .delete(`http://localhost:8000/api/posts/${id}`)
+        .delete(`http://localhost:8000/api/posts/7`)
         .then(response => {
-          console.log(id);
-          this.fetchPosts();
+          console.log("post deleted");
         })
         .catch(error => {
           console.log(error);
@@ -118,17 +115,24 @@ export default {
           console.log(error);
         });
     },
-    addComment(postId) {
+    addNewComment() {
+      const data = {
+        body: this.newCommentBody,
+        post_id: this.post_id,
+        user_id: 1,
+        commentable_type: "Post",
+        commentable_id: this.post_id
+      };
+      if (this.newCommentBody === "") return false;
       axios
-        .post(`http://localhost:8000/api/posts/7/comments `, {
-          body: this.newCommentBody
+        .post(`http://localhost:8000/api/posts/${this.post_id}/comments`, data)
+        .then(res => {
+          this.$refs.form.reset();
+          alert("Your comment has been added");
         })
-        .then(response => {
-          this.newCommentBody = "";
-          this.fetchPosts();
-        })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          //   alert('Something went wrong!');
+          console.log(data);
         });
     }
   },
@@ -137,7 +141,6 @@ export default {
       .get(`http://127.0.0.1:8000/api/comments/7`)
       .then(response => {
         this.comments = response.data;
-        // console.log(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -146,7 +149,7 @@ export default {
 };
 </script>
 
-<style>
+  <style>
 </style>
 
 

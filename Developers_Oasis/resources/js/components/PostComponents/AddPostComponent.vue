@@ -24,7 +24,7 @@
     </form>
   </div>
 </template>
-<script>
+  <script>
 import axios from "axios";
 
 export default {
@@ -61,7 +61,7 @@ export default {
       };
       const postId = response.data.id;
       //   window.location.href = '/addpost'
-    //   this.$router.push({ name: "/post", params: { id: post.id } });
+      //   this.$router.push({ name: "/post", params: { id: post.id } });
     }
   },
   mounted() {
