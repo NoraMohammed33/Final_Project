@@ -55,6 +55,10 @@ const routes = [
         path:'/expert/:id',
         component:ExpertDetail
     },
+    {
+        path:'/departments',
+        component:departmentlist
+    },
 
 
 ]

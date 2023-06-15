@@ -49,6 +49,10 @@ app.component('menubar-component',MenuBarComponent);
 import LoginComponent from "./components/AdminComponents/LoginComponent.vue";
 app.component('login-component',LoginComponent);
 
+import AdminHeaderComponent from "./components/AdminComponents/AdminHeaderComponent.vue";
+app.component('adminheader-component',AdminHeaderComponent);
+
+
 import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
 app.component('dashboard-component',DashBoardComponent);
 
@@ -67,6 +71,9 @@ app.component('expert-detail-component',ExpertDetail);
 
 import ServicesComponent from "./components/services/ServicesComponent.vue";
 app.component('services-component',ServicesComponent);
+
+import departmentlist from "./components/DepartmentComponents/departmentlist.vue";
+app.component('department-component',departmentlist);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

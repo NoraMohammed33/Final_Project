@@ -49,11 +49,16 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function expert()
+    {
+        return $this->hasOne(Expert::class);
+    }
+
     function comments():MorphMany{
 
         return $this->morphMany(Comment::class,'commentable');
 
-   }
+    }
     public function Contract()
     {
         return $this->belongsTo(Contract::class);
