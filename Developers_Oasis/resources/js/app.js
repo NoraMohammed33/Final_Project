@@ -10,6 +10,7 @@ import * as Vue from 'vue';
 import { createApp } from 'vue';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import router from "./routes/index.js";
 
 
 // Vuetify
@@ -32,11 +33,15 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
-import PostComponent from './components/UserComponents/PostComponent.vue';
+import PostComponent from './components/PostComponents/PostComponent.vue';
 app.component('post-component',PostComponent);
 
-import AddPostComponent from "./components/UserComponents/AddPostComponent.vue";
+import AddPostComponent from "./components/PostComponents/AddPostComponent.vue";
 app.component('addpost-component',AddPostComponent);
+
+import AllpostsComponent from "./components/PostComponents/AllpostsComponent.vue";
+app.component('allposts-component',AllpostsComponent);
+
 
 import MenuBarComponent from "./components/MenuBarComponent.vue";
 app.component('menubar-component',MenuBarComponent);
@@ -46,8 +51,6 @@ app.component('login-component',LoginComponent);
 
 import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
 app.component('dashboard-component',DashBoardComponent);
-
-
 
 import MainComponent from './components/MainComponent.vue'
 app.component('main-component', MainComponent)
@@ -62,7 +65,8 @@ app.component('addexpert-component',ExpertForm);
 import ExpertDetail from "./components/ExpertComponents/ExpertDetail.vue";
 app.component('expert-detail-component',ExpertDetail);
 
-
+import ServicesComponent from "./components/services/ServicesComponent.vue";
+app.component('services-component',ServicesComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -81,5 +85,6 @@ app.component('expert-detail-component',ExpertDetail);
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
+app.use(router);
 app.use(VueAxios, axios);
 app.use(vuetify).mount('#app');

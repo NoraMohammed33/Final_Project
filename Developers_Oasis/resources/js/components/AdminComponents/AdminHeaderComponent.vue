@@ -6,10 +6,10 @@
 
 
                 <!-- Brand -->
-                <a class="navbar-brand" href="/api/admin">
+                <a class="navbar-brand" href="/">
                    <span class="text-green fw-bold fs-2">Developers Oasis</span>
                 </a>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/api/admin">
                     <span class="text-green ">Admin dashboard</span>
                 </a>
 
@@ -24,11 +24,11 @@
                         <span> posts</span>
                     </router-link>
 
-                    <router-link :to="'/post'" class="list-group-item mx-4  py-2 ripple ">
+                    <router-link :to="'/allposts'" class="list-group-item mx-4  py-2 ripple ">
                         <span>experts</span>
                     </router-link>
 
-                <router-link :to="'/post'" class="list-group-item mx-4  py-2 ripple ">
+                <router-link :to="'/departments'" class="list-group-item mx-4  py-2 ripple ">
                     <span>departments</span>
                 </router-link>
 

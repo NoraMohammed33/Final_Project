@@ -10,7 +10,7 @@ class ExpertController extends Controller
 {
     public function index()
     {
-        $experts = Expert::all();
+        $experts = Expert::with('department','user')->get();
         return response()->json($experts);
     }
 
@@ -21,27 +21,34 @@ class ExpertController extends Controller
 
     public function store(Request $request)
     {
-        // Validate and store the new expert
+        $expert = Expert::create($request->all());
+        return response()->json($expert, 201);
     }
 
-    public function show(Expert $expert)
+    public function show($id)
     {
-        return view('expertdetail', compact('expert'));
+        $expert = Expert::findOrFail($id);
+        return response()->json($expert);
     }
 
-    public function edit(Expert $expert)
+    public function edit($id)
     {
-        return view('experts.edit', compact('expert'));
+        $expert = Expert::findOrFail($id);
+        return response()->json($expert);
     }
 
-    public function update(Request $request, Expert $expert)
+    public function update(Request $request, $id)
     {
-        // Validate and update the expert
+        $expert = Expert::findOrFail($id);
+        $expert->update($request->all());
+        return response()->json($expert);
     }
 
-    public function destroy(Expert $expert)
+    public function destroy($id)
     {
+        $expert = Expert::findOrFail($id);
         $expert->delete();
-        return redirect()->route('experts.index');
+        return response()->json(null, 204);
+    }
 }
-}
+

@@ -19,25 +19,11 @@ use Exception;
 
 class PostController extends Controller
 {
-    // function __construct()
-    // {
-
-    //     $this->middleware('auth:sanctum')->only('create', 'store', 'update','destroy');
-    // }
     public function index()
     {
         return PostResource::collection(Post::all());
     }
 
-
-//     public function index(Request $request)
-// {
-//     $departmentIds = $request->input('department_ids', []);
-
-//     $posts = Post::whereIn('department_id', $departmentIds)->get();
-
-//     return PostResource::collection($posts);
-// }
 
     public function store(StorePostRequest $request)
     {
