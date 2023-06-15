@@ -1,57 +1,85 @@
 <template>
-    <div>
-        <h2>Create Expert</h2>
-        <!-- Form fields for dept_id, bio, and user_id -->
-        <form @submit.prevent="createExpert">
-            <label htmlFor="dept_id">Department ID:</label>
-            <input type="text" v-model="deptId" required>
+    <v-sheet width="300" class="mx-auto">
+        <form @submit.prevent="createUserAndExpert">
+            <!-- User fields -->
+            <v-text-field
+                v-model="userData.name"
+                :rules="nameRules"
+                label="Name"
+                required
+            ></v-text-field>
 
-            <label htmlFor="bio">Bio:</label>
-            <input type="text" v-model="bio" required>
+            <v-text-field
+                v-model="userData.email"
+                label="Email"
+                required
+                type="email"
+            ></v-text-field>
 
-<!--            <label htmlFor="user_id">User ID:</label>-->
-<!--            <input type="text" v-model="user_id" required>-->
+            <v-text-field
+                v-model="userData.password"
+                label="Password"
+                required
+                type="password"
+            ></v-text-field>
 
-            <button type="submit">Create Expert</button>
+            <!-- Expert fields -->
+            <v-text-field
+                v-model="expertData.dept_id"
+                label="Department ID"
+                required
+                type="number"
+            ></v-text-field>
+
+            <v-textarea
+                v-model="expertData.bio"
+                label="Bio"
+                required
+            ></v-textarea>
+
+            <v-btn type="submit" color="primary">Create User and Expert</v-btn>
         </form>
-    </div>
+    </v-sheet>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
     data() {
         return {
-            deptId: '',
-            bio: '',
-            user_id: this.user_id,
+            userData: {
+                name: '',
+                email: '',
+                password: '',
+            },
+            expertData: {
+                dept_id: '',
+                bio: '',
+            },
+            nameRules: [
+                (v) => !!v || 'Name is required',
+                (v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
+            ],
         };
-
     },
-    props:['user_id'],
-
     methods: {
-        createExpert() {
+        createUserAndExpert() {
             axios
-                .post("/api/experts", {
-                    dept_id: this.deptId,
-                    bio: this.bio,
-                    user_id: this.userId,
+                .post('/api/users', {
+                    name: this.userData.name,
+                    email: this.userData.email,
+                    password: this.userData.password,
+                    dept_id: this.expertData.dept_id,
+                    bio: this.expertData.bio,
                 })
                 .then((response) => {
-                    // Handle successful creation
+                    // Handle success response
                     console.log(response.data);
                 })
                 .catch((error) => {
-                    // Handle error
-                    console.log(error);
+                    // Handle error response
+                    console.error(error.response.data);
                 });
         },
     },
 };
 </script>
-
-<style>
-/* Component styles go here */
-</style>

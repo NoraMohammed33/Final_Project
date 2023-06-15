@@ -4,15 +4,15 @@
         <div class="expert-card-container">
             <v-card v-for="expert in experts" :key="expert.id" class="expert-card">
                 <v-img class="align-end text-white" height="200" :src="'public/images/'+expert.user.image" cover>
-                    <v-card-title>{{ expert.name }}</v-card-title>
+                    <v-card-title>{{ expert.user.name }}</v-card-title>
                 </v-img>
                 <v-card-subtitle class="pt-4">
                     Expert ID: {{ expert.id }}
                 </v-card-subtitle>
 
                 <v-card-text>
-                    <div>{{ expert.bio }}</div>
-                    <div>Department: {{ expert.user.name }}</div>
+                    <div>Bio:  {{ expert.bio }}</div>
+                    <div>Department: {{ expert.name }}</div>
                 </v-card-text>
 
                 <router-link :to="`/expert/${expert.id}`">
