@@ -50,3 +50,4 @@ Route::apiResource('experts',ExpertController::class);
 Route::apiResource('departments',DepartmentController::class);
 
 
+Route::get('/departments/{id}/explore', 'API\DepartmentController@explore');

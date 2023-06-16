@@ -21,51 +21,58 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        return DepartmentResource::collection(Department::all());
+        $departments = Department::all();
+        return response()->json($departments);
     }
 
-
-    public function store(StoreDepartmentRequest $request)
+    public function store(Request $request)
     {
-        $post = Post::create($request->all());
-        return new  DepartmentResource($post);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $department = new Department();
+        $department->name = $request->input('name');
+        $department->description = $request->input('description');
+        $department->save();
+
+        return response()->json(['message' => 'Department created successfully'], 201);
     }
 
-    public function show($department)
+    public function show($id)
     {
-        if ($department) {
-            return new DepartmentResource($department);
-        }
-        return response('', 404);
+        $department = Department::findOrFail($id);
+        return response()->json($department);
     }
 
-
-    public function update(UpdateDepartmentRequest $request, Department $department)
+    public function update(Request $request, $id)
     {
-        if ($department)
-            try {
-                $department->update($request->all());
-                return new DepartmentResource($department);
-            } catch (Exception $e) {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
 
-                return $e;
-            }
-        else {
-            return response('', 404);
-        }
+        $department = Department::findOrFail($id);
+        $department->name = $request->input('name');
+        $department->description = $request->input('description');
+        $department->save();
+
+        return response()->json(['message' => 'Department updated successfully']);
     }
 
-    public function destroy(Department $department)
+    public function destroy($id)
     {
-        if ($department) {
-            try {
-                $department->delete();
-                return new Response('', 204);
-            } catch (Exception $e) {
-                return $e;
-            }
-        } else {
-            return response()->json('', 404);
-        }
+        $department = Department::findOrFail($id);
+        $department->delete();
+
+        return response()->json(['message' => 'Department deleted successfully']);
+    }
+
+    public function explore($id)
+    {
+        $department = Department::findOrFail($id);
+        $experts = Expert::where('dept_id', $id)->with('department', 'user')->get();
+        return response()->json(['department' => $department, 'experts' => $experts]);
     }
 }

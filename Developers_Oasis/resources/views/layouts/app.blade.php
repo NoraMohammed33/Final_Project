@@ -25,7 +25,7 @@
             <div class="container-fluid d-flex align-items-baseline ">
                 @unless(request()->is('login', 'register', 'password/*'))
                 <router-link to="/">
-                    <img style="width:100px;height: 100px" src="{{ asset('images/logo10.png') }}" class="img-fluid navbar-brand">
+                    <img style="width:100px;height: 100px" src="{{ asset('images/logo.jpg') }}" class="img-fluid navbar-brand">
                 </router-link>
                 @endunless
 
