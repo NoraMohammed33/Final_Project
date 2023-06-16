@@ -1,62 +1,71 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateDepartmentRequest;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Response;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Comment;
 use App\Models\Department;
+use App\Models\Service;
+use App\Models\Expert;
 use Illuminate\Http\Request;
+use App\Http\Resources\DepartmentResource;
+use App\Http\Requests\StoreDepartmentRequest;
+use Exception;
 
 class DepartmentController extends Controller
 {
     public function index()
     {
-        $departments = Department::all();
-
-        return response()->json($departments);
+        return DepartmentResource::collection(Department::all());
     }
 
-    public function store(Request $request)
+
+    public function store(StoreDepartmentRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
-
-        $department = Department::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-        ]);
-
-        return response()->json($department, 201);
+        $post = Post::create($request->all());
+        return new  DepartmentResource($post);
     }
 
-    public function show($id)
+    public function show($department)
     {
-        $department = Department::findOrFail($id);
-
-        return response()->json($department);
+        if ($department) {
+            return new DepartmentResource($department);
+        }
+        return response('', 404);
     }
 
-    public function update(Request $request, $id)
+
+    public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
+        if ($department)
+            try {
+                $department->update($request->all());
+                return new DepartmentResource($department);
+            } catch (Exception $e) {
 
-        $department = Department::findOrFail($id);
-
-        $department->name = $request->input('name');
-        $department->description = $request->input('description');
-        $department->save();
-
-        return response()->json($department);
+                return $e;
+            }
+        else {
+            return response('', 404);
+        }
     }
 
-    public function destroy($id)
+    public function destroy(Department $department)
     {
-        $department = Department::findOrFail($id);
-        $department->delete();
-
-        return response()->json(['message' => 'Department deleted']);
+        if ($department) {
+            try {
+                $department->delete();
+                return new Response('', 204);
+            } catch (Exception $e) {
+                return $e;
+            }
+        } else {
+            return response()->json('', 404);
+        }
     }
 }
