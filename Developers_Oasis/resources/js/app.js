@@ -7,6 +7,7 @@
 import './bootstrap';
 import 'vuetify/styles';
 import * as Vue from 'vue';
+import { createApp } from 'vue';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import router from "./routes/index.js";
@@ -21,10 +22,6 @@ const vuetify = createVuetify({
     components,
     directives,
 })
-
-import './bootstrap';
-import { createApp } from 'vue';
-
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -52,11 +49,12 @@ app.component('menubar-component',MenuBarComponent);
 import LoginComponent from "./components/AdminComponents/LoginComponent.vue";
 app.component('login-component',LoginComponent);
 
+import AdminHeaderComponent from "./components/AdminComponents/AdminHeaderComponent.vue";
+app.component('adminheader-component',AdminHeaderComponent);
+
+
 import DashBoardComponent from "./components/AdminComponents/DashBoardComponent.vue";
 app.component('dashboard-component',DashBoardComponent);
-
-import AdminHeaderComponent from "./components/AdminComponents/AdminHeaderComponent.vue";
-app.component('adminheader-component',AdminHeaderComponent)
 
 import MainComponent from './components/MainComponent.vue'
 app.component('main-component', MainComponent)
@@ -74,6 +72,8 @@ app.component('expert-detail-component',ExpertDetail);
 import ServicesComponent from "./components/services/ServicesComponent.vue";
 app.component('services-component',ServicesComponent);
 
+import departmentlist from "./components/DepartmentComponents/departmentlist.vue";
+app.component('department-component',departmentlist);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

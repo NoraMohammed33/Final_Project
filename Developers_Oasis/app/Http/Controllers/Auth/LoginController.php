@@ -37,4 +37,29 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    public function showAdminLoginForm()
+    {
+        $userType = 'admin';
+        return view('auth.loginAdmin', compact('userType'));
+    }
+
+    public function adminLogin()
+    {
+        $credentials = $this->validate(request(), [
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        if (auth()->attempt($credentials)) {
+            return redirect()->intended('/admin/dashboard');
+        }
+
+        return redirect()->back()->withErrors(['email' => 'Email or password incorrect']);
+    }
+
+
+
+
 }

@@ -22,38 +22,68 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+
                 <a class="navbar-brand" href="{{ url('/') }}">
-                 <span>Developers Oasis</span>
+                    <span class="text-green fw-bold fs-2">Developers Oasis</span>
                 </a>
-
-
+                <a class="navbar-brand" href="/api/admin">
+                    <span class="text-green ">Admin dashboard</span>
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+
+
+                <router-link :to="'/services'"  class="list-group-item  py-2 mx-4 ripple ">
+                    <span>services</span>
+                </router-link>
+
+
+                <router-link :to="'/addpost'"  class="list-group-item mx-4  py-2 ripple ">
+                    <span> posts</span>
+                </router-link>
+
+                <router-link :to="'/allposts'" class="list-group-item mx-4  py-2 ripple ">
+                    <span>experts</span>
+                </router-link>
+
+                <router-link :to="'/departments'" class="list-group-item mx-4  py-2 ripple ">
+                    <span>departments</span>
+                </router-link>
+
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    this is admin dashborad
+
                     <!-- Right Side Of Navbar -->
+
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-
-
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                        @guest
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
 
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                     </ul>
+
+
+
                 </div>
             </div>
         </nav>

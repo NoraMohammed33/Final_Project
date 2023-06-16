@@ -1,7 +1,9 @@
 
-@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+{{--@vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
 
-<div id="app">
+
+@extends('layouts.appAdmin')
+@section('content')
             <dashboard-component></dashboard-component>
-</div>
+@endsection
 
