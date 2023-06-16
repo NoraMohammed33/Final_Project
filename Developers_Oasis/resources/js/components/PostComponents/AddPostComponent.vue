@@ -69,7 +69,7 @@ export default {
       .get(`http://localhost:8000/api/departments`)
       .then(response => {
         this.departments = response.data;
-        // console.log(this.departments);
+        console.log(this.departments);
       })
       .catch(error => {
         console.log(error);

@@ -7,9 +7,10 @@ use App\Http\Controllers\API\ServiceController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\API\ExpertController;
 use App\Http\Controllers\API\AdminController;
-use App\Http\Controllers\API\DepartmentController;
+
 use App\Http\Controllers\API\AuthController;
 
 /*
@@ -46,6 +47,7 @@ Route::get('/comments/{post}', [CommentController::class, 'commentsForPost']);
 
 Route::apiResource('experts',ExpertController::class);
 //====================departments========================
-
 Route::apiResource('departments',DepartmentController::class);
 
+
+Route::get('/departments/{id}/explore', 'API\DepartmentController@explore');

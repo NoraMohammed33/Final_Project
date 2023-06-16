@@ -67,7 +67,7 @@
   </div>
 </template>
 
-    <script>
+<script>
 import axios from "axios";
 
 export default {
@@ -107,9 +107,33 @@ export default {
     },
     deleteComment(commentId) {
       axios
-        .delete(`http://localhost:8000/api/posts/{post}/comments/${commentId}`)
+        .delete(`http://localhost:8000/api/posts/${this.post_id}/comments/${commentId}`)
         .then(response => {
-          this.fetchPosts();
+          this.fetchComments();
+          console.log("comment deleted");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    editComment(comment) {
+      this.editMode = true;
+      this.editedComment = Object.assign({}, comment);
+    },
+    updateComment() {
+      const updatedComment = { ...this.editedComment };
+      for (let key in updatedComment)
+        if (!updatedComment[key]) delete updatedComment[key];
+      axios
+        .put(
+          `/api/posts/${this.post_id}/comments/${this.editedComment.id}`,
+          updatedComment
+        )
+        .then(response => {
+          this.fetchComments();
+          this.editMode = false;
+          this.editedComment = {};
+          toastr["success"]("Updated Successfully!");
         })
         .catch(error => {
           console.log(error);
@@ -123,31 +147,45 @@ export default {
         commentable_type: "Post",
         commentable_id: this.post_id
       };
-      if (this.newCommentBody === "") return false;
+
+      if (this.newCommentBody == "") {
+        alert("fehler");
+        return false;
+      }
       axios
         .post(`http://localhost:8000/api/posts/${this.post_id}/comments`, data)
         .then(res => {
-          this.$refs.form.reset();
           alert("Your comment has been added");
+          this.newCommentBody = "";
         })
         .catch(() => {
-          //   alert('Something went wrong!');
+          alert("Something went wrong!");
           console.log(data);
+        });
+    },
+    setupTimer() {
+      this.timer = setInterval(() => {
+        this.fetchComments();
+      }, 2000);
+    },
+    fetchComments() {
+      axios
+        .get(`http://127.0.0.1:8000/api/comments/7`)
+        .then(response => {
+          this.comments = response.data;
+        })
+        .catch(error => {
+          console.log(error);
         });
     }
   },
   mounted() {
-    axios
-      .get(`http://127.0.0.1:8000/api/comments/7`)
-      .then(response => {
-        this.comments = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.fetchComments();
+    this.setupTimer();
   }
 };
 </script>
+
 
   <style>
 </style>
