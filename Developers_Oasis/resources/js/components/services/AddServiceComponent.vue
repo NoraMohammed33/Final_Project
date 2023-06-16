@@ -22,7 +22,9 @@
                     <div v-if="errors.service_price" class="text-danger">{{ errors.service_price }}</div>
                     <input type="file" ref="service_name" class="form-control my-3 w-50" name="service_image" @change="previewImage">
                     <div v-if="errors.imagePreview" class="text-danger">{{ errors.imagePreview }}</div>
-                    <img v-if="imagePreview" :src="imagePreview" alt="Image Preview" class="img-fluid rounded-5" style="width: 60%;height: 210px">
+                    <div class="d-flex justify-content-center p-1">
+                        <img v-if="imagePreview" :src="imagePreview" alt="Image Preview" class="img-fluid rounded-2" style="width: 70%;height: 210px">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="dismiss" data-bs-dismiss="modal" class="btn btn-secondary text-light" @click="emptyForm">Cancel</button>

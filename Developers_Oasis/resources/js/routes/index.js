@@ -14,7 +14,6 @@ import ExpertDetail from "../components/ExpertComponents/ExpertDetail.vue";
 import departmentlist from "../components/DepartmentComponents/departmentlist.vue";
 import exampleComponent from "../components/ExampleComponent.vue";
 
-
 const routes = [
 
     {

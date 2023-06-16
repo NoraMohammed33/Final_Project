@@ -16,26 +16,34 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {return view('welcome');});
-Route::get('/posts', function () {return view('posts');});
-Route::get('/services', function () {return view('services');});
-
-Route::view('/admin/login','auth.loginAdmin');
-
-Route::get('/departments', function () {return view('departments');});
-
-
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any', '.*');
+
+
+
+
+//Route::get('/', function () {return view('welcome');});
+//Route::get('/posts', function () {return view('posts');});
+//Route::get('/services', function () {return view('services');});
+//
+//Route::view('/admin/login','auth.loginAdmin');
+//
+//Route::get('/departments', function () {return view('departments');});
+
+
+
+
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
 //expert
-Route::get('/experts', function () {return view('expert');});
-Route::get('/addexpert', function () {return view('addexpert');});
-Route::get('/expert/{id}', function ($id) {
-    return view('expertdetail', ['id' => $id]);
-});
+//Route::get('/experts', function () {return view('expert');});
+//Route::get('/addexpert', function () {return view('addexpert');});
+//Route::get('/expert/{id}', function ($id) {
+//    return view('expertdetail', ['id' => $id]);
+//});

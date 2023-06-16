@@ -7,7 +7,6 @@
 import './bootstrap';
 import 'vuetify/styles';
 import * as Vue from 'vue';
-import { createApp } from 'vue';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import router from "./routes/index.js";
@@ -74,6 +73,7 @@ app.component('expert-detail-component',ExpertDetail);
 
 import ServicesComponent from "./components/services/ServicesComponent.vue";
 app.component('services-component',ServicesComponent);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

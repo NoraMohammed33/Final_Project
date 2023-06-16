@@ -4,7 +4,5 @@
 
 
 @section('content')
-
-<h1>welcome to our project</h1>
-
+    <router-view></router-view>
 @endsection

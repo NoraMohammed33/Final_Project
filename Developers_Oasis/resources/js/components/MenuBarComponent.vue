@@ -1,21 +1,39 @@
 <template>
-    <ul class="navbar-nav me-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="/posts"> posts<span class="sr-only"></span></a>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <router-link to="/home" class="nav-link">
+                Home
+            </router-link>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="/addpost"> <span class="sr-only">Ask me </span></a>
+        <li class="nav-item">
+            <router-link to="/services" class="nav-link">
+                Services
+            </router-link>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="/experts">experts<span class="sr-only"></span></a>
+        <li class="nav-item">
+            <router-link to="/posts" class="nav-link">
+                Posts
+            </router-link>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Departments<span class="sr-only"></span></a>
+        <li class="nav-item">
+            <router-link to="/Experts" class="nav-link">
+                Experts
+            </router-link>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="#">about us<span class="sr-only"></span></a>
+        <li class="nav-item">
+            <router-link to="/Departments" class="nav-link">
+                Departments
+            </router-link>
         </li>
+
     </ul>
 </template>
 <script setup>
 </script>
+
+<style scoped>
+    router-link{
+        font-size: larger;
+        font-weight: bold;
+    }
+</style>
