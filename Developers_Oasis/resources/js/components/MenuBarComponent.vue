@@ -16,12 +16,12 @@
             </router-link>
         </li>
         <li class="nav-item">
-            <router-link to="/Experts" class="nav-link">
+            <router-link to="/experts" class="nav-link">
                 Experts
             </router-link>
         </li>
         <li class="nav-item">
-            <router-link to="/Departments" class="nav-link">
+            <router-link to="/departments" class="nav-link">
                 Departments
             </router-link>
         </li>
