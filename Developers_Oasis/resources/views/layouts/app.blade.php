@@ -15,27 +15,29 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js','resources/css/app.css'])
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                 <span>Developers Oasis</span>
-                </a>
 
-
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid d-flex align-items-baseline ">
+                @unless(request()->is('login', 'register', 'password/*'))
+                <router-link to="/">
+                    <img style="width:100px;height: 100px" src="{{ asset('images/logo10.png') }}" class="img-fluid navbar-brand">
+                </router-link>
+                @endunless
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @auth()
                     <!-- Left Side Of Navbar -->
-                    <menubar-component></menubar-component>
-                    <!-- Right Side Of Navbar -->
+                        <menubar-component></menubar-component>
+                    @endauth
+                            <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
@@ -72,15 +74,15 @@
                 </div>
             </div>
         </nav>
-
-
-
-
         <main class="py-4">
             @yield('content')
+            @if(request()->is('login', 'register', 'password/*'))
+                <a href="/">Go home page</a>
+            @endif
         </main>
 
     </div>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
 </html>
