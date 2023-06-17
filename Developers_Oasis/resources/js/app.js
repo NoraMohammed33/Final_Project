@@ -42,7 +42,6 @@ app.component('addpost-component',AddPostComponent);
 import AllpostsComponent from "./components/PostComponents/AllpostsComponent.vue";
 app.component('allposts-component',AllpostsComponent);
 
-
 import MenuBarComponent from "./components/MenuBarComponent.vue";
 app.component('menubar-component',MenuBarComponent);
 

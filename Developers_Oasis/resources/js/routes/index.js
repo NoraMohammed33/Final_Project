@@ -4,9 +4,9 @@ import ServicesComponent from "../components/services/ServicesComponent.vue";
 
 import dashBoardComponent from "../components/AdminComponents/DashBoardComponent.vue";
 
-
 import AddPostComponent from '../components/PostComponents/AddPostComponent.vue';
 import AllpostsComponent from '../components/PostComponents/AllpostsComponent.vue';
+import PostComponent from "../components/PostComponents/PostComponent.vue";
 
 import ExpertList from "../components/ExpertComponents/ExpertList.vue";
 import ExpertForm from "../components/ExpertComponents/ExpertForm.vue";
@@ -14,7 +14,7 @@ import ExpertDetail from "../components/ExpertComponents/ExpertDetail.vue";
 import departmentlist from "../components/DepartmentComponents/departmentlist.vue";
 import exampleComponent from "../components/ExampleComponent.vue";
 import expertList from "../components/ExpertComponents/ExpertList.vue";
-import PostComponent from "../components/PostComponent.vue";
+
 import DepartmentExpertsComponent from "../components/DepartmentComponents/DepartmentExpertsComponent.vue";
 
 const routes = [
@@ -54,7 +54,7 @@ const routes = [
         component:ExpertDetail
     },
     {
-        path:'/post/:id',
+        path:'/posts/:id',
         component:PostComponent
     },
     {
