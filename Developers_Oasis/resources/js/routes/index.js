@@ -52,10 +52,6 @@ const routes = [
         component:ExpertDetail
     },
     {
-        path:'/departments',
-        component:departmentlist
-    },
-    {
         path:'/admin/dashboard',
         component: dashBoardComponent,
         children:[
@@ -77,6 +73,10 @@ const routes = [
             },
         ]
 
+    },
+    {
+        path:'/departments',
+        component:departmentlist
     }
 
 
