@@ -57,3 +57,4 @@ Route::get('/{any}', function () {
 //    return view('expertdetail', ['id' => $id]);
 //})->middleware('auth');
 
+//Route::get('/departments/{id}/explore', DepartmentController::class);

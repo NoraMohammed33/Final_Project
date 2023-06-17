@@ -14,6 +14,8 @@ import ExpertDetail from "../components/ExpertComponents/ExpertDetail.vue";
 import departmentlist from "../components/DepartmentComponents/departmentlist.vue";
 import exampleComponent from "../components/ExampleComponent.vue";
 import expertList from "../components/ExpertComponents/ExpertList.vue";
+import PostComponent from "../components/PostComponent.vue";
+import DepartmentExpertsComponent from "../components/DepartmentComponents/DepartmentExpertsComponent.vue";
 
 const routes = [
 
@@ -50,6 +52,14 @@ const routes = [
     {
         path:'/expert/:id',
         component:ExpertDetail
+    },
+    {
+        path:'/post/:id',
+        component:PostComponent
+    },
+    {
+        path:'/departments/:id',
+        component:DepartmentExpertsComponent
     },
     {
         path:'/admin/dashboard',

@@ -11,9 +11,9 @@ class ExpertController extends Controller
 {
     public function index()
     {
-        // $experts = Expert::with('department','user')->get();
-        // return response()->json($experts);
-        return ExpertResource::collection(Expert::all());
+         $experts = Expert::with('department','user')->get();
+         return response()->json($experts);
+//        return ExpertResource::collection(Expert::all());
     }
 
     public function create()

@@ -75,6 +75,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 export default {
     data() {
         return {
+            experts:[],
             departments: [],
             department_name: "",
             department_description: "",
@@ -98,6 +99,7 @@ export default {
                     const experts = response.data.experts;
                     // Handle the department and experts data
                     this.experts = experts;
+                    this.$router.push({ path: `/departments/${department.id}` });
                     console.log(department);
                     console.log(experts);
                 })
