@@ -34,18 +34,12 @@ class CommentController extends Controller
         return new CommentResource($comment);
     }
 
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(UpdateCommentRequest $request, $postId, $commentId)
     {
-        if ($comment)
-            try {
-                $comment->update($request->all());
-                return new CommentResource($comment);
-            } catch (Exception $e) {
-                return $e;
-            }
-        else {
-            return response('', 404);
-        }
+        $comment = Comment::findOrFail($commentId);
+        $comment->body = $request->input('body');
+        $comment->save();
+        return response()->json('Comment updated successfully');
     }
 
     public function destroy($postId, $commentId)

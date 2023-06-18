@@ -63,7 +63,7 @@
                           <div v-if="errors.comment_body"  class="text-danger" >{{ errors.comment_body }}</div>
                           <div class="modal-footer">
                           <button type="button" id="dismissUpdate" data-bs-dismiss="modal" class="btn btn-secondary text-light">Cancel</button>
-                          <button type="button" class="btn btn-primary text-light" @click="updateComment">Update comment</button>
+                          <button type="button" class="btn btn-primary text-light" @click="updateComment()">Update comment</button>
                         </div>
                       </div>
                     </div>
@@ -118,7 +118,6 @@ export default {
         .get(`http://127.0.0.1:8000/api/comments/${this.post_id}`)
         .then(response => {
           this.comments = response.data;
-          //   console.log(response.data);
         })
         .catch(error => {
           console.log(error);
@@ -159,15 +158,16 @@ export default {
       this.comment_body = comment.body;
     },
     updateComment() {
+        const requestData = {
+            body:this.comment_body
+        };
       this.errors = {};
       if (!this.comment_body) {
         this.errors.comment_body = "Please enter a comment body.";
       }
       if (Object.keys(this.errors).length === 0) {
         axios
-          .put(`http://localhost:8000/api/posts/${this.post_id}/comments/${this.update_commentID}`, {
-            body: this.comment_body
-          })
+          .put(`http://localhost:8000/api/posts/${this.post_id}/comments/${this.update_commentID}`,requestData )
           .then(response => {
             Swal.fire({
               title: "Success!",
