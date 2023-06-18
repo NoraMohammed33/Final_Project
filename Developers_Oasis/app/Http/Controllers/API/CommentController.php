@@ -27,7 +27,7 @@ class CommentController extends Controller
             'body' => 'required',
             'user_id' => 'required',
             'post_id' => 'required',
-            'commentable_id' => 'required',
+            // 'commentable_id' => 'required',
         ]);
         $comment = Comment::create($request->all());
         $comment->save();
