@@ -48,23 +48,22 @@ class CommentController extends Controller
         }
     }
 
-    public function destroy(Comment $comment)
+    public function destroy($postId, $commentId)
     {
-        if ($comment) {
-            try {
-                $comment->delete();
-                return new Response('', 204);
-            } catch (Exception $e) {
-                return $e;
-            }
-        } else {
-            return response()->json('', 404);
+        try {
+
+            $comment = Comment::findOrFail($commentId);
+
+            $comment->delete();
+
+            return response()->json('Comment deleted successfully', 204);
+        } catch (\Exception $e) {
+            return response()->json('Failed to delete comment', 500);
         }
     }
     //========show cmments for spesific posts=======================
-    public function commentsForPost(Post $post)
+    public function commentsForPost($postId)
     {
-        $postId = $post->id;
         $comments = Comment::where('post_id', $postId)->get();
         return CommentResource::collection($comments);
     }
