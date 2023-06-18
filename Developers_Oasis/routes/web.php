@@ -18,10 +18,15 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/{any}', function () {
+Route::get('/', function () {
     return view('welcome');
-})->where('any', '.*');
+});
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/{any}', function () {
+        return view('home');
+    })->where('any', '.*');
+});
 
 //Route::view('/admin/login','auth.loginAdmin');
 //departments
