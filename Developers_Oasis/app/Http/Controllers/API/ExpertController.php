@@ -5,13 +5,15 @@ namespace App\Http\Controllers\API;
 use App\Models\Expert;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\ExpertResource;
 
 class ExpertController extends Controller
 {
     public function index()
     {
-        $experts = Expert::with('department','user')->get();
-        return response()->json($experts);
+         $experts = Expert::with('department','user')->get();
+         return response()->json($experts);
+//        return ExpertResource::collection(Expert::all());
     }
 
     public function create()

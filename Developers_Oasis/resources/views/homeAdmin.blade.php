@@ -4,6 +4,6 @@
 
 @extends('layouts.appAdmin')
 @section('content')
-            <dashboard-component></dashboard-component>
+<router-view></router-view>
 @endsection
 

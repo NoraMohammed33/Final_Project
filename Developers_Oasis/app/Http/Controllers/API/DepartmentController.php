@@ -21,8 +21,9 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        $departments = Department::all();
-        return response()->json($departments);
+        return DepartmentResource::collection(Department::all());
+//        $departments = Department::all();
+//        return response()->json($departments);
     }
 
     public function store(Request $request)
@@ -65,7 +66,6 @@ class DepartmentController extends Controller
     {
         $department = Department::findOrFail($id);
         $department->delete();
-
         return response()->json(['message' => 'Department deleted successfully']);
     }
 

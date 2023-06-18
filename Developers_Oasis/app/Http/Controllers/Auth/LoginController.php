@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use App\Models\User;
+
 class LoginController extends Controller
 {
     /*
@@ -41,8 +43,8 @@ class LoginController extends Controller
 
     public function showAdminLoginForm()
     {
-        $userType = 'admin';
-        return view('auth.loginAdmin', compact('userType'));
+
+        return view('auth.loginAdmin');
     }
 
     public function adminLogin()
@@ -53,7 +55,16 @@ class LoginController extends Controller
         ]);
 
         if (auth()->attempt($credentials)) {
-            return redirect()->intended('/admin/dashboard');
+           if  (auth()->user()->isadmin == true){
+                           return redirect()->intended('/admin/dashboard');
+           }else
+           {
+               return redirect('/addpost');
+
+           }
+
+
+
         }
 
         return redirect()->back()->withErrors(['email' => 'Email or password incorrect']);

@@ -55,7 +55,7 @@ class PostController extends Controller
         }
     }
 
-    public function destroy(Post $post)
+    public function destroy (Post $post)
     {
         if ($post) {
             try {
@@ -68,4 +68,13 @@ class PostController extends Controller
             return response()->json('', 404);
         }
     }
-}
+    public function explore($id)
+    {
+        $post = Post::findOrFail($id);
+        return response()->json([
+            'data' => [
+                'post' => $post,
+            ],
+        ]);
+    }
+    }

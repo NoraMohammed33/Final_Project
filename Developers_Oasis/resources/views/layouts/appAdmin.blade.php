@@ -26,34 +26,35 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <span class="text-green fw-bold fs-2">Developers Oasis</span>
                 </a>
-                <a class="navbar-brand" href="/api/admin">
+                @auth
+                <a class="navbar-brand" href="/admin/dashboard">
                     <span class="text-green ">Admin dashboard</span>
                 </a>
-
+@endauth
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
 
-
-                <router-link :to="'/services'"  class="list-group-item  py-2 mx-4 ripple ">
+@auth
+                <router-link :to="'/admin/dashboard/services'"  class="list-group-item  py-2 mx-4 ripple ">
                     <span>services</span>
                 </router-link>
 
 
-                <router-link :to="'/addpost'"  class="list-group-item mx-4  py-2 ripple ">
+                <router-link :to="'/admin/dashboard/allposts'"  class="list-group-item mx-4  py-2 ripple ">
                     <span> posts</span>
                 </router-link>
 
-                <router-link :to="'/allposts'" class="list-group-item mx-4  py-2 ripple ">
-                    <span>experts</span>
+                <router-link :to="'/admin/dashboard/experts'" class="list-group-item mx-4  py-2 ripple ">
+                    <span>experts hamada</span>
                 </router-link>
 
-                <router-link :to="'/departments'" class="list-group-item mx-4  py-2 ripple ">
+                <router-link :to="'/admin/dashboard/departments'" class="list-group-item mx-4  py-2 ripple ">
                     <span>departments</span>
                 </router-link>
 
-
+@endauth
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
 
@@ -62,6 +63,8 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
+
+
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

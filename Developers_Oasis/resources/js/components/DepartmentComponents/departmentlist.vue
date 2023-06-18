@@ -4,7 +4,7 @@
         <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent>
 
         <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
-            <template v-for="department in departments" :key="department.id">
+            <template v-for="department in departments.data" :key="department.id">
                 <v-card class="col-8 col-sm-5 col-md-4 col-lg-3 m-3 rounded-4">
                     <v-card-text>
                         <h2 class="font-weight-bold text-orange mb-2">{{ department.name }}</h2>
@@ -75,6 +75,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 export default {
     data() {
         return {
+            experts:[],
             departments: [],
             department_name: "",
             department_description: "",
@@ -98,6 +99,7 @@ export default {
                     const experts = response.data.experts;
                     // Handle the department and experts data
                     this.experts = experts;
+                    this.$router.push({ path: `/departments/${department.id}` });
                     console.log(department);
                     console.log(experts);
                 })
@@ -173,6 +175,7 @@ export default {
                                 text: "Department deleted successfully",
                                 confirmButtonColor: "#5cb85c",
                             });
+                            console.log(departmentID);
                             this.fetchAllDepartments();
                         })
                         .catch((error) => {

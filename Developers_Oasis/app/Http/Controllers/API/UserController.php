@@ -13,8 +13,8 @@ use App\Models\Department;
 use App\Models\Service;
 use App\Models\Expert;
 use Illuminate\Http\Request;
-use App\Http\Resources\PostResource;
-use App\Http\Requests\StorePostRequest;
+use App\Http\Resources\UserResource;
+use App\Http\Requests\StoreUserRequest;
 use Exception;
 
 class UserController extends Controller

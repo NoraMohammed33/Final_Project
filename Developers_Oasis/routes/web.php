@@ -16,9 +16,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// Admin login route
+Route::get('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm']);
+Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin'])->name('admin.login');
+
 Auth::routes();
 
-Route::get('/', function () {
+Route::view('/admin/dashboard','homeAdmin')->name('admin.dashboard');
+Route::get('/admin/dashboard/{any}', function () {
+    return view('homeAdmin');
+})->where('any', '.*');
+
+
+Route::get('/{any}', function () {
     return view('welcome');
 });
 

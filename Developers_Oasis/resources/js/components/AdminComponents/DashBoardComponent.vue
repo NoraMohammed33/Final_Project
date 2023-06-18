@@ -6,7 +6,7 @@
 
 
 <v-container class="d-flex justify-content-center py-5">
-<main-component></main-component>
+<router-view></router-view>
 </v-container>
 
     <footer class="text-center bg-black fixed-bottom">all copy rights saved</footer>
@@ -15,9 +15,17 @@
 
 import {defineComponent} from "vue";
 import AdminheaderComponent from "./AdminHeaderComponent.vue";
+import ServicesComponent from "../services/ServicesComponent.vue";
+import AllpostsComponent from '../PostComponents/AllpostsComponent.vue';
+import departmentlist from '../DepartmentComponents/departmentlist.vue';
+import ExpertList from "../ExpertComponents/ExpertList.vue";
 
 export default defineComponent({
-    components: {AdminheaderComponent}
+    components: {AdminheaderComponent,
+        ServicesComponent,AllpostsComponent,
+        departmentlist,ExpertList
+
+    }
 })
 </script>
 
