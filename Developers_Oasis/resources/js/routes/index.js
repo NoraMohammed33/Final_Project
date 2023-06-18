@@ -24,6 +24,10 @@ const routes = [
         component: MainComponent
     },
     {
+        path: '/home',
+        component: MainComponent
+    },
+    {
 
         path:'/posts',
         component:AllpostsComponent

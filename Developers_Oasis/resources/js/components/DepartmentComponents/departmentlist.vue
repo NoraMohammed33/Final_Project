@@ -100,8 +100,6 @@ export default {
                     // Handle the department and experts data
                     this.experts = experts;
                     this.$router.push({ path: `/departments/${department.id}` });
-                    console.log(department);
-                    console.log(experts);
                 })
                 .catch(error => {
                     console.error(error);
