@@ -1,14 +1,14 @@
 <template>
     <div v-if="experts && experts.length > 0">
         <h4 class="font-weight-bold mt-3">Experts</h4>
-        <div v-for="expert in experts" :key="expert.id">
-            <v-card class="mx-auto" max-width="344">
+        <div class="card-container">
+            <v-card v-for="expert in experts" :key="expert.id" class="card-item" max-width="344">
                 <v-card-title>
-                    <!-- {{ expert.name }} -->samer
+                    {{ expert.name }}
                 </v-card-title>
 
                 <v-card-subtitle>
-                    <!-- {{ expert.name }} -->samer
+                    {{ expert.name }}
                 </v-card-subtitle>
 
                 <v-card-actions>
@@ -39,6 +39,7 @@ export default {
         return {
             experts: [],
             departments: [],
+            show: false,
         };
     },
     mounted() {
@@ -70,4 +71,13 @@ export default {
 </script>
 
 <style scoped>
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-item {
+    flex: 1 1 300px;
+    margin: 8px;
+}
 </style>
