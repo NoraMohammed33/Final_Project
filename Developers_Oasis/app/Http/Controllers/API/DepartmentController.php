@@ -44,7 +44,8 @@ class DepartmentController extends Controller
     public function show($id)
     {
         $department = Department::findOrFail($id);
-        return response()->json($department);
+        $experts = Expert::where('dept_id', $id)->with('department', 'user')->get();
+        return response()->json(['department' => $department, 'experts' => $experts]);
     }
 
     public function update(Request $request, $id)

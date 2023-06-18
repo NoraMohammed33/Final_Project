@@ -12,7 +12,6 @@ import ExpertList from "../components/ExpertComponents/ExpertList.vue";
 import ExpertForm from "../components/ExpertComponents/ExpertForm.vue";
 import ExpertDetail from "../components/ExpertComponents/ExpertDetail.vue";
 import departmentlist from "../components/DepartmentComponents/departmentlist.vue";
-import HomeComponent from "../components/home/HomeComponent.vue"
 import exampleComponent from "../components/ExampleComponent.vue";
 import expertList from "../components/ExpertComponents/ExpertList.vue";
 
@@ -26,9 +25,10 @@ const routes = [
     },
     {
         path: '/home',
-        component: HomeComponent
+        component: MainComponent
     },
     {
+
         path:'/posts',
         component:AllpostsComponent
     },
@@ -45,10 +45,6 @@ const routes = [
     {
         path: '/allposts',
         component: AllpostsComponent
-    },
-    {
-        path: '/departments',
-        component: departmentlist
     },
     {
         path:'/experts',
