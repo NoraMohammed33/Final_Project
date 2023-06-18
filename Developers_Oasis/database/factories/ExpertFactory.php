@@ -19,7 +19,9 @@ class ExpertFactory extends Factory
         return [
                  'bio' => fake()->name(),
                  'user_id'=>rand(3,10),
-                 'dept_id'=>rand(5,15),
+                 'dept_id'=>rand(5,10),
+                //  'image' => fake()->imageUrl(),
+
             //
         ];
     }
