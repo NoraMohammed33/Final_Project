@@ -59,9 +59,9 @@
                         <div class="modal-header bg-warning">
                           <h3 class="modal-title text-center w-100 fw-bold">Update comment</h3>
                         </div>
-                        <div v-if="errors.comment_body"  class="text-danger" >{{ errors.comment_body }}</div>
                         <textarea type="text" v-model="comment_body" class="form-control my-3" maxlength="200" name="post_title" placeholder="comment Body"></textarea>
-                        <div class="modal-footer">
+                          <div v-if="errors.comment_body"  class="text-danger" >{{ errors.comment_body }}</div>
+                          <div class="modal-footer">
                           <button type="button" id="dismissUpdate" data-bs-dismiss="modal" class="btn btn-secondary text-light">Cancel</button>
                           <button type="button" class="btn btn-primary text-light" @click="updateComment">Update comment</button>
                         </div>
@@ -80,6 +80,8 @@
 
   <script>
 import axios from "axios";
+import Swal from "sweetalert2";
+
 
 export default {
   data() {
@@ -105,6 +107,7 @@ export default {
         .get(`http://localhost:8000/api/posts/${this.post_id}`)
         .then(response => {
           this.posts = response.data;
+          this.fetchComments();
         })
         .catch(error => {
           console.log(error);
@@ -130,12 +133,12 @@ export default {
         commentable_id: this.post_id
       };
 
-      if (this.newCommentBody == "") {
+      if (this.newCommentBody === "") {
         alert("Please enter the body of the comment");
         return false;
       }
       axios
-        .post(`http://localhost:8000/api/posts/7/comments`, data)
+        .post(`http://localhost:8000/api/posts/${this.post_id}/comments`, data)
         .then(res => {
           alert("Your comment has been added");
           this.newCommentBody = "";
@@ -150,8 +153,8 @@ export default {
         this.fetchComments();
       }, 1000);
     },
-
     openUpdateModal(comment) {
+        this.errors={}
       this.update_commentID = comment.id;
       this.comment_body = comment.body;
     },
@@ -162,12 +165,10 @@ export default {
       }
       if (Object.keys(this.errors).length === 0) {
         axios
-          .put(`/api/comments/${this.post_id}/${this.update_commentID}`, {
+          .put(`http://localhost:8000/api/posts/${this.post_id}/comments/${this.update_commentID}`, {
             body: this.comment_body
           })
           .then(response => {
-            this.fetchComments();
-            $("#update_modal").modal("hide");
             Swal.fire({
               title: "Success!",
               text: "Comment has been updated successfully.",
@@ -175,6 +176,10 @@ export default {
               showConfirmButton: false,
               timer: 1500
             });
+            document.getElementById('dismissUpdate').click()
+              this.fetchComments();
+              this.errors={}
+
           })
           .catch(error => {
             console.log(error);
@@ -193,27 +198,24 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           axios
-         .delete(`/api/comments/${commentID}`)
-         .then(response => {
-              this.fetchComments();
-              Swal.fire({
-                title: "Deleted!",
-                text: "comment has been deleted successfully.",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 15000
-              });
-            })
-            .catch(error => {
-              console.log(error);
-            });
+         .delete(`http://localhost:8000/api/posts/${this.post_id}/comments/${commentID}`)
+         .then(() => {
+                 Swal.fire({
+                     icon: 'success',
+                     title: 'Success',
+                     text: 'Service deleted successfully!',
+                 });
+                 this.comments = this.comments.filter(comment => comment.id !== commentID);
+             })
+                 .catch((error) => {
+                     console.error(error);
+                 });
         }
       });
     }
   },
 
   mounted() {
-    this.fetchComments();
     this.setupTimer();
   }
 };

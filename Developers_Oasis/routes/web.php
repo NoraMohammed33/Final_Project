@@ -30,9 +30,15 @@ Route::get('/admin/dashboard/{any}', function () {
 
 Route::get('/{any}', function () {
     return view('welcome');
-})->where('any', '.*');
+});
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/{any}', function () {
+        return view('home');
+    })->where('any', '.*');
+});
 
+//Route::view('/admin/login','auth.loginAdmin');
 //departments
 //Route::get('/departments', function () {return view('departments');})->middleware('auth');
 //Route::get('/adddepartments', function () {
@@ -42,6 +48,10 @@ Route::get('/{any}', function () {
 //    return view('departmentsdetail', ['id' => $id]);
 //})->middleware('auth');
 
+// Admin login route
+//Route::get('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm'])->name('admin.login');
+//Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin']);
+//
 //Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
 
@@ -57,4 +67,3 @@ Route::get('/{any}', function () {
 //    return view('expertdetail', ['id' => $id]);
 //})->middleware('auth');
 
-//Route::get('/departments/{id}/explore', DepartmentController::class);

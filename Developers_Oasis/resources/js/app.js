@@ -76,6 +76,9 @@ app.component('department-component',departmentlist);
 
 import AddDepartmentComponent from "./components/DepartmentComponents/AddDepartmentComponent.vue";
 app.component('adddepartment-component',AddDepartmentComponent);
+
+import HomeComponent from "./components/home/HomeComponent.vue";
+app.component('home-component', HomeComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
