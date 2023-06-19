@@ -3,21 +3,19 @@
         <h2>Expert List</h2>
         <div class="expert-card-container">
             <v-card v-for="expert in experts" :key="expert.id" class="expert-card">
-                <v-img class="align-end text-white" height="200" :src="'public/images/'+expert.user.image" cover>
-                    <v-card-title>{{ expert.user.name }}</v-card-title>
+                <v-img class="align-end text-white" height="200" :src="'public/images/' + expert.user.image" cover>
                 </v-img>
+                <v-card-title>{{ expert.user.name }}</v-card-title>
                 <v-card-subtitle class="pt-4">
-                    Expert ID: {{ expert.id }}
+                    {{ expert.user.email }}
+                </v-card-subtitle>
+                <v-card-subtitle class="pt-4">
+                    <div>Department: {{ expert.department.name }}</div>
                 </v-card-subtitle>
 
                 <v-card-text>
-                    <div>Bio:  {{ expert.bio }}</div>
-                    <div>Department: {{ expert.name }}</div>
+                    <div>Bio: {{ expert.bio }}</div>
                 </v-card-text>
-
-                <router-link :to="`/expert/${expert.id}`">
-                    View Details
-                </router-link>
 
                 <v-card-actions>
                     <v-btn color="orange" @click="exploreExpert(expert)">
@@ -35,7 +33,7 @@ import axios from "axios";
 export default {
     data() {
         return {
-            experts: [], // Add back the experts data property
+            experts: [],
         };
     },
     mounted() {
@@ -44,7 +42,7 @@ export default {
     methods: {
         fetchExperts() {
             axios
-                .get("/api/experts")
+                .get("/api/experts?include=department")
                 .then((response) => {
                     this.experts = response.data;
                 })
@@ -53,8 +51,6 @@ export default {
                 });
         },
         exploreExpert(expert) {
-            // Assuming you want to navigate to the expert's detail page
-            // Use the router to navigate to the expert detail route
             this.$router.push({ path: `/expert/${expert.id}` });
         },
     },
