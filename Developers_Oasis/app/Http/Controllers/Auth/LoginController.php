@@ -59,7 +59,7 @@ class LoginController extends Controller
                            return redirect()->intended('/admin/dashboard');
            }else
            {
-               return redirect('/addpost');
+               return redirect('/login');
 
            }
 
