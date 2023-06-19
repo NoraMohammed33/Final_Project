@@ -27,44 +27,37 @@ class CommentController extends Controller
             'body' => 'required',
             'user_id' => 'required',
             'post_id' => 'required',
-            'commentable_id' => 'required',
+            // 'commentable_id' => 'required',
         ]);
         $comment = Comment::create($request->all());
         $comment->save();
         return new CommentResource($comment);
     }
 
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(UpdateCommentRequest $request, $postId, $commentId)
     {
-        if ($comment)
-            try {
-                $comment->update($request->all());
-                return new CommentResource($comment);
-            } catch (Exception $e) {
-                return $e;
-            }
-        else {
-            return response('', 404);
-        }
+        $comment = Comment::findOrFail($commentId);
+        $comment->body = $request->input('body');
+        $comment->save();
+        return response()->json('Comment updated successfully');
     }
 
-    public function destroy(Comment $comment)
+    public function destroy($postId, $commentId)
     {
-        if ($comment) {
-            try {
-                $comment->delete();
-                return new Response('', 204);
-            } catch (Exception $e) {
-                return $e;
-            }
-        } else {
-            return response()->json('', 404);
+        try {
+
+            $comment = Comment::findOrFail($commentId);
+
+            $comment->delete();
+
+            return response()->json('Comment deleted successfully', 204);
+        } catch (\Exception $e) {
+            return response()->json('Failed to delete comment', 500);
         }
     }
     //========show cmments for spesific posts=======================
-    public function commentsForPost(Post $post)
+    public function commentsForPost($postId)
     {
-        $postId = $post->id;
         $comments = Comment::where('post_id', $postId)->get();
         return CommentResource::collection($comments);
     }

@@ -1,8 +1,8 @@
 
-{{--@vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
+@extends('layouts.app')
 
-{{--<div id="app">--}}
-{{--<login-component></login-component>--}}
 
-{{--</div>--}}
+@section('content')
+    <router-view></router-view>
+@endsection
 

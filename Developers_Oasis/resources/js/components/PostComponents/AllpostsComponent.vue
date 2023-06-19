@@ -150,6 +150,7 @@ export default {
       this.fetchPosts();
     },
     openUpdateModal(post) {
+        this.errors = {}
       this.update_postID = post.id;
       this.post_title = post.title;
       this.post_body = post.body;
@@ -170,7 +171,6 @@ export default {
           })
           .then(response => {
             this.fetchPosts();
-            $("#update_modal").modal("hide");
             Swal.fire({
               title: "Success!",
               text: "Post has been updated successfully.",
@@ -178,6 +178,8 @@ export default {
               showConfirmButton: false,
               timer: 1500
             });
+            document.getElementById('dismissUpdate').click()
+              this.errors= {}
           })
           .catch(error => {
             console.log(error);
@@ -239,7 +241,7 @@ export default {
   width: 70%;
   margin-left: auto;
   margin-right: auto;
-  border:5px,
+  border:5px;
 }
 
 .post-item {

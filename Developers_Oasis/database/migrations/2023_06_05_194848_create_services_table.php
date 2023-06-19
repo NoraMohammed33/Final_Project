@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('price');
             $table->string('image');
             $table->unsignedBigInteger('expert_id');
-            $table->foreign('expert_id')->references('id')->on('experts')->onDelete('cascade');
+            $table->foreign('expert_id')->references('id')->on('experts');
         });
 
         Schema::enableForeignKeyConstraints();
