@@ -74,14 +74,6 @@ app.component('services-component',ServicesComponent);
 import departmentlist from "./components/DepartmentComponents/departmentlist.vue";
 app.component('department-component',departmentlist);
 
-import AddDepartmentComponent from "./components/DepartmentComponents/AddDepartmentComponent.vue";
-app.component('adddepartment-component',AddDepartmentComponent);
-
-import HomeComponent from "./components/home/HomeComponent.vue";
-app.component('home-component', HomeComponent);
-
-// import ServiceDetailsComponent from "./components/services/ServiceDetailsComponent.vue";
-// app.component('service-details', ServiceDetailsComponent)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -91,8 +83,7 @@ app.component('home-component', HomeComponent);
  */
 
 // Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.componeimport { vue } from '@vitejs/plugin-vue';
-// nt(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
+//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
 // });
 
 /**
