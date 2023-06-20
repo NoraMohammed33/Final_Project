@@ -53,7 +53,6 @@ export default {
     },
     resetForm() {
       this.newPost = {
-
         title: "",
         body: "",
         dep_id: null
