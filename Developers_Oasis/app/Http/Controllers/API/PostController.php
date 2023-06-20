@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Requests\StorePostRequest;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -27,8 +28,15 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $post = Post::create($request->all());
-        return new  PostResource($post);
+        $post = new Post($request->all());
+        $post->user_id = auth()->user()->getAuthIdentifier();
+        $post->save();
+
+        return response()->json([
+            'data' => [
+                'post' => $post,
+            ],
+        ]);
     }
 
     public function show(Post $post)
