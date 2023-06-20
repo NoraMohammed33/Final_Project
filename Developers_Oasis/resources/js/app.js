@@ -80,8 +80,8 @@ app.component('adddepartment-component',AddDepartmentComponent);
 import HomeComponent from "./components/home/HomeComponent.vue";
 app.component('home-component', HomeComponent);
 
-import ServiceDetailsComponent from "./components/services/ServiceDetailsComponent.vue";
-app.component('service-details', ServiceDetailsComponent)
+// import ServiceDetailsComponent from "./components/services/ServiceDetailsComponent.vue";
+// app.component('service-details', ServiceDetailsComponent)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
