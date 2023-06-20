@@ -9,12 +9,13 @@ class Contract extends Model
 {
 
     use HasFactory;
-    
+
     public function users(){
         $this->hasMany(User::class);
     }
-    public function services(){
-        $this->hasMany(Service::class);
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
     }
     // public function experts(){
     //     $this->hasMany(Expert::class);
