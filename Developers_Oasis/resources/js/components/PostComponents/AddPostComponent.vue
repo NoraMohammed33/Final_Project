@@ -34,32 +34,30 @@ export default {
       newPost: {
         title: "",
         body: "",
-        user_id: this.user_id,
         dep_id: ""
       }
     };
   },
-  props: ["user_id"],
   methods: {
     addPost() {
       axios
         .post("http://localhost:8000/api/posts/", this.newPost)
         .then(response => {
           console.log(response.data);
-          this.resetForm();
+            const postId = response.data.id;
+            this.resetForm();
         })
         .catch(error => {
-          console.error(error);
+          console.log(error);
         });
     },
     resetForm() {
       this.newPost = {
+
         title: "",
         body: "",
-        user_id: this.user_id,
         dep_id: null
       };
-      const postId = response.data.id;
       //   window.location.href = '/addpost'
       //   this.$router.push({ name: "/post", params: { id: post.id } });
     }
