@@ -10,6 +10,7 @@ use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\ExpertController;
 use App\Http\Controllers\API\AdminController;
 use App\Http\Controllers\API\DepartmentController;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,15 +26,13 @@ use App\Http\Controllers\API\DepartmentController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResource('admin',AdminController::class);
+//Route::post('/api/admin/login','AdminController@adminLogin');
 
 //=====================contracts routes ======================
 Route::apiResource('contracts',ContractController::class);
 
 //=====================services routes ======================
 Route::apiResource('services',ServiceController::class);
-
-
 //=====================posts routes==========================
 
 Route::apiResource('posts',PostController::class);
@@ -41,10 +40,11 @@ Route::apiResource('posts',PostController::class);
 //========================comments routes==================
 
 Route::apiResource('posts.comments',CommentController::class);
+Route::get('/comments/{post}', [CommentController::class, 'commentsForPost']);
 
 //==============experts====================================
 
-Route::apiResource('expersts',ExpertController::class);
+Route::apiResource('experts',ExpertController::class);
 //====================departments========================
 
 Route::apiResource('departments',DepartmentController::class);

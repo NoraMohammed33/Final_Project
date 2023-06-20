@@ -10,16 +10,10 @@ use App\Http\Resources\CommentResource;
 use Exception;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-
+use App\Models\Post;
 
 class CommentController extends Controller
 {
-
-    function __construct()
-    {
-
-        $this->middleware('auth:sanctum')->only('create', 'store', 'edit', 'update','destroy');
-    }
 
     public function index()
     {
@@ -64,5 +58,29 @@ class CommentController extends Controller
         }
 
     }
+    public function commentsForPost(Post $post)
+    {
+        $postId = $post->id;
+        $comments = Comment::where('post_id', $postId)->get();
+        return CommentResource::collection($comments);
     }
+}
+
+//=====================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -51,15 +51,8 @@
                         {{ comment.created_at }}
                       </div>
                       <div>
-                        <form
-                          :action="`/comments/destroy/${comment.id}`"
-                          method="POST"
-                          style="display: inline;"
-                        >
-                          <button
-                            type="submit"
-                            class="btn btn-danger"
-                            @click="deleteComment(comment.id)"
+                        <form :action="`/comments/destroy/${comment.id}`" method="POST" style="display: inline;">
+                          <button type="submit"  class="btn btn-danger" @click="deleteComment(comment.id)"
                           >Delete</button>
                         </form>
                       </div>
@@ -76,7 +69,7 @@
   </div>
 </template>
 
-    <script>
+  <script>
 import axios from "axios";
 
 export default {
@@ -153,7 +146,7 @@ export default {
 };
 </script>
 
-  <style>
+<style>
 </style>
 
 
