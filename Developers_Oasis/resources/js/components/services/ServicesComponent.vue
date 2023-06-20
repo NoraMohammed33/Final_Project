@@ -18,7 +18,9 @@
             </v-card-text>
 
             <v-card-actions>
-                <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
+                <router-link :to="`/services/${service.id}`">
+                    <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
+                </router-link>
 <!--                <div class="ms-auto">-->
 <!--                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"-->
 <!--                       data-bs-toggle="modal"-->

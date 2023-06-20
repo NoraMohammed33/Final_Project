@@ -59,9 +59,10 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
+    public function show($id)
     {
-        return view('services.show', compact('service'));
+        $service = Service::findOrFail($id);
+        return response()->json($service);
     }
 
     /**
