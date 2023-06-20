@@ -20,6 +20,10 @@ use Exception;
 class UserController extends Controller
 {
 
+    public function getUser(Request $request)
+    {
+        return $request->user();
+    }
     public function index()
     {
         return UserResource::collection(User::all());

@@ -21,7 +21,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::with('expert.user')->get();
+        $services = Service::withCount('contracts')->get();
+
         return response()->json($services);
     }
 
@@ -48,9 +49,9 @@ class ServiceController extends Controller
             $imagePath = $image->storeAs('services_images', $imageName, 'public');
             $service->image = $imagePath;
         }
-
-        $service->expert_id = 2;
-
+        $userId = Auth::user()->getAuthIdentifier();
+        $expertId = Expert::where('user_id', $userId)->first()->id;
+        $service->expert_id = $expertId;
         $service->save();
         return response()->json('Service saved successfully');
     }
@@ -58,9 +59,10 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
+    public function show($id)
     {
-        return view('services.show', compact('service'));
+        $service = Service::findOrFail($id);
+        return response()->json($service);
     }
 
     /**

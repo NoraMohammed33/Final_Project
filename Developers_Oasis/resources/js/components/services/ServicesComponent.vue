@@ -18,13 +18,19 @@
             </v-card-text>
 
             <v-card-actions>
-                <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
-                <div class="ms-auto">
-                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"
-                       data-bs-toggle="modal"
-                       data-bs-target="#update_modal">
-                    </i>
-                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>
+                <router-link :to="`/services/${service.id}`">
+                    <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
+                </router-link>
+<!--                <div class="ms-auto">-->
+<!--                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"-->
+<!--                       data-bs-toggle="modal"-->
+<!--                       data-bs-target="#update_modal">-->
+<!--                    </i>-->
+<!--                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>-->
+<!--                </div>-->
+                <div class="d-flex ms-auto align-items-baseline text-success fs-5">
+                    <i class="fa-solid fa-user mx-1"></i>
+                    <span class="text-dark font-weight-bold me-1">({{ service.contracts_count }})</span>
                 </div>
             </v-card-actions>
         </v-card>
@@ -234,6 +240,5 @@ i:hover{
 }
 #explore:hover{
     background-color: #e2e8f0;
-
 }
 </style>

@@ -12,9 +12,9 @@ class Service extends Model
 
     protected $fillable = ['title', 'price', 'description', 'image', 'expert_id'];
 
-    public function Contract()
+    public function contracts()
     {
-        return $this->belongsTo(Contract::class);
+        return $this->hasMany(Contract::class);
     }
 
     public function expert()

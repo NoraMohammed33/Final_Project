@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'image'=>$data['image']
         ]);
     }
-    
+
 }
 
 

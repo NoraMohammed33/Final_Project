@@ -16,6 +16,7 @@ import exampleComponent from "../components/ExampleComponent.vue";
 import expertList from "../components/ExpertComponents/ExpertList.vue";
 
 import DepartmentExpertsComponent from "../components/DepartmentComponents/DepartmentExpertsComponent.vue";
+import ServiceDetailsComponent from "../components/services/ServiceDetailsComponent.vue";
 
 const routes = [
 
@@ -35,6 +36,10 @@ const routes = [
     {
         path: '/services',
         component: ServicesComponent
+    },
+    {
+        path: '/services/:id',
+        component: ServiceDetailsComponent
     },
 
     {

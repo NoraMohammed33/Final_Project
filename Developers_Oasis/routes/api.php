@@ -25,7 +25,7 @@ use App\Http\Controllers\API\AuthController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return Auth::user();
 });
 //Route::post('/api/admin/login','AdminController@adminLogin');
 
@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('contracts',ContractController::class);
 
 //=====================services routes ======================
-Route::apiResource('services',ServiceController::class);
+Route::apiResource('services',ServiceController::class)->middleware('auth:sanctum');
 //=====================posts routes==========================
 
 Route::apiResource('posts',PostController::class);
