@@ -3,14 +3,14 @@
         <h4 class="font-weight-bold mt-3">Experts</h4>
         <div class="card-container">
             <v-card v-for="expert in experts" :key="expert.id" class="card-item" max-width="344">
+                <v-img class="align-end text-white" height="200" :src="'public/images/' +expert.user.image" cover/>
                 <v-card-title>
-                    {{ expert.name }}
+                    <strong>Name: </strong>{{ expert.user.name }}
                 </v-card-title>
 
                 <v-card-subtitle>
-                    {{ expert.name }}
+                    <strong>Email: </strong>{{ expert.user.email }}
                 </v-card-subtitle>
-
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show"></v-btn>

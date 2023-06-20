@@ -16,7 +16,7 @@ class Expert extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
     public function services()
     {
@@ -24,6 +24,6 @@ class Expert extends Model
     }
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class, 'dept_id');
     }
 }

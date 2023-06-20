@@ -29,7 +29,7 @@ class ExpertController extends Controller
 
     public function show($id)
     {
-        $expert = Expert::findOrFail($id);
+        $expert = Expert::with('user', 'department')->findOrFail($id);
         return response()->json($expert);
     }
 

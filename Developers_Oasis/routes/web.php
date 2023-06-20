@@ -23,7 +23,13 @@ Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, '
 
 Auth::routes();
 
-Route::view('/admin/dashboard','homeAdmin')->name('admin.dashboard');
+Route::get('/admin/dashboard',function (){
+    if (Auth::user() && Auth::user()->isadmin){
+        return view('homeAdmin');
+    }else{
+        return redirect('/home');
+    }
+})->name('admin.dashboard');
 Route::get('/admin/dashboard/{any}', function () {
     return view('homeAdmin');
 })->where('any', '.*');

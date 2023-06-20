@@ -55,12 +55,12 @@ class LoginController extends Controller
         ]);
 
         if (auth()->attempt($credentials)) {
-           if  (auth()->user()->isadmin == true){
-                           return redirect()->intended('/admin/dashboard');
-           }else
-           {
-               return redirect('/addpost');
 
+//            return auth()->user()->isadmin;
+
+           if  (auth()->user()->isadmin){
+//                           return redirect()->intended('');
+               return redirect('/admin/dashboard');
            }
 
 
