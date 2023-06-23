@@ -39,7 +39,7 @@ Route::get('/{any}', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/{any}', function () {
         return view('home');
     })->where('any', '.*');
