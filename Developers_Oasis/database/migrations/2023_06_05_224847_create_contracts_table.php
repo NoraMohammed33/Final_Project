@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->references('id')->on('services');
-           $table->unsignedBigInteger('expert_id');
-            $table->foreign('expert_id')->references('id')->on('experts');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->unsignedBigInteger('expert_id');
+            $table->foreign('expert_id')->references('id')->on('experts')->onDelete('cascade');
+            $table->string('charge_id');
             $table->timestamps();
         });
     }

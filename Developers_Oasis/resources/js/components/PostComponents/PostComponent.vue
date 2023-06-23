@@ -127,7 +127,7 @@ export default {
       const data = {
         body: this.newCommentBody,
         post_id: this.post_id,
-        user_id: 1,
+        user_id: 3,
         commentable_type: "Post",
         commentable_id: this.post_id
       };

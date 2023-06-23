@@ -21,13 +21,13 @@
                 <router-link :to="`/services/${service.id}`">
                     <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
                 </router-link>
-<!--                <div class="ms-auto">-->
-<!--                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"-->
-<!--                       data-bs-toggle="modal"-->
-<!--                       data-bs-target="#update_modal">-->
-<!--                    </i>-->
-<!--                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>-->
-<!--                </div>-->
+                <div class="ms-auto">
+                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"
+                       data-bs-toggle="modal"
+                       data-bs-target="#update_modal">
+                    </i>
+                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>
+                </div>
                 <div class="d-flex ms-auto align-items-baseline text-success fs-5">
                     <i class="fa-solid fa-user mx-1"></i>
                     <span class="text-dark font-weight-bold me-1">({{ service.contracts_count }})</span>
@@ -227,7 +227,7 @@ export default {
     background-color: rgba(60, 100, 120, 0.8);
     color: white;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.1s;
 }
 
 .image-container:hover .hover-overlay {
@@ -235,7 +235,7 @@ export default {
 }
 i:hover{
     scale: 1.2;
-    transition: 5ms;
+    transition: 2ms;
     cursor: pointer;
 }
 #explore:hover{
