@@ -28,7 +28,7 @@
               </v-btn>
               <div class="ms-auto">
                 <!-- Edit Post Icon -->
-                <i
+                <i v-if="currentUser.id === post.user_id"
                   class="fas fa-edit fs-4 text-warning"
                   @click="openUpdateModal(post)"
                   data-bs-toggle="modal"
@@ -36,6 +36,7 @@
                 ></i>
                 <!-- Delete Post Icon -->
                 <i
+                    v-if="currentUser.id === post.user_id"
                   class="fas fa-trash fs-4 text-danger ms-4"
                   @click="deletePost(post.id)"
                 ></i>
@@ -127,7 +128,7 @@ export default {
       update_postID: null,
       errors: {},
       postDetails: { title: "", body: "" },
-      currentUser: null
+      currentUser: {}
     };
   },
   components: {
@@ -142,7 +143,7 @@ export default {
         .get("/api/posts")
         .then(response => {
          this.posts = response.data.posts;
-         this.currentUser=response.data.user;
+         this.currentUser=response.data.loggeduser;
           console.log(this.posts);
           console.log(this.currentUser);
         })
