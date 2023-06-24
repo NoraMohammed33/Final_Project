@@ -16,6 +16,7 @@ import exampleComponent from "../components/ExampleComponent.vue";
 import expertList from "../components/ExpertComponents/ExpertList.vue";
 
 import DepartmentExpertsComponent from "../components/DepartmentComponents/DepartmentExpertsComponent.vue";
+import ServiceDetailsComponent from "../components/services/ServiceDetailsComponent.vue";
 import UserProfile from "../components/Profile/UserProfile.vue";
 import ExpertProfile from "../components/Profile/ExpertProfile.vue";
 // import ServiceDetailsComponent from "../components/services/ServiceDetailsComponent.vue";
@@ -49,6 +50,10 @@ const routes = [
     {
         path: '/services',
         component: ServicesComponent
+    },
+    {
+        path: '/services/:id',
+        component: ServiceDetailsComponent
     },
 
 
@@ -106,7 +111,7 @@ const routes = [
     {
         path:'/departments',
         component:departmentlist
-    }
+    },
 
 
 ]

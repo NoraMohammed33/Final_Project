@@ -21,9 +21,17 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::withCount('contracts')->get();
-
-        return response()->json($services);
+        $services = Service::with(['expert.user', 'ratings'])
+            ->withCount('contracts')
+            ->get();
+        $servicesWithAverageRating = $services->map(function ($service) {
+            $averageRating = $service->ratings->avg('rating');
+            $service->average_rating = $averageRating;
+            return $service;
+        });
+        return response()->json([
+            'services' => $servicesWithAverageRating,
+        ]);
     }
 
     /**
@@ -61,8 +69,12 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::findOrFail($id);
-        return response()->json($service);
+        $service = Service::with('expert.user', 'ratings.user')->findOrFail($id);
+        $service->hasRated = $service->ratings()->where('user_id', auth()->id())->exists();
+        $service->loggedUser = Auth::user();
+        return response()->json([
+            'service' => $service,
+        ]);
     }
 
     /**

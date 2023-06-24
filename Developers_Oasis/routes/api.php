@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ServiceRatingController;
 use App\Http\Controllers\API\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,17 +42,22 @@ Route::apiResource('services',ServiceController::class)->middleware('auth:sanctu
 Route::apiResource('posts',PostController::class)->middleware('auth:sanctum');
 Route::get('/posts/{id}/explore', [PostController::class, 'explore']);
 
+Route::apiResource('posts',PostController::class);
 
 //========================comments routes==================
+
 Route::apiResource('posts.comments',CommentController::class);
 Route::get('/comments/{post}', [CommentController::class, 'commentsForPost']);
 
 //==============experts====================================
+
 Route::apiResource('experts',ExpertController::class);
 
 
 //====================departments========================
 Route::apiResource('departments',DepartmentController::class);
+
+
 Route::get('/departments/{id}/explore', [DepartmentController::class, 'explore']);
 
 //====================profile========================
@@ -62,3 +68,5 @@ Route::get('/expert/profile', [ProfileController::class, 'expert']);
 Route::apiResource('users', UserController::class);
 
 
+Route::get('/posts/{id}/explore', [PostController::class, 'explore']);
+Route::apiResource('service-ratings', ServiceRatingController::class);

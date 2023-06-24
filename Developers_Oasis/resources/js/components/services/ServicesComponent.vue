@@ -4,9 +4,9 @@
 
 <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
     <template v-for="service in services" :key="service.id">
-        <v-card class="col-8 col-sm-5 col-md-4 col-lg-3 m-3 rounded-4">
+        <v-card class="col-9 col-sm-5 col-md-5 col-lg-4 col-xl-3 m-3 rounded-4">
             <div class="image-container">
-                <v-img cover :src="'storage/' + service.image" style="width: 100%; height: 190px;"></v-img>
+                <v-img cover :src="'storage/' + service.image" style="width: 100%; height: 140px;"></v-img>
                 <div class="hover-overlay fs-1 font-weight-bold">
                     ${{ service.price }}
                 </div>
@@ -17,20 +17,31 @@
                 <div class=" text-grey">{{ service.description }}</div>
             </v-card-text>
 
-            <v-card-actions>
+            <v-card-actions class="bg-blue-grey-darken-3 text-light">
+                <div class="d-flex w-100 flex-column flex-sm-row align-items-sm-baseline  align-items-center justify-content-between justify-content-sm-evenly">
                 <router-link :to="`/services/${service.id}`">
                     <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
                 </router-link>
-                <div class="ms-auto">
-                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"
-                       data-bs-toggle="modal"
-                       data-bs-target="#update_modal">
-                    </i>
-                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>
+<!--                <div class="ms-auto text-light">-->
+<!--                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"-->
+<!--                       data-bs-toggle="modal"-->
+<!--                       data-bs-target="#update_modal">-->
+<!--                    </i>-->
+<!--                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>-->
+<!--                </div>-->
+                <div class="w-sm-100 w-md-auto">
+                    <star-rating
+                        v-model:rating="service.average_rating"
+                        :star-size="24"
+                        :active-color="'#ffd055'"
+                        :inactive-color="'#d8d8d8'"
+                        read-only="true"
+                    ></star-rating>
                 </div>
-                <div class="d-flex ms-auto align-items-baseline text-success fs-5">
+                <div class="fs-5 fs-sm-6">
                     <i class="fa-solid fa-user mx-1"></i>
-                    <span class="text-dark font-weight-bold me-1">({{ service.contracts_count }})</span>
+                    <span class="text-light font-weight-bold me-1">({{ service.contracts_count }})</span>
+                </div>
                 </div>
             </v-card-actions>
         </v-card>
@@ -105,7 +116,8 @@ export default {
         fetchAllServices() {
             axios.get('api/services')
                 .then(response => {
-                    this.services = response.data
+                    console.log(response.data)
+                    this.services = response.data.services;
                 }).catch(error => {
                 console.log(error.response.data)
             })

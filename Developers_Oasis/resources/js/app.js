@@ -22,9 +22,12 @@ const vuetify = createVuetify({
     components,
     directives,
 })
+
+import PrimeVue from 'primevue/config';
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
+ * registering components with the application instance, so they are ready
  * to use in your application's views. An example is included for you.
  */
 
@@ -77,6 +80,8 @@ app.component('department-component',departmentlist);
 import ServiceDetailsComponent from "./components/services/ServiceDetailsComponent.vue";
 app.component('services-details', ServiceDetailsComponent)
 
+import StarRating from 'vue-star-rating';
+app.component('StarRating', StarRating)
 
 import Profile from "./components/Profile/Profile.vue";
 app.component('Profile',Profile);
@@ -100,10 +105,12 @@ app.component('user-profile',UserProfile);
 // });
 
 /**
- * Finally, we will attach the application instance to a HTML element with
+ * Finally, we will attach the application instance to an HTML element with
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 app.use(router);
 app.use(VueAxios, axios);
-app.use(vuetify).mount('#app');
+app.use(PrimeVue);
+app.use(vuetify);
+app.mount('#app');
