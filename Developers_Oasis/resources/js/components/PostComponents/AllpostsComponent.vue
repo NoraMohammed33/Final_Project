@@ -35,8 +35,7 @@
                   data-bs-target="#update_modal"
                 ></i>
                 <!-- Delete Post Icon -->
-                <i
-                    v-if="currentUser.id === post.user_id"
+                <i v-if="currentUser.id === post.user_id"
                   class="fas fa-trash fs-4 text-danger ms-4"
                   @click="deletePost(post.id)"
                 ></i>
