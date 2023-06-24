@@ -1,5 +1,13 @@
 <template>
     <div class="expert-list">
+
+        <v-container>
+            <router-link :to="'/admin/dashboard/addexpert'">
+                <v-btn color="green">add new expert</v-btn>
+            </router-link>
+        </v-container>
+
+
         <h2>Expert List</h2>
         <div class="expert-card-container">
             <v-card v-for="expert in experts" :key="expert.id" class="expert-card">
