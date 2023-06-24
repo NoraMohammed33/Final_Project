@@ -10,7 +10,7 @@ class Service extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = ['title', 'price', 'description', 'image', 'expert_id'];
+    protected $fillable = ['title', 'price', 'description', 'image', 'expert_id','dept_id'];
 
     public function contracts()
     {
@@ -23,6 +23,10 @@ class Service extends Model
     }
     public function ratings(){
         return $this->hasMany(ServiceRating::class);
+    }
+
+    public function department(){
+        return $this->belongsTo(Department::class);
     }
 
 

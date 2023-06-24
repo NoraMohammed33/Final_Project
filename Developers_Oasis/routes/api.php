@@ -1,19 +1,18 @@
 <?php
 
-use App\Http\Controllers\API\ServiceRatingController;
-use App\Http\Controllers\API\ProfileController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\ContractController;
-use App\Http\Controllers\API\ServiceController;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\API\ContractController;
 use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\API\ExpertController;
-use App\Http\Controllers\API\AdminController;
-
-use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\PaymentController;
+use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\ServiceController;
+use App\Http\Controllers\API\ServiceRatingController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +29,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return Auth::user();
 });
 //Route::post('/api/admin/login','AdminController@adminLogin');
+
+
+Route::get('/paypal/payment', [PaymentController::class, 'createPayment']);
+Route::get('/paypal/execute-payment', [PaymentController::class, 'successTransaction'])->name('execute');
+Route::get('/success', function () {
+    return view('welcome');
+})->name('success');;
+Route::get('/error', function () {
+    return view('welcome');
+})->name('error');;
 
 //=====================contracts routes ======================
 Route::apiResource('contracts',ContractController::class);

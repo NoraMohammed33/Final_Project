@@ -24,6 +24,9 @@ const vuetify = createVuetify({
 })
 
 import PrimeVue from 'primevue/config';
+import Toast from 'vue-toastification';
+import "vue-toastification/dist/index.css";
+
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -113,4 +116,5 @@ app.use(router);
 app.use(VueAxios, axios);
 app.use(PrimeVue);
 app.use(vuetify);
+app.use(Toast);
 app.mount('#app');

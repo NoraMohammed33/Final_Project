@@ -13,4 +13,7 @@ class Department extends Model
     {
         return $this->hasMany(Expert::class);
     }
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
 }

@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div v-if="successMessage" class="alert alert-success">
+            {{ successMessage }}
+        </div>
         <div class="row justify-content-center">
             <div class="col-6">
                 <img :src="'/storage/'+service.image" class="w-100 rounded-3">
@@ -9,9 +12,7 @@
                 <h1>{{ service.expert.user.name }}</h1>
                 <h1>{{ service.expert.bio}}</h1>
                 <div class="mt-auto">
-                    <router-link to="/payment">
-                        <button class="btn btn-primary">Buy Now</button>
-                    </router-link>
+                        <button class="btn btn-primary" @click="paypalPayment">Buy Now</button>
                 </div>
             </div>
         </div>
@@ -59,9 +60,9 @@
 
 <script>
 import axios from 'axios';
+import { showToast } from "../../toast";
 
 export default {
-
     data(){
         return{
             service: {},
@@ -69,11 +70,28 @@ export default {
             comment:'',
             serviceId : this.$route.params.id,
             showSuccessMessage: false,
+            successMessage: null,
         };
     },
     methods:{
+        paypalPayment() {
+            axios.get('/api/paypal/payment')
+                .then((response) => {
+                    console.log(response.data)
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        showSuccess(){
+            const { showSuccessToast } = showToast();
+            showSuccessToast("Your Feedback Submitted");
+        },
+        showError() {
+            const { showErrorToast } = showToast();
+            showErrorToast("Your Feedback Not Submitted");
+        },
       getService(){
-
             axios.get(`/api/services/${this.serviceId}`)
                 .then(response => {
                     this.service = response.data.service
@@ -92,9 +110,10 @@ export default {
         axios.post('/api/service-ratings',ratingData)
             .then(response=>{
                 console.log(response)
-                this.showSuccessMessage = true;
+                this.showSuccess()
             })
             .catch(error=>{
+                this.showError()
                 console.log(error.response.text)
             })
       },
