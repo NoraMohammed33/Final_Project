@@ -1,8 +1,7 @@
 <template>
-  <form @submit.prevent="addPost" class="container">
-    <div>
-      <div class="col-md-7" id="c">
-        <div class="raw">
+    <form @submit.prevent="addPost" class="container">
+      <div class="col-lg-7 col-md-8 col-sm-10" id="c">
+        <div class="row">
           <div class="col-md-6">
             <h3 class="text-left" id="h">Add New Post</h3>
           </div>
@@ -28,7 +27,7 @@
         <div class="row">
           <label for="dep_id" class="label col-md-2 control-label" id="l">Department</label>
           <div class="col-md-10">
-            <select class="form-control"  v-model="newPost.dep_id" name="dep_id" id="dep_id">
+            <select class="form-control" v-model="newPost.dep_id" name="dep_id" id="dep_id">
               <option
                 v-for="department in departments.data"
                 :key="department.id"
@@ -39,13 +38,14 @@
         </div>
         <hr />
         <div class="row">
-          <button class="btn btn-info" id="buttun" type="submit"> Add You Post</button>
-          &nbsp; &nbsp; &nbsp;
+          <div class="col-md-12 text-center">
+            <button class="btn btn-info" id="button" type="submit">Add Your Post</button>
+          </div>
         </div>
       </div>
-    </div>
-  </form>
-</template>
+    </form>
+  </template>
+
   <script>
 import axios from "axios";
 
@@ -67,7 +67,9 @@ export default {
         .then(response => {
           console.log(response.data);
             const postId = response.data.id;
-            this.resetForm();
+            // this.resetForm();
+            this.$router.push({ path: `/posts/${postId}` });
+           $("#post_details_modal").modal("show");
         })
         .catch(error => {
           console.log(error);
@@ -86,7 +88,7 @@ export default {
       .get(`http://localhost:8000/api/departments`)
       .then(response => {
         this.departments = response.data;
-        console.log(this.departments);
+        // console.log(this.departments);
       })
       .catch(error => {
         console.log(error);
@@ -139,21 +141,21 @@ export default {
 }
 #body{
     width: 700px;
-    height:70px;
+    height:250px;
     border-radius: 7px;
     position: relative;
     margin-bottom: 10px;
 }
 #dep_id{
-    width: 700px;
+    width: 300px;
     height:40px ;
 }
 #buttun{
-    width: 700px;
+    width: 250px;
     height:40px ;
     padding-right: 9px;
     cursor: pointer;
-    margin:10px;
+    margin-left:10px;
 }
 
 </style>

@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -25,33 +26,56 @@ class CommentController extends Controller
     {
         $this->validate($request, [
             'body' => 'required',
-            'user_id' => 'required',
             'post_id' => 'required',
-            // 'commentable_id' => 'required',
         ]);
-        $comment = Comment::create($request->all());
+
+        // $comment = Comment::create($request->all());
+        // $comment->user_id = auth()->user()->getAuthIdentifier();
+        // $comment->save();
+        // return new CommentResource($comment);
+
+        $comment = new Comment($request->all());
+        $comment->user_id = auth()->user()->getAuthIdentifier();
         $comment->save();
-        return new CommentResource($comment);
+
+        return response()->json([
+            'data' => [
+                'comment' => $comment,
+            ],
+        ]);
     }
 
     public function update(UpdateCommentRequest $request, $postId, $commentId)
     {
+        $user = Auth::user();
+
         $comment = Comment::findOrFail($commentId);
-        $comment->body = $request->input('body');
-        $comment->save();
-        return response()->json('Comment updated successfully');
+
+        if ($user->id !== $comment->user_id) {
+
+            abort(403, 'You are not authorized to delete this post.');
+        }
+        try {
+            $comment->body = $request->input('body');
+            $comment->save();
+            return response()->json('Comment updated successfully');
+        } catch (Exception $e) {
+            return response()->json(['error' => $e], 500);
+        }
     }
 
     public function destroy($postId, $commentId)
     {
+        $user = Auth::user();
+        $comment = Comment::findOrFail($commentId);
+        if ($user->id !== $comment->user_id) {
+            abort(403, 'you can not do that!');
+        }
+
         try {
-
-            $comment = Comment::findOrFail($commentId);
-
             $comment->delete();
-
             return response()->json('Comment deleted successfully', 204);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json('Failed to delete comment', 500);
         }
     }
@@ -62,4 +86,4 @@ class CommentController extends Controller
         return CommentResource::collection($comments);
     }
 }
-//==============================================================
+//===================================================================

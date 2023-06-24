@@ -23,12 +23,9 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             "body" => 'required',
-            "user_id" => 'required',
             "post_id" => 'required',
             "commentable_type" => 'required',
-            "commentable_id" => 'required'
-
-
+            "commentable_id" => 'required',
         ];
     }
 
@@ -47,7 +44,6 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             "body" => "The body field is required",
-            "user_id" => 'user_id is required',
             "post_id" => 'post_id is required',
         ];
     }
