@@ -22,7 +22,14 @@ class PostController extends Controller
 {
     public function index()
     {
-        return PostResource::collection(Post::all());
+        $user=Auth::user();
+        $posts=post::all();
+        return response()->json([
+            "status" =>'success',
+            'message'=> 'Posts fetched successfully.',
+            'posts'=>$posts,
+            'loggeduser'=>$user
+        ]);
     }
 
 
@@ -42,6 +49,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         if ($post) {
+
             return new PostResource($post);
         }
         return response('', 404);
@@ -60,7 +68,12 @@ class PostController extends Controller
 
             $post->update($request->all());
 
-            return new PostResource($post);
+            return response()->json([
+                'data' => [
+                    'post' => $post,
+                    'user' => $user,
+                ],
+            ]);
         } catch (Exception $e) {
 
             return $e;
@@ -78,8 +91,9 @@ class PostController extends Controller
         try {
 
             $post->delete();
-
-            return new Response('', 204);
+            return Response()->json([
+                'user' => $user,
+            ]);
         } catch (Exception $e) {
             return $e;
         }

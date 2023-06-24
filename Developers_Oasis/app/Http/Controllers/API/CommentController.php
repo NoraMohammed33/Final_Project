@@ -28,12 +28,6 @@ class CommentController extends Controller
             'body' => 'required',
             'post_id' => 'required',
         ]);
-
-        // $comment = Comment::create($request->all());
-        // $comment->user_id = auth()->user()->getAuthIdentifier();
-        // $comment->save();
-        // return new CommentResource($comment);
-
         $comment = new Comment($request->all());
         $comment->user_id = auth()->user()->getAuthIdentifier();
         $comment->save();
