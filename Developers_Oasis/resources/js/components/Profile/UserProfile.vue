@@ -56,5 +56,6 @@ export default {
 
 .user-info strong {
     font-weight: bold;
+
 }
 </style>

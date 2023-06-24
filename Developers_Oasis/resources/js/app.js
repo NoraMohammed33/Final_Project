@@ -77,6 +77,7 @@ app.component('department-component',departmentlist);
 import ServiceDetailsComponent from "./components/services/ServiceDetailsComponent.vue";
 app.component('services-details', ServiceDetailsComponent)
 
+
 import Profile from "./components/Profile/Profile.vue";
 app.component('Profile',Profile);
 

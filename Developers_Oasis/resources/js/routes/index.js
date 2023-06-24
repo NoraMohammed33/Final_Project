@@ -40,6 +40,7 @@ const routes = [
         name:'expert-profile',
         component: ExpertProfile
     },
+
     {
 
         path:'/posts',

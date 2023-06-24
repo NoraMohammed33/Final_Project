@@ -48,6 +48,7 @@ export default {
 
 .expert-info {
     margin-top: 20px;
+
 }
 
 .expert-info p {
