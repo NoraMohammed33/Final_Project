@@ -16,8 +16,8 @@
 
 <body>
     <div id="app">
-        <div class="header">
-        <nav class="navbar navbar-expand-md w-100">
+        <div class="header m-5">
+        <nav class="navbar navbar-expand-md w-100 mynav">
             <div class="container-fluid d-flex align-items-baseline ">
                 @unless(request()->is('login', 'register', 'password/*'))
                 <router-link to="/">
