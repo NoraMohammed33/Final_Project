@@ -1,34 +1,20 @@
 <template>
-    <div>
-        <h1>Create User</h1>
-        <form @submit.prevent="createUser">
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" v-model="user.name" required>
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" v-model="user.email" required>
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" v-model="user.password" required>
-            </div>
-            <div>
-                <label for="dept_id">Department:</label>
-                <select id="dept_id" v-model="expert.dept_id" required>
-                    <option v-for="department in departments" :value="department.id" :key="department.id">{{ department.name }}</option>
-                </select>
-            </div>
-            <div>
-                <label for="bio">Bio:</label>
-                <textarea id="bio" v-model="expert.bio" required></textarea>
-            </div>
-            <button type="submit">Create User and Expert</button>
-        </form>
-    </div>
+    <v-container class="d-flex justify-content-center">
+        <v-card  class="w-50">
+            <v-card-title>Create User and Expert</v-card-title>
+            <v-card-text>
+                <v-form @submit.prevent="createUser">
+                    <v-text-field v-model="user.name" label="Name" required></v-text-field>
+                    <v-text-field v-model="user.email" label="Email" type="email" required></v-text-field>
+                    <v-text-field v-model="user.password" label="Password" type="password" required></v-text-field>
+                    <v-select v-model="expert.dept_id" :items="departments" label="Department" required></v-select>
+                    <v-textarea v-model="expert.bio" label="Bio" required></v-textarea>
+                    <v-btn color="green" type="submit">Create User and Expert</v-btn>
+                </v-form>
+            </v-card-text>
+        </v-card>
+    </v-container>
 </template>
-
 <script>
 import axios from 'axios';
 

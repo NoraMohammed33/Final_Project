@@ -65,7 +65,7 @@ app.component('main-component', MainComponent)
 import ExpertList from "./components/ExpertComponents/ExpertList.vue";
 app.component('expert-component',ExpertList);
 
-import ExpertForm from "./components/ExpertComponents/ExpertForm.vue";
+import ExpertForm from "./components/AdminComponents/ExpertForm.vue";
 app.component('addexpert-component',ExpertForm);
 
 import ExpertDetail from "./components/ExpertComponents/ExpertDetail.vue";
