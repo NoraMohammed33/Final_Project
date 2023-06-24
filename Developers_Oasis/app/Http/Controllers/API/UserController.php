@@ -20,6 +20,10 @@ use Exception;
 class UserController extends Controller
 {
 
+    public function profile(Request $request)
+    {
+        return $request->user();
+    }
     public function getUser(Request $request)
     {
         return $request->user();
@@ -38,12 +42,10 @@ class UserController extends Controller
         ]);
         return new UserResource($user);
     }
-    public function show(User $user)
+    public function show($id)
     {
-        if ($user) {
-            return new UserResource($user);
-        }
-        return response('', 404);
+        $user = User::findOrFail($id);
+        return response()->json($user);
     }
     public function update(UpdateUserRequest $request, User $user)
     {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Add Department Component -->
-        <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent>
+<!--        <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent>-->
 
         <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
             <template v-for="department in departments.data" :key="department.id">
