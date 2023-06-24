@@ -30,6 +30,7 @@ Route::get('/admin/dashboard',function (){
         return redirect('/home');
     }
 })->name('admin.dashboard');
+
 Route::get('/admin/dashboard/{any}', function () {
     return view('homeAdmin');
 })->where('any', '.*');
@@ -39,11 +40,10 @@ Route::get('/{any}', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/{any}', function () {
         return view('home');
     })->where('any', '.*');
-});
+
 
 //Route::view('/admin/login','auth.loginAdmin');
 //departments

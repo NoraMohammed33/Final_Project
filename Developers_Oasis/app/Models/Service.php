@@ -21,6 +21,9 @@ class Service extends Model
     {
         return $this->belongsTo(Expert::class);
     }
+    public function ratings(){
+        return $this->hasMany(ServiceRating::class);
+    }
 
 
 

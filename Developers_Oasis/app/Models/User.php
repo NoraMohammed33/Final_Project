@@ -65,4 +65,8 @@ class User extends Authenticatable
         return $this->belongsTo(Contract::class);
     }
 
+    public function ratings(){
+        return $this->hasMany(ServiceRating::class);
+    }
+
 }
