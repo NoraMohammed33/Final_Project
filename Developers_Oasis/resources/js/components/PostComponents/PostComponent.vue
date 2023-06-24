@@ -7,7 +7,10 @@
           <div class="mb-3">
             <p>{{ post.body }}</p>
           </div>
-          <div class="card mt-4">
+        </div>
+      </div>
+    </div>
+    <div class="card mt-4">
             <h5 class="card-header">Comments</h5>
             <div class="card-body">
               <form @submit.prevent="addNewComment()">
@@ -72,9 +75,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -88,7 +88,6 @@ export default {
     return {
       posts: [],
       comments: [],
-      commentCount: 0,
       user_id: this.user_id,
       newCommentBody: "",
       update_commentID: null,
@@ -127,7 +126,6 @@ export default {
       const data = {
         body: this.newCommentBody,
         post_id: this.post_id,
-        user_id: 3,
         commentable_type: "Post",
         commentable_id: this.post_id
       };
@@ -222,5 +220,5 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 </style>
