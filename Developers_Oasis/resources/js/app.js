@@ -77,6 +77,15 @@ app.component('department-component',departmentlist);
 import ServiceDetailsComponent from "./components/services/ServiceDetailsComponent.vue";
 app.component('services-details', ServiceDetailsComponent)
 
+import Profile from "./components/Profile/Profile.vue";
+app.component('Profile',Profile);
+
+import ExpertProfile from "./components/Profile/ExpertProfile.vue";
+app.component('expert-Profile',ExpertProfile);
+
+import UserProfile from "./components/Profile/UserProfile.vue";
+app.component('user-profile',UserProfile);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
