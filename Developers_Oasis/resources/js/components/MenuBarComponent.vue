@@ -25,6 +25,11 @@
                 Departments
             </router-link>
         </li>
+        <li class="nav-item">
+                <router-link to="/addpost" class="nav-link">
+                    Ask me
+                </router-link>
+            </li>
             <li class="nav-item" v-if="user && !expert">
                 <router-link :to="'/user/profile/' + user.id" class="nav-link">
                     Profile
