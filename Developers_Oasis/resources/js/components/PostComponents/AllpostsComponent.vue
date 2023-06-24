@@ -22,8 +22,7 @@
                 id="explore"
                 color="blue"
                 class="border rounded-2"
-                @click="explorePost(post.id)"
-              >
+                @click="explorePost(post.id)">
                 Explore
               </v-btn>
               <div class="ms-auto">
