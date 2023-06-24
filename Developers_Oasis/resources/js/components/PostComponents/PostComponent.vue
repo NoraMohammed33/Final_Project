@@ -94,7 +94,7 @@ export default {
       errors: {},
       comment_body: "",
       commentDetails: { body: "" },
-      post_id: this.$route.params.id
+      post_id: this.$route.params.id,
     };
   },
   created() {

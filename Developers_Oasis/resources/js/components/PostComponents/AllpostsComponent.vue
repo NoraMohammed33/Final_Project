@@ -6,7 +6,7 @@
     <div class="posts-container">
       <h2 class="section-title">All Posts</h2>
       <div class="post-list">
-        <div v-for="post in posts.data" :key="post.id" class="post-item">
+        <div v-for="post in posts" :key="post.id" class="post-item">
           <v-card class="post-card">
             <v-card-title class="post-title">{{ post.title }}</v-card-title>
             <v-card-text class="post-body">
@@ -126,21 +126,25 @@ export default {
       post_body: "",
       update_postID: null,
       errors: {},
-      postDetails: { title: "", body: "" } // To store the details of the post being explored
+      postDetails: { title: "", body: "" },
+      currentUser: null
     };
   },
   components: {
     AddPostComponent
   },
   mounted() {
-    this.fetchPosts();
-  },
+  this.fetchPosts();
+},
   methods: {
     fetchPosts() {
       axios
         .get("/api/posts")
         .then(response => {
-          this.posts = response.data;
+         this.posts = response.data.posts;
+         this.currentUser=response.data.user;
+          console.log(this.posts);
+          console.log(this.currentUser);
         })
         .catch(error => {
           console.log(error);
@@ -230,7 +234,9 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+
+
   }
 };
 </script>
