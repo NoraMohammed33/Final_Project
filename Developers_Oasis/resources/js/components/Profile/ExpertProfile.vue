@@ -1,9 +1,15 @@
 <template>
     <div className="expert-profile">
-        <h2>Expert Profile</h2>
-        <div className="expert-info">
-            <p><strong>Bio:</strong> {{ expert.bio }}</p>
-            <!-- Display other expert-specific information -->
+<!--        <h2>{{ expert.user.name }}</h2>-->
+        <div class="expert-info">
+            <div class="expert-image">
+<!--                <img :src="expert.user.image" alt="User Image">-->
+            </div>
+            <div class="expert-details">
+<!--                <p><strong>Email:</strong> {{ expert.user.email }}</p>-->
+                <p><strong>Bio:</strong> {{ expert.bio }}</p>
+
+            </div>
         </div>
     </div>
 </template>

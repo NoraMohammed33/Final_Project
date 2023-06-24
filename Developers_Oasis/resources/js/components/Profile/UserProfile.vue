@@ -1,13 +1,19 @@
 <template>
     <div class="user-profile">
-        <h2>User Profile</h2>
-        <div class="user-info">
-            <p><strong>Name:</strong> {{ user.name }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <!-- Display other user-specific information -->
+        <div class="card">
+            <h2>{{ user.name }}</h2>
+            <div class="user-info">
+                <div class="user-image">
+                    <img :src="user.image" alt="User Image">
+                </div>
+                <div class="user-details">
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
+
 
 <script>
 import axios from "axios";
