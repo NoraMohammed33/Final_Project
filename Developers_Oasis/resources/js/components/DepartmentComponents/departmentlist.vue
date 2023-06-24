@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Add Department Component -->
-        <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent>
+<!--        <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent>-->
 
         <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
             <template v-for="department in departments.data" :key="department.id">
@@ -16,14 +16,8 @@
 
                         <div class="ms-auto">
                             <!-- Edit Department Icon -->
-                            <i
-                                class="fas fa-edit fs-4 text-warning"
-                                @click="openUpdateModal(department)"
-                                data-bs-toggle="modal"
-                                data-bs-target="#update_modal"
-                            ></i>
+
                             <!-- Delete Department Icon -->
-                            <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteDepartment(department.id)"></i>
                         </div>
                     </v-card-actions>
                     <div v-if="department.experts && department.experts.length > 0">

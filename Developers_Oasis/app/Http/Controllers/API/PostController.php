@@ -50,30 +50,38 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-        if ($post)
-            try {
-                $post->update($request->all());
-                return new PostResource($post);
-            } catch (Exception $e) {
+        $user = Auth::user();
 
-                return $e;
-            }
-        else {
-            return response('', 404);
+        if ($user->id !== $post->user_id) {
+
+            abort(403, 'You are not authorized to delete this post.');
+        }
+        try {
+
+            $post->update($request->all());
+
+            return new PostResource($post);
+        } catch (Exception $e) {
+
+            return $e;
         }
     }
 
-    public function destroy (Post $post)
+    public function destroy(Post $post)
     {
-        if ($post) {
-            try {
-                $post->delete();
-                return new Response('', 204);
-            } catch (Exception $e) {
-                return $e;
-            }
-        } else {
-            return response()->json('', 404);
+        $user = Auth::user();
+
+        if ($user->id !== $post->user_id) {
+
+            abort(403, 'You are not authorized to delete this post.');
+        }
+        try {
+
+            $post->delete();
+
+            return new Response('', 204);
+        } catch (Exception $e) {
+            return $e;
         }
     }
     public function explore($id)
@@ -85,4 +93,4 @@ class PostController extends Controller
             ],
         ]);
     }
-    }
+}

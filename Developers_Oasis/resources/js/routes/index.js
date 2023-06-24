@@ -17,6 +17,9 @@ import expertList from "../components/ExpertComponents/ExpertList.vue";
 
 import DepartmentExpertsComponent from "../components/DepartmentComponents/DepartmentExpertsComponent.vue";
 import ServiceDetailsComponent from "../components/services/ServiceDetailsComponent.vue";
+import UserProfile from "../components/Profile/UserProfile.vue";
+import ExpertProfile from "../components/Profile/ExpertProfile.vue";
+// import ServiceDetailsComponent from "../components/services/ServiceDetailsComponent.vue";
 
 const routes = [
 
@@ -28,6 +31,17 @@ const routes = [
         path: '/home',
         component: MainComponent
     },
+    {
+        path: '/user/profile/:id',
+        name:'user-profile',
+        component: UserProfile
+    },
+    {
+        path: '/expert/profile/:id',
+        name:'expert-profile',
+        component: ExpertProfile
+    },
+
     {
 
         path:'/posts',
@@ -41,6 +55,8 @@ const routes = [
         path: '/services/:id',
         component: ServiceDetailsComponent
     },
+
+
     {
 
         path:'/addpost',

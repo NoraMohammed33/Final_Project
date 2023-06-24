@@ -1,85 +1,78 @@
 <template>
-    <v-sheet width="300" class="mx-auto">
-        <form @submit.prevent="createUserAndExpert">
-            <!-- User fields -->
-            <v-text-field
-                v-model="userData.name"
-                :rules="nameRules"
-                label="Name"
-                required
-            ></v-text-field>
-
-            <v-text-field
-                v-model="userData.email"
-                label="Email"
-                required
-                type="email"
-            ></v-text-field>
-
-            <v-text-field
-                v-model="userData.password"
-                label="Password"
-                required
-                type="password"
-            ></v-text-field>
-
-            <!-- Expert fields -->
-            <v-text-field
-                v-model="expertData.dept_id"
-                label="Department ID"
-                required
-                type="number"
-            ></v-text-field>
-
-            <v-textarea
-                v-model="expertData.bio"
-                label="Bio"
-                required
-            ></v-textarea>
-
-            <v-btn type="submit" color="primary">Create User and Expert</v-btn>
+    <div>
+        <h1>Create User</h1>
+        <form @submit.prevent="createUser">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" v-model="user.name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" v-model="user.email" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" v-model="user.password" required>
+            </div>
+            <div>
+                <label for="dept_id">Department:</label>
+                <select id="dept_id" v-model="expert.dept_id" required>
+                    <option v-for="department in departments" :value="department.id" :key="department.id">{{ department.name }}</option>
+                </select>
+            </div>
+            <div>
+                <label for="bio">Bio:</label>
+                <textarea id="bio" v-model="expert.bio" required></textarea>
+            </div>
+            <button type="submit">Create User and Expert</button>
         </form>
-    </v-sheet>
+    </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
-            userData: {
+            user: {
                 name: '',
                 email: '',
                 password: '',
             },
-            expertData: {
+            expert: {
                 dept_id: '',
                 bio: '',
             },
-            nameRules: [
-                (v) => !!v || 'Name is required',
-                (v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
-            ],
+            departments: [], // Fetch the departments from the API and populate this array
         };
     },
     methods: {
-        createUserAndExpert() {
-            axios
-                .post('/api/users', {
-                    name: this.userData.name,
-                    email: this.userData.email,
-                    password: this.userData.password,
-                    dept_id: this.expertData.dept_id,
-                    bio: this.expertData.bio,
+        createUser() {
+            axios.post('/api/users', this.user)
+                .then(response => {
+                    this.expert.user_id = response.data.id;
+                    return axios.post('/api/experts', this.expert);
                 })
-                .then((response) => {
-                    // Handle success response
-                    console.log(response.data);
+                .then(response => {
+                    // Success: Handle any additional logic or redirects here
+                    console.log('User and expert created successfully');
                 })
-                .catch((error) => {
-                    // Handle error response
-                    console.error(error.response.data);
+                .catch(error => {
+                    // Error: Handle the error response
+                    console.error(error);
                 });
         },
+    },
+    mounted() {
+        // Fetch the departments from the API and populate the departments array
+        axios.get('/api/departments')
+            .then(response => {
+                this.departments = response.data;
+            })
+            .catch(error => {
+                console.error(error);
+            });
     },
 };
 </script>
