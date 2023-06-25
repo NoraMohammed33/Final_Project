@@ -12,6 +12,7 @@ use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\API\ExpertController;
 use App\Http\Controllers\API\AdminController;
+use App\Http\Controllers\API\UserController;
 
 use App\Http\Controllers\API\AuthController;
 
@@ -30,6 +31,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return Auth::user();
 });
 //Route::post('/api/admin/login','AdminController@adminLogin');
+
+
+//====================users========================
+Route::apiResource('users', UserController::class);
 
 //=====================contracts routes ======================
 Route::apiResource('contracts',ContractController::class);
@@ -64,8 +69,6 @@ Route::get('/departments/{id}/explore', [DepartmentController::class, 'explore']
 Route::get('/user/profile', [ProfileController::class, 'user']);
 Route::get('/expert/profile', [ProfileController::class, 'expert']);
 
-//====================users========================
-Route::apiResource('users', UserController::class);
 
 
 Route::get('/posts/{id}/explore', [PostController::class, 'explore']);

@@ -35,11 +35,16 @@ export default {
     },
     methods: {
         createUser() {
-            axios.post('/api/users', this.user)
-                .then(response => {
-                    this.expert.user_id = response.data.id;
-                    return axios.post('/api/experts', this.expert);
-                })
+            axios.post('/api/users', this.user,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            })
+                // .then(response => {
+                //     this.expert.user_id = response.data.id;
+                //     return axios.post('/api/experts', this.expert);
+                //
+                // })
                 .then(response => {
                     // Success: Handle any additional logic or redirects here
                     console.log('User and expert created successfully');

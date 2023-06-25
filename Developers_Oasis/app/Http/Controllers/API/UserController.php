@@ -32,16 +32,45 @@ class UserController extends Controller
     {
         return UserResource::collection(User::all());
     }
+
+
+
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->all());
-        $expert = Expert::create([
-            'dept_id' => $request->input('dept_id'),
-            'bio' => $request->input('bio'),
-            'user_id' => $user->id,
+//dd($request);
+//        $user = User::create($request->all());
+        $user =User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+//            'image'=>$request['image']
         ]);
+//        $dept_id=$request['dept_id'];
+//        $bio=$request['bio'];
+//        $user_id=$request['user_id'];
+//        $expert_info=["dept_id"=>$dept_id,"bio"=>$bio,"user_id"=>$user_id];
+//        $expert= $this->storeExpirt($expert_info);
         return new UserResource($user);
     }
+
+
+//    private function storeExpirt(Array $expert_info)
+//    {
+////        return $expert_info['dept_id"];
+//        $expert = Expert::create([
+//        'dept_id' => $expert_info['dept_id'],
+//        'bio' => $expert_info['bio'],
+//        'user_id' =>  $expert_info['user_id']
+//
+//    ]);
+//        return $expert;
+//
+//    }
+
+
+
+
+
     public function show($id)
     {
         $user = User::findOrFail($id);
