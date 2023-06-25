@@ -22,7 +22,19 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {
-        return $request->user();
+        $user = $request->user();
+        $service = Service::with('ratings')->first(); // Modify this to fetch the appropriate service
+        $serviceRating = ServiceRating::first(); // Modify this to fetch the appropriate service rating
+        $expert = Expert::with('department')->first(); // Modify this to fetch the appropriate expert
+        $department = Department::first(); // Modify this to fetch the appropriate department
+
+        return response()->json([
+            'user' => $user,
+            'service' => $service,
+            'serviceRating' => $serviceRating,
+            'expert' => $expert,
+            'department' => $department,
+        ]);
     }
     public function getUser(Request $request)
     {
