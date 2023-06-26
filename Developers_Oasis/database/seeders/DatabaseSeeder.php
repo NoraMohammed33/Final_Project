@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+$this->call(
+    [
+  ChatRoomSeeder::class
+    ]
+);
     //    \App\Models\User::factory(20)->create();
     //    \App\Models\Department::factory(20)->create();
         // \App\Models\Expert::factory(10)->create();

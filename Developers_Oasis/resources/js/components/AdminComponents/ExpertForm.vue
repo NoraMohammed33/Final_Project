@@ -7,7 +7,17 @@
                     <v-text-field v-model="user.name" label="Name" required></v-text-field>
                     <v-text-field v-model="user.email" label="Email" type="email" required></v-text-field>
                     <v-text-field v-model="user.password" label="Password" type="password" required></v-text-field>
-                    <v-select v-model="expert.dept_id" :items="departments" label="Department" required></v-select>
+<!--                    <v-select v-model="expert.dept_id" :items="departments" label="Department" required>-->
+<!--                    </v-select>-->
+                    <select class="form-control" v-model="expert.dep_id" name="dep_id" id="dep_id" placeholder="select dept">
+
+                        <option
+
+                            v-for="department in departments.data"
+                            :key="department.id"
+                            :value="department.id"
+                        >{{ department.name }}</option>
+                    </select>
                     <v-textarea v-model="expert.bio" label="Bio" required></v-textarea>
                     <v-btn color="green" type="submit">Create User and Expert</v-btn>
                 </v-form>
@@ -37,7 +47,7 @@ export default {
         createUser() {
             axios.post('/api/users', this.user,{
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    "Content-Type": "application/json"
                 },
             })
                 // .then(response => {
@@ -56,14 +66,15 @@ export default {
         },
     },
     mounted() {
-        // Fetch the departments from the API and populate the departments array
-        axios.get('/api/departments')
+        axios
+            .get(`http://localhost:8000/api/departments`)
             .then(response => {
                 this.departments = response.data;
+                // console.log(this.departments);
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
             });
-    },
+    }
 };
 </script>
