@@ -13,10 +13,13 @@ class ServiceRatingController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
-        //
+        // Retrieve all service ratings
+        $serviceRatings = ServiceRating::all();
+
+        // Return a response
+        return response()->json($serviceRatings);
     }
 
     /**
@@ -33,11 +36,7 @@ class ServiceRatingController extends Controller
     public function store(StoreServiceRatingRequest $request)
     {
         // Validate the request data
-        $validatedData = $request->validate([
-            'service_id' => 'required',
-            'rating' => 'required|numeric|min:1|max:5',
-            'comment' => 'nullable|string',
-        ]);
+        $validatedData = $request->validated();
 
         // Create a new rating record
         $rating = new ServiceRating();
@@ -56,7 +55,8 @@ class ServiceRatingController extends Controller
      */
     public function show(ServiceRating $serviceRating)
     {
-        //
+        // Return the specific service rating
+        return response()->json($serviceRating);
     }
 
     /**
@@ -72,7 +72,16 @@ class ServiceRatingController extends Controller
      */
     public function update(UpdateServiceRatingRequest $request, ServiceRating $serviceRating)
     {
-        //
+        // Validate the request data
+        $validatedData = $request->validated();
+
+        // Update the rating record
+        $serviceRating->rating = $validatedData['rating'];
+        $serviceRating->comment = $validatedData['comment'];
+        $serviceRating->save();
+
+        // Return a response
+        return response()->json(['message' => 'Rating updated successfully']);
     }
 
     /**
@@ -80,6 +89,10 @@ class ServiceRatingController extends Controller
      */
     public function destroy(ServiceRating $serviceRating)
     {
-        //
+        // Delete the rating record
+        $serviceRating->delete();
+
+        // Return a response
+        return response()->json(['message' => 'Rating deleted successfully']);
     }
 }
