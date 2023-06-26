@@ -1,6 +1,6 @@
 <template>
     <div class="user-profile">
-        <div class="card" v-if="user && expert && expert.department && service && serviceRating">
+        <div class="card" v-if="user">
             <h2>{{ user.name }}</h2>
             <div class="user-info">
                 <div class="user-image">
@@ -8,11 +8,18 @@
                 </div>
                 <div class="user-details">
                     <p><strong>Email:</strong> {{ user.email }}</p>
-                    <p><strong>Department:</strong> {{ expert.department.name }}</p>
-                    <p><strong>Bio:</strong> {{ expert.bio }}</p>
-                    <p><strong>Service:</strong> {{ service.title }}</p>
-                    <p><strong>Service Rating:</strong> {{ serviceRating.rating }}</p>
                 </div>
+            </div>
+            <div class="services" v-if="services && services.length > 0">
+                <h3>Services:</h3>
+                <ul>
+                    <li v-for="service in services" :key="service.id">
+                        <p><strong>Title:</strong> {{ service.title }}</p>
+                        <p><strong>Description:</strong> {{ service.description }}</p>
+                        <p><strong>Price:</strong> {{ service.price }}</p>
+                        <p><strong>Rating:</strong> {{ getServiceRating(service.id) }}</p>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="error-message" v-else>
@@ -28,14 +35,13 @@ export default {
     data() {
         return {
             user: null,
-            expert: null,
-            service: null,
-            serviceRating: null,
             error: false,
+            services: [],
         };
     },
     mounted() {
         this.fetchUser();
+        this.fetchServices();
     },
     methods: {
         fetchUser() {
@@ -43,52 +49,27 @@ export default {
                 .get("/api/user/profile")
                 .then((response) => {
                     this.user = response.data;
-                    const expertId = this.user.expert_id; // Make sure the expert_id property exists
-                    console.log("expertId:", expertId); // Log the value of expertId
-                    console.log("this.user:", this.user); // Log the value of this.user
-                    this.fetchExpert(expertId);
                 })
                 .catch((error) => {
                     console.log(error);
                     this.error = true;
                 });
         },
-
-
-        fetchExpert(expertId) {
+        fetchServices() {
             axios
-                .get(`/api/experts/${expertId}`)
+                .get("/api/user/services")
                 .then((response) => {
-                    this.expert = response.data;
-                    this.fetchService(this.expert.service_id);
+                    console.log(response.data.data); // Log the response data
+                    this.services = response.data.data; // Update this line
                 })
                 .catch((error) => {
                     console.log(error);
                     this.error = true;
                 });
         },
-        fetchService(serviceId) {
-            axios
-                .get(`/api/services/${serviceId}`)
-                .then((response) => {
-                    this.service = response.data;
-                    this.fetchServiceRating(this.service.id);
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.error = true;
-                });
-        },
-        fetchServiceRating(serviceId) {
-            axios
-                .get(`/api/service-ratings?service_id=${serviceId}`)
-                .then((response) => {
-                    this.serviceRating = response.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.error = true;
-                });
+        getServiceRating(serviceId) {
+            const service = this.services.find((s) => s.id === serviceId);
+            return service ? service.rating : "N/A";
         },
     },
 };

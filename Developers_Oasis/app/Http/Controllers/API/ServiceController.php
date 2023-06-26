@@ -19,20 +19,32 @@ class ServiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::with(['expert.user', 'ratings'])
-            ->withCount('contracts')
-            ->get();
+        $query = Service::with(['expert.user', 'ratings'])
+            ->withCount('contracts');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%');
+            });
+        }
+
+        $services = $query->get();
+
         $servicesWithAverageRating = $services->map(function ($service) {
             $averageRating = $service->ratings->avg('rating');
             $service->average_rating = $averageRating;
             return $service;
         });
+
         return response()->json([
             'services' => $servicesWithAverageRating,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
