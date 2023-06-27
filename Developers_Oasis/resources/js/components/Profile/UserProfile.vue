@@ -79,46 +79,20 @@ export default {
 .user-profile {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
-    height: 100vh;
+    min-height: 50vh;
+    padding-top: 100px; /* Increase the padding-top value for a higher placement */
 }
 
 .card {
     max-width: 400px;
     width: 90%;
+    margin: 0 auto; /* Center the card horizontally */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.user-info {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.user-info p {
-    margin-bottom: 10px;
-}
-
-.user-info strong {
-    font-weight: bold;
-}
-
-.user-image {
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.user-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .error-message {
