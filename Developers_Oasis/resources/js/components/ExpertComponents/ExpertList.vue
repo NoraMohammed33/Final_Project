@@ -9,8 +9,26 @@
 
 
         <h2>Expert List</h2>
+        <v-row class="search-container justify-center">
+            <v-col cols="12" sm="6" md="4" lg="3" xl="2" class="text-center">
+                <v-text-field
+                    v-model="searchInput"
+                    outlined
+                    dense
+                    placeholder="Search experts"
+                ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4" lg="3" xl="2">
+                <v-btn color="primary" @click="fetchExperts">Search</v-btn>
+            </v-col>
+        </v-row>
+
         <div class="expert-card-container">
-            <v-card v-for="expert in experts" :key="expert.id" class="expert-card">
+            <v-card
+                v-for="expert in filteredExperts"
+                :key="expert.id"
+                class="expert-card"
+            >
                 <v-img class="align-end text-white" height="200" :src="'public/images/' + expert.user.image" cover>
                 </v-img>
                 <v-card-title>{{ expert.user.name }}</v-card-title>
@@ -42,10 +60,26 @@ export default {
     data() {
         return {
             experts: [],
+            searchInput: "", // Search input property
         };
     },
     mounted() {
         this.fetchExperts();
+    },
+    computed: {
+        // Computed property to filter experts based on search input
+        filteredExperts() {
+            if (!this.searchInput) {
+                return this.experts;
+            }
+            const search = this.searchInput.toLowerCase();
+            return this.experts.filter(
+                (expert) =>
+                    expert.user.name.toLowerCase().includes(search) ||
+                    expert.user.email.toLowerCase().includes(search) ||
+                    expert.department.name.toLowerCase().includes(search)
+            );
+        },
     },
     methods: {
         fetchExperts() {
@@ -83,5 +117,9 @@ export default {
 .expert-card {
     width: calc(33.33% - 20px);
     margin: 10px;
+}
+
+.search-container {
+    margin-bottom: 20px;
 }
 </style>

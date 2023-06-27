@@ -20,15 +20,25 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user=Auth::user();
-        $posts=post::all();
+        $user = Auth::user();
+        $searchInput = $request->input('search');
+
+        // Query posts with search input if provided, else retrieve all posts
+        if ($searchInput) {
+            $posts = Post::where('title', 'like', '%' . $searchInput . '%')
+                ->orWhere('body', 'like', '%' . $searchInput . '%')
+                ->get();
+        } else {
+            $posts = Post::all();
+        }
+
         return response()->json([
-            "status" =>'success',
-            'message'=> 'Posts fetched successfully.',
-            'posts'=>$posts,
-            'loggeduser'=>$user
+            "status" => 'success',
+            'message' => 'Posts fetched successfully.',
+            'posts' => $posts,
+            'loggeduser' => $user
         ]);
     }
 

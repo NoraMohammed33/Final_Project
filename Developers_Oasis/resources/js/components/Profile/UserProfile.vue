@@ -84,8 +84,19 @@ export default {
     height: 100vh;
 }
 
+.card {
+    max-width: 400px;
+    width: 90%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .user-info {
     margin-top: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .user-info p {
@@ -94,6 +105,20 @@ export default {
 
 .user-info strong {
     font-weight: bold;
+}
+
+.user-image {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .error-message {
