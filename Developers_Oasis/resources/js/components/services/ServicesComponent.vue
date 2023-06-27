@@ -2,11 +2,19 @@
     <div>
         <AddServiceComponent @service-saved="handleServiceSaved"></AddServiceComponent>
 
-<div class="d-flex flex-wrap justify-content-center mx-auto px-5">
-    <div class="input-container">
-        <input type="text" class="input-field" placeholder="Search Services" v-model="searchQuery" @input="fetchAllServices">
-        <i class="fas fa-search"></i>
-    </div>
+        <div class="d-flex justify-content-center mx-auto px-5">
+            <div class="input-container">
+                <input
+                    type="text"
+                    class="input-field"
+                    placeholder="Search Services"
+                    v-model="searchQuery"
+                    @input="fetchAllServices"
+                />
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
     <template v-for="service in services" :key="service.id">
         <v-card class="col-9 col-sm-5 col-md-5 col-lg-4 col-xl-3 m-3 rounded-4">
             <div class="image-container">
@@ -50,6 +58,7 @@
             </v-card-actions>
         </v-card>
     </template>
+        </div>
 <!--    <div class="card">-->
 <!--        <Paginator :rows="6" :totalRecords="services.length" :rowsPerPageOptions="[10, 20, 30]"></Paginator>-->
 <!--    </div>-->
@@ -84,7 +93,6 @@
 
 </div>
 
-    </div>
 
 </template>
 
@@ -282,7 +290,7 @@ i:hover{
     border-radius: 4px;
     font-size: 1rem;
     width: 100%;
-    max-width: 400px; /* Adjust the maximum width as needed */
+    max-width: 600px; /* Adjust the maximum width as needed */
 }
 
 .input-field:focus {
@@ -294,5 +302,10 @@ i:hover{
 .fa-search {
     margin-left: -30px;
     color: #a0a0a0;
+}
+
+/* Styles for the service cards container */
+.d-flex.flex-wrap.justify-content-center.mx-auto.px-5 {
+    /* Adjust the styles as needed */
 }
 </style>
