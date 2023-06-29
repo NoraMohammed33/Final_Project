@@ -28,6 +28,7 @@
 </template>
 <script>
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 export default {
     data() {
@@ -47,27 +48,31 @@ export default {
     },
     methods: {
         createUser() {
-            axios.post('http://localhost:8000/api/experts', this.user,{
+            axios.post('http://localhost:8000/api/experts', this.user, {
                 headers: {
                     "Content-Type": 'multipart/form-data'
                 },
             })
-                // .then( response => {
-                //   // let  res_data=response.data;
-                //   //   console.log( res_data.data.id);
-                //     this.expert.user_id = response.data.data.id;
-                //     return  axios.post('http://localhost:8000/api/experts', this.expert);
-                //
-                // })
-                .then(response => {
-                    // Success: Handle any additional logic or redirects here
-                    console.log('User and expert created successfully');
+                .then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'expert saved successfully!'
+                    });
+                    this.$emit('expert-saved')
+                    const close = document.getElementById('dismiss')
+                    close.click()
+                    this.emptyForm()
+                        // .then(response => {
+                        //     // Success: Handle any additional logic or redirects here
+                        //     console.log('User and expert created successfully');
+                        // })
+                        .catch(error => {
+                            // Error: Handle the error response
+                            console.error(error);
+                        });
                 })
-                .catch(error => {
-                    // Error: Handle the error response
-                    console.error(error);
-                });
-        },
+        }
     },
     mounted() {
         axios
