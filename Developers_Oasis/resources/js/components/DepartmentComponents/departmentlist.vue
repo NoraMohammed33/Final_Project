@@ -107,6 +107,7 @@ export default {
             this.fetchDepartments();
         },
         fetchDepartments() {
+            console.log(this.searchQuery);
             const params = {
                 search: this.searchQuery,
                 page: this.pagination.page,
@@ -114,7 +115,7 @@ export default {
             };
 
             axios
-                .get("api/departments", { params })
+                .get("/api/departments", { params })
                 .then((response) => {
                     this.departments = response.data.data;
                     this.pagination.totalPages = response.data.last_page;

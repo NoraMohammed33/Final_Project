@@ -4,7 +4,6 @@
     <!-- <AddPostComponent @post-saved="handlePostSaved"></AddPostComponent> -->
 
     <div class="posts-container">
-      <h2 class="section-title">All Posts</h2>
         <div>
             <input
                 v-model="searchInput"

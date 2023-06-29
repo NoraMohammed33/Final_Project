@@ -6,9 +6,6 @@
                 <v-btn color="green">add new expert</v-btn>
             </router-link>
         </v-container>
-
-
-        <h2>Expert List</h2>
         <v-row class="search-container justify-center">
             <v-col cols="12" sm="6" md="4" lg="3" xl="2" class="text-center">
                 <v-text-field

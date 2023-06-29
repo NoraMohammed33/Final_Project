@@ -23,14 +23,14 @@ class DepartmentController extends Controller
     {
         $search = $request->query('search');
         $perPage = $request->query('limit', 5);
+        $query = Department::query();
 
         if ($search) {
-            $departments = Department::where('name', 'like', '%' . $search . '%')
-                ->orWhere('description', 'like', '%' . $search . '%')
-                ->paginate($perPage);
-        } else {
-            $departments = Department::paginate($perPage);
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%');
         }
+
+        $departments = $query->paginate($perPage);
 
         return DepartmentResource::collection($departments);
     }
