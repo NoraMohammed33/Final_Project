@@ -26,23 +26,21 @@
             </router-link>
         </li>
         <li class="nav-item">
-                <router-link to="/addpost" class="nav-link">
-                    Ask me
-                </router-link>
-            </li>
-            <li class="nav-item" v-if="user && !expert">
-                <router-link :to="'/user/profile/' + user.id" class="nav-link">
-                    Profile
-                </router-link>
-            </li>
-            <li class="nav-item" v-if="expert">
-                <router-link :to="'/expert/profile/' + expert.id" class="nav-link">
-                    Profile
-                </router-link>
-            </li>
-
-        </ul>
-
+            <router-link to="/addpost" class="nav-link">
+                Ask me
+            </router-link>
+        </li>
+        <li class="nav-item" v-if="user && !expert">
+            <router-link :to="'/user/profile/' + user.id" class="nav-link">
+                Profile
+            </router-link>
+        </li>
+        <li class="nav-item" v-if="expert">
+            <router-link :to="'/expert/profile/' + expert.id" class="nav-link">
+                Profile
+            </router-link>
+        </li>
+    </ul>
 </template>
 
 <script setup>
@@ -72,8 +70,14 @@ axios
 </script>
 
 <style scoped>
-router-link {
-    font-size: larger;
-    font-weight: bold;
+@media (max-width: 576px) {
+    .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-item {
+        margin-bottom: 10px;
+    }
 }
 </style>
