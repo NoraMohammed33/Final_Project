@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\StoreUserRequest;
 use Exception;
-
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
@@ -45,35 +45,18 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-//dd($request);
-//        $user = User::create($request->all());
+
         $user =User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-//            'image'=>$request['image']
+            'image'=>$request['image']
         ]);
-//        $dept_id=$request['dept_id'];
-//        $bio=$request['bio'];
-//        $user_id=$request['user_id'];
-//        $expert_info=["dept_id"=>$dept_id,"bio"=>$bio,"user_id"=>$user_id];
-//        $expert= $this->storeExpirt($expert_info);
+
         return new UserResource($user);
     }
 
 
-//    private function storeExpirt(Array $expert_info)
-//    {
-////        return $expert_info['dept_id"];
-//        $expert = Expert::create([
-//        'dept_id' => $expert_info['dept_id'],
-//        'bio' => $expert_info['bio'],
-//        'user_id' =>  $expert_info['user_id']
-//
-//    ]);
-//        return $expert;
-//
-//    }
 
 
 

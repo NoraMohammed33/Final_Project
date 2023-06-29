@@ -9,7 +9,8 @@
                     <v-text-field v-model="user.password" label="Password" type="password" required></v-text-field>
 <!--                    <v-select v-model="expert.dept_id" :items="departments" label="Department" required>-->
 <!--                    </v-select>-->
-                    <select class="form-control" v-model="expert.dep_id" name="dep_id" id="dep_id" placeholder="select dept">
+                    <label>department</label>
+                    <select class="form-control mb-2" v-model="user.dept_id" >
 
                         <option
 
@@ -18,7 +19,7 @@
                             :value="department.id"
                         >{{ department.name }}</option>
                     </select>
-                    <v-textarea v-model="expert.bio" label="Bio" required></v-textarea>
+                    <v-textarea v-model="user.bio" label="Bio" required></v-textarea>
                     <v-btn color="green" type="submit">Create User and Expert</v-btn>
                 </v-form>
             </v-card-text>
@@ -35,24 +36,27 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-            },
-            expert: {
+                // user_id:'',
                 dept_id: '',
                 bio: '',
+            },
+            expert: {
             },
             departments: [], // Fetch the departments from the API and populate this array
         };
     },
     methods: {
         createUser() {
-            axios.post('/api/users', this.user,{
+            axios.post('http://localhost:8000/api/experts', this.user,{
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": 'multipart/form-data'
                 },
             })
-                // .then(response => {
-                //     this.expert.user_id = response.data.id;
-                //     return axios.post('/api/experts', this.expert);
+                // .then( response => {
+                //   // let  res_data=response.data;
+                //   //   console.log( res_data.data.id);
+                //     this.expert.user_id = response.data.data.id;
+                //     return  axios.post('http://localhost:8000/api/experts', this.expert);
                 //
                 // })
                 .then(response => {
