@@ -4,7 +4,7 @@
         <!-- <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent> -->
 
         <div class="input-container">
-            <input type="text" class="input-field" placeholder="Search departments" v-model="searchQuery">
+            <input type="text" class="input-field" placeholder="Search departments" v-model="searchQuery" @input="fetchDepartments">
             <i class="fas fa-search"></i>
         </div>
 
@@ -107,7 +107,6 @@ export default {
             this.fetchDepartments();
         },
         fetchDepartments() {
-            console.log(this.searchQuery);
             const params = {
                 search: this.searchQuery,
                 page: this.pagination.page,
@@ -137,6 +136,10 @@ export default {
     },
 };
 </script>
+
+
+
+
 
 <style scoped>
 .input-container {
