@@ -1,8 +1,5 @@
 <template>
 <div >
-
-
-
     <router-link :to="'/admin/dashboard/services'"
                  class="list-group-item  py-2 mx-4 ripple  menu_item">
         <Button>services</Button>
@@ -30,7 +27,8 @@
     border:1px solid green;
     margin:10px;
     padding:10px;
-    border-radius:10px
+    border-radius:10px;
+    font-size:20px
 }
 .menu_item:hover{
     background-color:green;
