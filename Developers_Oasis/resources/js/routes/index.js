@@ -9,6 +9,7 @@ import AllpostsComponent from '../components/PostComponents/AllpostsComponent.vu
 import PostComponent from "../components/PostComponents/PostComponent.vue";
 
 import ExpertList from "../components/ExpertComponents/ExpertList.vue";
+import AllExpertsTable from "../components/AdminComponents/AllExpertsTable.vue";
 import ExpertForm from "../components/AdminComponents/ExpertForm.vue";
 import ExpertDetail from "../components/ExpertComponents/ExpertDetail.vue";
 import departmentlist from "../components/DepartmentComponents/departmentlist.vue";
@@ -100,7 +101,7 @@ const routes = [
             },
             {
                 path: 'experts',
-                component: expertList
+                component: AllExpertsTable
             },
             {
                 path:'addexpert',
