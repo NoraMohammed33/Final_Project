@@ -58,20 +58,20 @@ export default {
     };
   },
   methods: {
-    addPost() {
-      axios
-        .post("http://localhost:8000/api/posts/", this.newPost)
-        .then(response => {
-          console.log(response.data);
-            const postId = response.data.id;
-            // this.resetForm();
-            this.$router.push({ path: `/posts/${postId}` });
-           $("#post_details_modal").modal("show");
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
+      addPost() {
+          axios
+              .post("http://localhost:8000/api/posts/", this.newPost)
+              .then(response => {
+                  console.log(response.data);
+                  const postId = response.data.id;
+                  // this.resetForm();
+                  this.$router.push("/posts"); // Redirect to /posts route
+                  $("#post_details_modal").modal("show");
+              })
+              .catch(error => {
+                  console.log(error);
+              });
+      },
     resetForm() {
       this.newPost = {
         title: "",
