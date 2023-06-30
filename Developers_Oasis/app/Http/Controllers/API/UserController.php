@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+use Illuminate\Support\Facades\File;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdatePostRequest;
@@ -43,14 +44,22 @@ class UserController extends Controller
 
 
 
+
     public function store(StoreUserRequest $request)
     {
+        $imagePath = null;
 
-        $user =User::create([
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('users_images', $imageName, 'public');
+        }
+
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'image'=>$request['image']
+            'image' => $imagePath,
         ]);
 
         return new UserResource($user);

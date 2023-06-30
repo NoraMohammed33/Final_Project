@@ -37,9 +37,30 @@
         </div>
 
         <!-- Pagination -->
+        <!-- Pagination -->
         <div class="pagination-container">
-            <v-btn v-for="pageNumber in pagination.totalPages" :key="pageNumber" class="pagination-link" :disabled="pageNumber === pagination.page" @click="changePage(pageNumber)">
+            <v-btn
+                class="pagination-link"
+                :disabled="pagination.page === 1"
+                @click="changePage(pagination.page - 1)"
+            >
+                Previous
+            </v-btn>
+            <v-btn
+                v-for="pageNumber in pagination.totalPages"
+                :key="pageNumber"
+                class="pagination-link"
+                :disabled="pageNumber === pagination.page"
+                @click="changePage(pageNumber)"
+            >
                 {{ pageNumber }}
+            </v-btn>
+            <v-btn
+                class="pagination-link"
+                :disabled="pagination.page === pagination.totalPages"
+                @click="changePage(pagination.page + 1)"
+            >
+                Next
             </v-btn>
         </div>
 
@@ -106,6 +127,7 @@ export default {
         handleDepartmentSaved() {
             this.fetchDepartments();
         },
+
         fetchDepartments() {
             const params = {
                 search: this.searchQuery,
@@ -132,7 +154,7 @@ export default {
         changePage(pageNumber) {
             this.pagination.page = pageNumber;
             this.paginatedDepartments = this.calculatePaginatedDepartments();
-        },
+        }
     },
 };
 </script>
