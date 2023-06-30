@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CommentController;
-use App\Http\Controllers\API\ContractController;
 use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\API\ExpertController;
+use App\Http\Controllers\API\AdminController;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\ProfileController;
@@ -31,14 +31,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::post('/api/admin/login','AdminController@adminLogin');
 
 
-Route::get('/paypal/payment', [PaymentController::class, 'createPayment']);
-Route::get('/paypal/execute-payment', [PaymentController::class, 'successTransaction'])->name('execute');
-Route::get('/success', function () {
-    return view('welcome');
-})->name('success');;
-Route::get('/error', function () {
-    return view('welcome');
-})->name('error');;
+//====================users========================
+Route::apiResource('users', UserController::class);
 
 //=====================contracts routes ======================
 Route::apiResource('contracts',ContractController::class);

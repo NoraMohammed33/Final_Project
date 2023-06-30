@@ -4,49 +4,61 @@
     <!-- <AddPostComponent @post-saved="handlePostSaved"></AddPostComponent> -->
 
     <div class="posts-container">
-      <h2 class="section-title">All Posts</h2>
-      <div class="post-list">
-        <div v-for="post in posts" :key="post.id" class="post-item">
-          <v-card class="post-card">
-            <v-card-title class="post-title">{{ post.title }}</v-card-title>
-            <v-card-text class="post-body">
-              <textarea
-                v-model="post.body"
-                class="post-textarea"
-                rows="3"
-                readonly
-              ></textarea>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn
-                id="explore"
-                color="blue"
-                class="border rounded-2"
-                @click="explorePost(post.id)">
-                Explore
-              </v-btn>
-              <div class="ms-auto">
-                <!-- Edit Post Icon -->
-                <i v-if="currentUser.id === post.user_id"
-                  class="fas fa-edit fs-4 text-warning"
-                  @click="openUpdateModal(post)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#update_modal"
-                ></i>
-                <!-- Delete Post Icon -->
-                <i v-if="currentUser.id === post.user_id"
-                  class="fas fa-trash fs-4 text-danger ms-4"
-                  @click="deletePost(post.id)"
-                ></i>
-              </div>
-            </v-card-actions>
-          </v-card>
+        <div>
+            <input
+                v-model="searchInput"
+                type="text"
+                placeholder="Search posts"
+                class="form-control"
+            />
+            <button @click="fetchPosts">Search</button>
         </div>
-      </div>
+
+        <div class="post-list">
+            <div v-for="post in filteredPosts" :key="post.id" class="post-item">
+                <v-card class="post-card">
+                    <v-card-title class="post-title">{{ post.title }}</v-card-title>
+                    <v-card-text class="post-body">
+              <textarea
+                  v-model="post.body"
+                  class="post-textarea"
+                  rows="3"
+                  readonly
+              ></textarea>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn
+                            id="explore"
+                            color="blue"
+                            class="border rounded-2"
+                            @click="explorePost(post.id)"
+                        >
+                            Explore
+                        </v-btn>
+                        <div class="ms-auto">
+                            <!-- Edit Post Icon -->
+                            <i
+                                v-if="currentUser.id === post.user_id"
+                                class="fas fa-edit fs-4 text-warning"
+                                @click="openUpdateModal(post)"
+                                data-bs-toggle="modal"
+                                data-bs-target="#update_modal"
+                            ></i>
+                            <!-- Delete Post Icon -->
+                            <i
+                                v-if="currentUser.id === post.user_id"
+                                class="fas fa-trash fs-4 text-danger ms-4"
+                                @click="deletePost(post.id)"
+                            ></i>
+                        </div>
+                    </v-card-actions>
+                </v-card>
+            </div>
+        </div>
     </div>
 
 
-    <!-- Update Post Modal -->
+      <!-- Update Post Modal -->
     <div
       class="modal fade"
       id="update_modal"
@@ -118,51 +130,64 @@ import AddPostComponent from "./AddPostComponent.vue";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 export default {
-  data() {
-    return {
-      posts: [],
-      post_title: "",
-      post_body: "",
-      update_postID: null,
-      errors: {},
-      postDetails: { title: "", body: "" },
-      currentUser: {}
-    };
-  },
+    data() {
+        return {
+            posts: [],
+            post_title: "",
+            post_body: "",
+            update_postID: null,
+            errors: {},
+            postDetails: { title: "", body: "" },
+            currentUser: {},
+            searchInput: "", // Search input property
+        };
+    },
   components: {
     AddPostComponent
   },
   mounted() {
   this.fetchPosts();
 },
+        computed: {
+            // Computed property to filter posts based on search input
+            filteredPosts() {
+                if (!this.searchInput) {
+                    return this.posts;
+                }
+                const search = this.searchInput.toLowerCase();
+                return this.posts.filter(
+                    (post) =>
+                        post.title.toLowerCase().includes(search) ||
+                        post.body.toLowerCase().includes(search)
+                );
+            },
+        },
   methods: {
-    fetchPosts() {
-      axios
-        .get("/api/posts")
-        .then(response => {
-         this.posts = response.data.posts;
-         this.currentUser=response.data.loggeduser;
-          console.log(this.posts);
-          console.log(this.currentUser);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
-    handlePostSaved() {
-      this.fetchPosts();
-    },
-    openUpdateModal(post) {
-        this.errors = {}
-      this.update_postID = post.id;
-      this.post_title = post.title;
-      this.post_body = post.body;
-    },
-    updatePost() {
-      this.errors = {};
-      if (!this.post_title) {
-        this.errors.post_title = "Please enter a post title.";
-      }
+      fetchPosts() {
+          axios
+              .get("/api/posts", { params: { search: this.searchInput } }) // Pass search input as a parameter
+              .then((response) => {
+                  this.posts = response.data.posts;
+                  this.currentUser = response.data.loggeduser;
+              })
+              .catch((error) => {
+                  console.log(error);
+              });
+      },
+      handlePostSaved() {
+          this.fetchPosts();
+      },
+      openUpdateModal(post) {
+          this.errors = {};
+          this.update_postID = post.id;
+          this.post_title = post.title;
+          this.post_body = post.body;
+      },
+      updatePost() {
+          this.errors = {};
+          if (!this.post_title) {
+              this.errors.post_title = "Please enter a title.";
+          }
       if (!this.post_body) {
         this.errors.post_body = "Please enter a post body.";
       }

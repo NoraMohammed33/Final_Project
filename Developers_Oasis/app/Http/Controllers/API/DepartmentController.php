@@ -19,11 +19,20 @@ use Exception;
 
 class DepartmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return DepartmentResource::collection(Department::all());
-//        $departments = Department::all();
-//        return response()->json($departments);
+        $search = $request->query('search');
+        $perPage = $request->query('limit', 5);
+        $query = Department::query();
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%');
+        }
+
+        $departments = $query->paginate($perPage);
+
+        return DepartmentResource::collection($departments);
     }
 
     public function store(Request $request)

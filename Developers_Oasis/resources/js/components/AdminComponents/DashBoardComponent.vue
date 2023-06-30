@@ -19,11 +19,12 @@ import ServicesComponent from "../services/ServicesComponent.vue";
 import AllpostsComponent from '../PostComponents/AllpostsComponent.vue';
 import departmentlist from '../DepartmentComponents/departmentlist.vue';
 import ExpertList from "../ExpertComponents/ExpertList.vue";
+import ExpertForm from "./ExpertForm.vue";
 
 export default defineComponent({
     components: {AdminheaderComponent,
         ServicesComponent,AllpostsComponent,
-        departmentlist,ExpertList
+        departmentlist,ExpertList,ExpertForm
 
     }
 })

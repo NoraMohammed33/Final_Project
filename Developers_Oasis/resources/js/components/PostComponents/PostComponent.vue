@@ -131,13 +131,21 @@ export default {
       };
 
       if (this.newCommentBody === "") {
-        alert("Please enter the body of the comment");
+          Swal.fire({
+              icon: 'warning',
+              title: 'forbidden',
+              text: 'Comment mustn\'t be empty!'
+          });
         return false;
       }
       axios
         .post(`http://localhost:8000/api/posts/${this.post_id}/comments`, data)
         .then(res => {
-          alert("Your comment has been added");
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Comment added successfully!'
+            });
           this.newCommentBody = "";
         })
         .catch(() => {

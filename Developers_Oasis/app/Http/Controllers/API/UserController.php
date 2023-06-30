@@ -18,13 +18,21 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\StoreUserRequest;
 use Exception;
-
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
     public function profile(Request $request)
     {
-        return $request->user();
+        $user = $request->user();
+        $services = Service::with('ratings')->where('expert_id', $user->id)->get(); // Fetch services associated with the user
+        $serviceRating = ServiceRating::where('user_id', $user->id)->get(); // Fetch service ratings given by the user
+
+        return response()->json([
+            'user' => $user,
+            'services' => $services,
+            'serviceRating' => $serviceRating,
+        ]);
     }
     public function getUser(Request $request)
     {
@@ -34,16 +42,28 @@ class UserController extends Controller
     {
         return UserResource::collection(User::all());
     }
+
+
+
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->all());
-        $expert = Expert::create([
-            'dept_id' => $request->input('dept_id'),
-            'bio' => $request->input('bio'),
-            'user_id' => $user->id,
+
+        $user =User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'image'=>$request['image']
         ]);
+
         return new UserResource($user);
     }
+
+
+
+
+
+
+
     public function show($id)
     {
         $user = User::findOrFail($id);

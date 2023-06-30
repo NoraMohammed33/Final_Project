@@ -9,7 +9,7 @@ import AllpostsComponent from '../components/PostComponents/AllpostsComponent.vu
 import PostComponent from "../components/PostComponents/PostComponent.vue";
 
 import ExpertList from "../components/ExpertComponents/ExpertList.vue";
-import ExpertForm from "../components/ExpertComponents/ExpertForm.vue";
+import ExpertForm from "../components/AdminComponents/ExpertForm.vue";
 import ExpertDetail from "../components/ExpertComponents/ExpertDetail.vue";
 import departmentlist from "../components/DepartmentComponents/departmentlist.vue";
 import exampleComponent from "../components/ExampleComponent.vue";
@@ -69,9 +69,6 @@ const routes = [
     {
         path:'/experts',
         component:ExpertList
-    },    {
-        path:'/addexpert',
-        component:ExpertForm
     },
     {
         path:'/expert/:id',
@@ -104,6 +101,10 @@ const routes = [
             {
                 path: 'experts',
                 component: expertList
+            },
+            {
+                path:'addexpert',
+                component:ExpertForm
             },
         ]
 

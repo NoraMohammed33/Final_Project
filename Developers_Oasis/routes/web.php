@@ -5,7 +5,7 @@ use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +47,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return view('home');
     })->where('any', '.*');
 });
+
+
+Route::middleware(['auth:sanctum','verified'])->get('/chat',function (){
+    return view('welcome');
+})->name('chat');
+
+Route::middleware('auth:sanctum')->get('/chat/room',[ChatController::class,'rooms']);
+Route::middleware('auth:sanctum')->get('/chat/room/{roomId}/messages',[ChatController::class,'messages']);
+Route::middleware('auth:sanctum')->post('/chat/room/{roomId}/message',[ChatController::class,'newMessage']);
+
+
 
 //Route::view('/admin/login','auth.loginAdmin');
 //departments

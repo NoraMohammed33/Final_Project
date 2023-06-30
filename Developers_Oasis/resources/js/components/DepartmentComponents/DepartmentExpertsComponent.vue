@@ -1,6 +1,5 @@
 <template>
     <div v-if="experts && experts.length > 0">
-        <h4 class="font-weight-bold mt-3">Experts</h4>
         <div class="card-container">
             <v-card v-for="expert in experts" :key="expert.id" class="card-item" max-width="344">
                 <v-img class="align-end text-white" height="200" :src="'public/images/' +expert.user.image" cover/>
@@ -31,6 +30,9 @@
             </v-card>
         </div>
     </div>
+    <div v-else class="no-experts-message">
+        No Experts In This Department
+    </div>
 </template>
 
 <script>
@@ -56,7 +58,7 @@ export default {
             axios
                 .get(`/api/departments/${id}/explore`)
                 .then(response => {
-                    const department = response.data.department;
+                    const department = response.data.departments;
                     const expert = response.data.experts;
                     // Handle the department and experts data
                     this.experts = expert;
@@ -74,10 +76,22 @@ export default {
 .card-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .card-item {
     flex: 1 1 300px;
     margin: 8px;
+}
+.no-experts-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 </style>
