@@ -1,12 +1,7 @@
 <template>
     <div class="expert-list">
 
-        <v-container>
-            <router-link :to="'/admin/dashboard/addexpert'">
-                <v-btn color="green">add new expert</v-btn>
-            </router-link>
-        </v-container>
-        <v-row class="search-container justify-center">
+        <v-row class="search-container justify-center my-5">
             <v-col>
                 <input  v-model="searchInput" type="text" class="form-control" placeholder="Search Expert" id="search">
             </v-col>
