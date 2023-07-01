@@ -107,6 +107,9 @@ app.component('allexperts-table',AllExpertsTable);
 import AllDepartmentsTable from "./components/AdminComponents/AllDepartmentsTable.vue";
 app.component('alldepartments-table',AllDepartmentsTable);
 
+import allPostsTable from "./components/AdminComponents/AllPostsTable.vue";
+app.component('allposts-table',allPostsTable);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

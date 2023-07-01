@@ -23,6 +23,8 @@ import ExpertProfile from "../components/Profile/ExpertProfile.vue";
 import SuccessPaymentComponent from "../components/Payment/SuccessPaymentComponent.vue";
 import ErrorPaymentComponent from "../components/Payment/ErrorPaymentComponent.vue";
 import allDepartmentsTable from "../components/AdminComponents/AllDepartmentsTable.vue";
+import allPostsTable from "../components/AdminComponents/allPostsTable.vue";
+
 import mainComponent from "../components/MainComponent.vue";
 const routes = [
 
@@ -91,7 +93,7 @@ const routes = [
         children:[
             {
                 path: 'allposts',
-                component: AllpostsComponent
+                component: allPostsTable
             },
             {
                 path: 'services',
