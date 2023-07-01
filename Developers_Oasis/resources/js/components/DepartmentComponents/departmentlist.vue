@@ -1,7 +1,7 @@
 <template>
     <div>
-        <!-- Add Department Component -->
-        <!-- <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent> -->
+         Add Department Component
+         <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent>
 
         <div class="input-container">
             <input v-model="searchQuery" @input="fetchDepartments"  type="text" class="form-control" placeholder="Search Department" id="search">

@@ -53,13 +53,13 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-                                <image src="D:\Final_Project\Developers_Oasis\public\images\users\default.jpg" />
+                                <image src={{asset('images\users\default.jpg')}} class="w-50" />
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                  </a>
-                                 <router-link to="/user/profile/auth::user()->id" class="dropdown-item">
+                                 <router-link :to="'/user/profile/auth::user()->id'" class="dropdown-item">
                                    {{__('Profile')}}  </router-link>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

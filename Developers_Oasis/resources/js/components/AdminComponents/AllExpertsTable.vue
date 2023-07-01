@@ -1,5 +1,12 @@
 <template>
     <div>
+<v-row>
+
+    <v-btn color="green">
+       <router-link :to="'/admin/dashboard/addexpert'" >add expert</router-link>
+    </v-btn>
+</v-row>
+    <v-row>
                     <table class="min-w-full">
                         <thead>
                         <tr>
@@ -132,6 +139,7 @@
                         </tr>
                         </tbody>
                     </table>
+    </v-row>
     </div>
 </template>
 
