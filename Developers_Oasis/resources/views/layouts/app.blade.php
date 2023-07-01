@@ -53,7 +53,8 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-                                <image src={{asset('images\users\default.jpg')}} class="w-50" />
+                                <image src="{{ asset('images/users/default.jpg') }}" class="user-avatar" />
+
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
@@ -78,5 +79,22 @@
     </main>
     </div>
 </body>
+<style>
+    .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 
+    .user-details .user-name {
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+    }
+
+    .user-details .user-name i {
+        margin-right: 5px;
+    }
+</style>
 </html>
