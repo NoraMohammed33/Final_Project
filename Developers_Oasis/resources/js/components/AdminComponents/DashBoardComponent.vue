@@ -1,12 +1,13 @@
 <template>
-   <v-container class="fs-4 my-5">
-<adminheader-component></adminheader-component>
-   </v-container>
-
 
 
 <v-container class="d-flex justify-content-center py-5">
-<main-component></main-component>
+    <v-row>
+
+      <adminheader-component class="col-3"></adminheader-component>
+
+<router-view class="col-9 py-0"></router-view>
+    </v-row>
 </v-container>
 
     <footer class="text-center bg-black fixed-bottom">all copy rights saved</footer>
@@ -15,9 +16,18 @@
 
 import {defineComponent} from "vue";
 import AdminheaderComponent from "./AdminHeaderComponent.vue";
+import ServicesComponent from "../services/ServicesComponent.vue";
+import AllpostsComponent from '../PostComponents/AllpostsComponent.vue';
+import departmentlist from '../DepartmentComponents/departmentlist.vue';
+import AllExpertsTable from "../AdminComponents/AllExpertsTable.vue";
+import ExpertForm from "./ExpertForm.vue";
 
 export default defineComponent({
-    components: {AdminheaderComponent}
+    components: {AdminheaderComponent,
+        ServicesComponent,AllpostsComponent,
+        departmentlist,AllExpertsTable,ExpertForm
+
+    }
 })
 </script>
 

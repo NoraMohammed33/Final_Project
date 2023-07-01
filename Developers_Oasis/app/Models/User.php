@@ -1,7 +1,6 @@
 <?php
-
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -14,6 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'isadmin'
     ];
 
     /**
@@ -48,14 +50,23 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function expert()
+    {
+        return $this->hasOne(Expert::class);
+    }
+
     function comments():MorphMany{
 
         return $this->morphMany(Comment::class,'commentable');
 
-   }
+    }
     public function Contract()
     {
         return $this->belongsTo(Contract::class);
+    }
+
+    public function ratings(){
+        return $this->hasMany(ServiceRating::class);
     }
 
 }

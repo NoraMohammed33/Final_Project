@@ -1,8 +1,13 @@
 
-@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+{{--@vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
 
-<div id="app">
-<dashboard-component></dashboard-component>
 
-</div>
+@extends('layouts.appAdmin')
+@section('content')
+{{--   @dd( Auth::user()->isadmin);--}}
+@if(Auth::user()->isadmin)
+{{--    <h1>yaaa haaaalaaaaa</h1>--}}
+{{--<router-view></router-view>--}}
+    @endif
+@endsection
 

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="highlightLevel" value="WARNING" />
+    <option name="transferred" value="true" />
+  </component>
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/phar-io/version" />
@@ -76,10 +86,6 @@
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/phpunit/php-text-template" />
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/phpunit/php-timer" />
-      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/spatie/backtrace" />
-      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/spatie/ignition" />
-      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/spatie/flare-client-php" />
-      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/spatie/laravel-ignition" />
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/guzzlehttp/uri-template" />
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/guzzlehttp/psr7" />
@@ -112,6 +118,32 @@
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/nunomaduro/collision" />
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/Developers_Oasis/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/clue/stream-filter" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/moneyphp/money" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/php-http/message-factory" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/php-http/message" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/php-http/guzzle7-adapter" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/php-http/httplug" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/php-http/discovery" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/laravel/cashier" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/stripe/stripe-php" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/srmklive/paypal" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/omnipay/paypal" />
+      <path value="$PROJECT_DIR$/Developers_Oasis/vendor/omnipay/common" />
     </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/Developers_Oasis/phpunit.xml" custom_loader_path="$PROJECT_DIR$/Developers_Oasis/vendor/autoload.php" use_configuration_file="true" />
+    </phpunit_settings>
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
   </component>
 </project>

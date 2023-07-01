@@ -4,8 +4,5 @@
 
 
 @section('content')
-
-<h1>welcome to our project</h1>
-<example-component></example-component>
-
+    <router-view></router-view>
 @endsection

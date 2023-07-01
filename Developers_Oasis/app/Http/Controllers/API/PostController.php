@@ -16,38 +16,50 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Requests\StorePostRequest;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // function __construct()
-    // {
-
-    //     $this->middleware('auth:sanctum')->only('create', 'store', 'update','destroy');
-    // }
-    public function index()
+    public function index(Request $request)
     {
-        return PostResource::collection(Post::all());
+        $user = Auth::user();
+        $searchInput = $request->input('search');
+
+        // Query posts with search input if provided, else retrieve all posts
+        if ($searchInput) {
+            $posts = Post::where('title', 'like', '%' . $searchInput . '%')
+                ->orWhere('body', 'like', '%' . $searchInput . '%')
+                ->get();
+        } else {
+            $posts = Post::all();
+        }
+
+        return response()->json([
+            "status" => 'success',
+            'message' => 'Posts fetched successfully.',
+            'posts' => $posts,
+            'loggeduser' => $user
+        ]);
     }
 
 
-//     public function index(Request $request)
-// {
-//     $departmentIds = $request->input('department_ids', []);
-
-//     $posts = Post::whereIn('department_id', $departmentIds)->get();
-
-//     return PostResource::collection($posts);
-// }
-
     public function store(StorePostRequest $request)
     {
-        $post = Post::create($request->all());
-        return new  PostResource($post);
+        $post = new Post($request->all());
+        $post->user_id = auth()->user()->getAuthIdentifier();
+        $post->save();
+
+        return response()->json([
+            'data' => [
+                'post' => $post,
+            ],
+        ]);
     }
 
     public function show(Post $post)
     {
         if ($post) {
+
             return new PostResource($post);
         }
         return response('', 404);
@@ -56,30 +68,53 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post)
     {
-        if ($post)
-            try {
-                $post->update($request->all());
-                return new PostResource($post);
-            } catch (Exception $e) {
+        $user = Auth::user();
 
-                return $e;
-            }
-        else {
-            return response('', 404);
+        if ($user->id !== $post->user_id) {
+
+            abort(403, 'You are not authorized to delete this post.');
+        }
+        try {
+
+            $post->update($request->all());
+
+            return response()->json([
+                'data' => [
+                    'post' => $post,
+                    'user' => $user,
+                ],
+            ]);
+        } catch (Exception $e) {
+
+            return $e;
         }
     }
 
     public function destroy(Post $post)
     {
-        if ($post) {
-            try {
-                $post->delete();
-                return new Response('', 204);
-            } catch (Exception $e) {
-                return $e;
-            }
-        } else {
-            return response()->json('', 404);
+        $user = Auth::user();
+
+        if ($user->id !== $post->user_id) {
+
+            abort(403, 'You are not authorized to delete this post.');
         }
+        try {
+
+            $post->delete();
+            return Response()->json([
+                'user' => $user,
+            ]);
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+    public function explore($id)
+    {
+        $post = Post::findOrFail($id);
+        return response()->json([
+            'data' => [
+                'post' => $post,
+            ],
+        ]);
     }
 }

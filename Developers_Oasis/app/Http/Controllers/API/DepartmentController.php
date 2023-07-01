@@ -2,64 +2,87 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Department;
-use App\Models\Expert;
-use App\Http\Requests\StoreDepartmentRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateDepartmentRequest;
-use App\HTTP\Controllers\controller;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Response;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Department;
+use App\Models\Service;
+use App\Models\Expert;
+use Illuminate\Http\Request;
 use App\Http\Resources\DepartmentResource;
+use App\Http\Requests\StoreDepartmentRequest;
+use Exception;
 
 class DepartmentController extends Controller
 {
-    
-    public function index()
+    public function index(Request $request)
     {
-        $departments = Deprtment::all();
-        return response()->json($departments);
-        // return DepartmentResource::collection(Department::all());
-    }
+        $search = $request->query('search');
+        $perPage = $request->query('limit', 5);
+        $query = Department::query();
 
-    public function store(StoreDepartmentRequest $request)
-    {
-        $department = Department::create($request->all());
-        return new  DepartmentResource($department);
-    }
-
-    public function show(Department $department)
-    {
-
-    }
-    public function update(UpdateDepartmentRequest $request, Department $department)
-    {
-        //
-        if ($department)
-            try {
-                $department->update($request->all());
-                return new DepartmentResource($department);
-            } catch (Exception $e) {
-                return $e;
-            }
-        else {
-            return response('', 404);
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%');
         }
+
+        $departments = $query->paginate($perPage);
+
+        return DepartmentResource::collection($departments);
     }
-    public function destroy(Department $department)
+
+    public function store(Request $request)
     {
-        if ($deprtment) {
-            try {
-                $deprtment->delete();
-                return new Response('', 204);
-            } catch (Exception $e) {
-                return $e;
-            }
-        } else {
-            return response()->json('', 404);
-        }
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $department = new Department();
+        $department->name = $request->input('name');
+        $department->description = $request->input('description');
+        $department->save();
+
+        return response()->json(['message' => 'Department created successfully'], 201);
+    }
+
+    public function show($id)
+    {
+        $department = Department::findOrFail($id);
+        $experts = Expert::where('dept_id', $id)->with('department', 'user')->get();
+        return response()->json(['department' => $department, 'experts' => $experts]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $department = Department::findOrFail($id);
+        $department->name = $request->input('name');
+        $department->description = $request->input('description');
+        $department->save();
+
+        return response()->json(['message' => 'Department updated successfully']);
+    }
+
+    public function destroy($id)
+    {
+        $department = Department::findOrFail($id);
+        $department->delete();
+        return response()->json(['message' => 'Department deleted successfully']);
+    }
+
+    public function explore($id)
+    {
+        $department = Department::findOrFail($id);
+        $experts = Expert::where('dept_id', $id)->with('department', 'user')->get();
+        return response()->json(['department' => $department, 'experts' => $experts]);
     }
 }
-
-
-
-
-
-

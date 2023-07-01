@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('image');
             $table->unsignedBigInteger('expert_id');
             $table->foreign('expert_id')->references('id')->on('experts')->onDelete('cascade');
+            $table->unsignedBigInteger('dept_id');
+            $table->foreign('dept_id')->references('id')->on('departments')->onDelete('cascade');
         });
 
         Schema::enableForeignKeyConstraints();

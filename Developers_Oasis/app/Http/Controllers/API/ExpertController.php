@@ -1,47 +1,56 @@
 <?php
-
 namespace App\Http\Controllers\API;
 
-use App\Models\Expert;
 use App\Http\Controllers\Controller;
+use App\Models\Expert;
+use App\Http\Resources\ExpertResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Models\User;
 
 class ExpertController extends Controller
 {
-    public function index()
+public function index(): JsonResponse
+{
+$experts = Expert::with('department', 'user', 'services')->get();
+return response()->json($experts);
+}
+
+public function store(Request $request): JsonResponse
+{
+$user = User::create([
+'name' => $request->input('name'),
+'email' => $request->input('email'),
+'password' => bcrypt($request->input('password')),
+]);
+
+$expert = Expert::create([
+'dept_id' => $request->input('dept_id'),
+'bio' => $request->input('bio'),
+'user_id' => $user->id,
+]);
+
+return response()->json($expert, 201);
+}
+
+    public function show($id): JsonResponse
     {
-        $experts = Expert::all();
-        return view('experts.index', compact('experts'));
+        $expert = Expert::with('user', 'department', 'services')->findOrFail($id);
+        return response()->json(['expert' => $expert]);
     }
 
-    public function create()
-    {
-        // Show the form to create a new expert
-    }
 
-    public function store(Request $request)
-    {
-        // Validate and store the new expert
-    }
+public function update(Request $request, $id): JsonResponse
+{
+$expert = Expert::findOrFail($id);
+$expert->update($request->all());
+return response()->json($expert);
+}
 
-    public function show(Expert $expert)
-    {
-        return view('experts.show', compact('expert'));
-    }
-
-    public function edit(Expert $expert)
-    {
-        return view('experts.edit', compact('expert'));
-    }
-
-    public function update(Request $request, Expert $expert)
-    {
-        // Validate and update the expert
-    }
-
-    public function destroy(Expert $expert)
-    {
-        $expert->delete();
-        return redirect()->route('experts.index');
+public function destroy($id): JsonResponse
+{
+$expert = Expert::findOrFail($id);
+$expert->delete();
+return response()->json(null, 204);
 }
 }

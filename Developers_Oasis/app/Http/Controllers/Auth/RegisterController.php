@@ -62,12 +62,32 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+    // private function save_image($image){
+    //     if($image){
+    //         $image_name = time().'.'.$image->extension();
+    //         $image->move(public_path('images/users'),$image_name);
+    //         return $image_name;
+    //     }
+    // }
     protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'image'=>$data['image']
         ]);
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+

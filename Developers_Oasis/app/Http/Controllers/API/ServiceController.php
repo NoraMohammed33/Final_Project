@@ -19,11 +19,32 @@ class ServiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::with('expert.user')->get();
-        return response()->json($services);
+        $query = Service::with(['expert.user', 'ratings'])
+            ->withCount('contracts');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%');
+            });
+        }
+
+        $services = $query->get();
+
+        $servicesWithAverageRating = $services->map(function ($service) {
+            $averageRating = $service->ratings->avg('rating');
+            $service->average_rating = $averageRating;
+            return $service;
+        });
+
+        return response()->json([
+            'services' => $servicesWithAverageRating,
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,15 +63,16 @@ class ServiceController extends Controller
         $service->title = $request->input('title');
         $service->description = $request->input('description');
         $service->price = $request->input('price');
+        $service->dept_id = $request->input('dept_id');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $imagePath = $image->storeAs('services_images', $imageName, 'public');
             $service->image = $imagePath;
         }
-
-        $service->expert_id = 2;
-
+        $userId = Auth::user()->getAuthIdentifier();
+        $expertId = Expert::where('user_id', $userId)->first()->id;
+        $service->expert_id = $expertId;
         $service->save();
         return response()->json('Service saved successfully');
     }
@@ -58,9 +80,14 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
+    public function show($id)
     {
-        return view('services.show', compact('service'));
+        $service = Service::with('expert.user', 'ratings.user')->findOrFail($id);
+        $service->hasRated = $service->ratings()->where('user_id', auth()->id())->exists();
+        $service->loggedUser = Auth::user();
+        return response()->json([
+            'service' => $service,
+        ]);
     }
 
     /**
@@ -80,6 +107,7 @@ class ServiceController extends Controller
         $service->title = $request->input('title');
         $service->description = $request->input('description');
         $service->price = $request->input('price');
+        $service->dept_id = $request->input('dept_id');
         if ($request->hasFile('image')) {
             $imagePath = 'public/' . $service->image;
             Storage::delete($imagePath);

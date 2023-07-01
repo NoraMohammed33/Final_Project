@@ -19,7 +19,7 @@ class ContractFactory extends Factory
         return [
             'expert_id'=>rand(2,9),
             'user_id'=>rand(3,9),
-            'service_id'=>rand(5,10),
+            'service_id'=>rand(4,10),
         ];
     }
 }

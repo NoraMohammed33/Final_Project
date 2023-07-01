@@ -20,7 +20,7 @@ class CommentFactory extends Factory
 
             'body' => fake()->name(),
             'user_id'=>rand(3,10),
-            'post_id'=>rand(5,15),
+            'post_id'=>rand(5,10),
             'commentable_type'=>fake()->name(),
             'commentable_id'=>rand(5,15),
              //

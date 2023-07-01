@@ -8,6 +8,9 @@
       <sourceFolder url="file://$MODULE_DIR$/Developers_Oasis/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Developers_Oasis/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/Developers_Oasis/tests/Unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Developers_Oasis/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/dflydev/dot-access-data" />
@@ -80,10 +83,6 @@
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/sebastian/recursion-context" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/sebastian/type" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/sebastian/version" />
-      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/spatie/backtrace" />
-      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/spatie/flare-client-php" />
-      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/spatie/ignition" />
-      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/spatie/laravel-ignition" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/symfony/css-selector" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/symfony/deprecation-contracts" />
@@ -118,6 +117,20 @@
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/clue/stream-filter" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/laravel/cashier" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/moneyphp/money" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/omnipay/common" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/omnipay/paypal" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/php-http/discovery" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/php-http/guzzle7-adapter" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/php-http/httplug" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/php-http/message" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/php-http/message-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/php-http/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/srmklive/paypal" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/stripe/stripe-php" />
+      <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/symfony/polyfill-intl-icu" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
