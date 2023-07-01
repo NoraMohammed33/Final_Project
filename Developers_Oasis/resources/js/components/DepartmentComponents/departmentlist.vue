@@ -1,8 +1,5 @@
 <template>
     <div>
-         Add Department Component
-         <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent>
-
         <div class="input-container">
             <input v-model="searchQuery" @input="fetchDepartments"  type="text" class="form-control" placeholder="Search Department" id="search">
         </div>
@@ -80,7 +77,7 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
-import AddDepartmentComponent from "./AddDepartmentComponent.vue";
+import AddDepartmentComponent from "../AdminComponents/DeptForm.vue";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 export default {
@@ -102,7 +99,7 @@ export default {
         };
     },
     components: {
-        AddDepartmentComponent,
+        // AddDepartmentComponent,
     },
     mounted() {
         this.fetchDepartments();

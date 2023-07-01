@@ -22,6 +22,7 @@ import UserProfile from "../components/Profile/UserProfile.vue";
 import ExpertProfile from "../components/Profile/ExpertProfile.vue";
 import SuccessPaymentComponent from "../components/Payment/SuccessPaymentComponent.vue";
 import ErrorPaymentComponent from "../components/Payment/ErrorPaymentComponent.vue";
+import allDepartmentsTable from "../components/AdminComponents/AllDepartmentsTable.vue";
 const routes = [
 
     {
@@ -88,10 +89,6 @@ const routes = [
         component: dashBoardComponent,
         children:[
             {
-                path:'departments',
-                component:departmentlist,
-            },
-            {
                 path: 'allposts',
                 component: AllpostsComponent
             },
@@ -102,6 +99,10 @@ const routes = [
             {
                 path: 'experts',
                 component: AllExpertsTable
+            },
+            {
+                path: 'departments',
+                component: allDepartmentsTable
             },
             {
                 path:'addexpert',

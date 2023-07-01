@@ -1,11 +1,14 @@
 <template>
     <div>
-<v-row>
+<div>
 
-    <v-btn color="green">
-       <router-link :to="'/admin/dashboard/addexpert'" >add expert</router-link>
-    </v-btn>
-</v-row>
+    <v-col cols="auto" class="ms-auto" data-bs-toggle="modal" data-bs-target="#mymodal">
+        <v-btn color="green" density="comfortable">
+            <i class="fas fa-plus fs-5 me-1"></i>
+            Add New expert
+        </v-btn>
+    </v-col>
+</div>
     <v-row>
                     <table class="min-w-full">
                         <thead>

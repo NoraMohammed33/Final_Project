@@ -100,8 +100,12 @@ app.component('success-payment', SuccessPaymentComponent);
 
 import ErrorPaymentComponent from "./components/Payment/ErrorPaymentComponent.vue";
 app.component('error-payment', ErrorPaymentComponent)
+
 import AllExpertsTable from "./components/AdminComponents/AllExpertsTable.vue";
 app.component('allexperts-table',AllExpertsTable);
+
+import AllDepartmentsTable from "./components/AdminComponents/AllDepartmentsTable.vue";
+app.component('alldepartments-table',AllDepartmentsTable);
 
 /**
  * The following block of code may be used to automatically register your
