@@ -2,7 +2,17 @@
     <div>
         <AddServiceComponent @service-saved="handleServiceSaved"></AddServiceComponent>
 
-<div class="d-flex flex-wrap justify-content-center mx-auto px-5">
+        <div class="d-flex justify-content-center mx-auto px-5">
+            <div class="input-container">
+                <input
+                    type="text" class="form-control" placeholder="Search Service" id="search"
+                    v-model="searchQuery"
+                    @input="fetchAllServices"
+                />
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
     <template v-for="service in services" :key="service.id">
         <v-card class="col-9 col-sm-5 col-md-5 col-lg-4 col-xl-3 mx-3 rounded-3">
             <div class="image-container">
@@ -22,13 +32,13 @@
                 <router-link :to="`/services/${service.id}`">
                     <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
                 </router-link>
-                <div class="ms-auto text-light">
-                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"
-                       data-bs-toggle="modal"
-                       data-bs-target="#update_modal">
-                    </i>
-                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>
-                </div>
+<!--                <div class="ms-auto text-light">-->
+<!--                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"-->
+<!--                       data-bs-toggle="modal"-->
+<!--                       data-bs-target="#update_modal">-->
+<!--                    </i>-->
+<!--                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>-->
+<!--                </div>-->
                 <div class="w-sm-100 w-md-auto">
                     <star-rating
                         v-model:rating="service.average_rating"
@@ -46,6 +56,7 @@
             </v-card-actions>
         </v-card>
     </template>
+        </div>
 <!--    <div class="card">-->
 <!--        <Paginator :rows="6" :totalRecords="services.length" :rowsPerPageOptions="[10, 20, 30]"></Paginator>-->
 <!--    </div>-->
@@ -103,18 +114,19 @@ import { showToast } from "../../toast";
 
 export default {
 
-    data(){
-        return{
-            services:[],
-            service_title:'',
-            service_description:'',
-            service_price:'',
+    data() {
+        return {
+            services: [],
+            service_title: '',
+            service_description: '',
+            service_price: '',
             imagePreview: '',
+            update_serviceID: null,
+            errors: {},
+            searchQuery: "",
+            departments:[],
             dept_id:'',
-            update_serviceID:null,
-            errors:{},
-            departments:[]
-        }
+        };
     },
     components:{
         AddServiceComponent,
@@ -123,6 +135,9 @@ export default {
         this.fetchAllServices()
         this.fetchAllDepartments()
     },
+    // debounceSearch: _.debounce(function() {
+    //     this.fetchAllServices();
+    // }, 500),
     methods: {
         showSuccess(){
             const { showSuccessToast } = showToast();
@@ -136,13 +151,20 @@ export default {
             this.fetchAllServices()
         },
         fetchAllServices() {
-            axios.get('api/services')
-                .then(response => {
-                    console.log(response.data)
+            const params = {
+                search: this.searchQuery,
+            };
+
+            axios
+                .get("api/services", { params })
+                .then((response) => {
+                    console.log(response.data);
                     this.services = response.data.services;
-                }).catch(error => {
-                console.log(error.response.data)
-            })
+                })
+                .catch((error) => {
+                    console.log(error.response.data);
+                });
+        },
 
         },
         updateService(){
@@ -267,4 +289,45 @@ export default {
 #explore:hover{
     background-color: #e2e8f0;
 }
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.input-field {
+    padding: 0.5rem;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 600px; /* Adjust the maximum width as needed */
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.3);
+}
+
+.fa-search {
+    margin-left: -30px;
+    color: #a0a0a0;
+}
+
+/* Styles for the service cards container */
+.d-flex.flex-wrap.justify-content-center.mx-auto.px-5 {
+    /* Adjust the styles as needed */
+}
+#search{
+width:600px;
+padding:4px;
+margin-right: 500px;
+border-radius:5px;
+margin-bottom: 40px;
+margin-top: -50px;
+height: 45px;
+background: #fff;}
+
 </style>

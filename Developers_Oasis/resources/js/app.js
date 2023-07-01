@@ -100,6 +100,9 @@ app.component('success-payment', SuccessPaymentComponent);
 
 import ErrorPaymentComponent from "./components/Payment/ErrorPaymentComponent.vue";
 app.component('error-payment', ErrorPaymentComponent)
+import AllExpertsTable from "./components/AdminComponents/AllExpertsTable.vue";
+app.component('allexperts-table',AllExpertsTable);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

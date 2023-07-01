@@ -4,8 +4,7 @@
         <!-- <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent> -->
 
         <div class="input-container">
-            <input type="text" class="input-field" placeholder="Search departments" v-model="searchQuery" @input="fetchDepartments">
-            <i class="fas fa-search"></i>
+            <input v-model="searchQuery" @input="fetchDepartments"  type="text" class="form-control" placeholder="Search Department" id="search">
         </div>
 
         <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
@@ -37,9 +36,30 @@
         </div>
 
         <!-- Pagination -->
+        <!-- Pagination -->
         <div class="pagination-container">
-            <v-btn v-for="pageNumber in pagination.totalPages" :key="pageNumber" class="pagination-link" :disabled="pageNumber === pagination.page" @click="changePage(pageNumber)">
+            <v-btn
+                class="pagination-link"
+                :disabled="pagination.page === 1"
+                @click="changePage(pagination.page - 1)"
+            >
+                Previous
+            </v-btn>
+            <v-btn
+                v-for="pageNumber in pagination.totalPages"
+                :key="pageNumber"
+                class="pagination-link"
+                :disabled="pageNumber === pagination.page"
+                @click="changePage(pageNumber)"
+            >
                 {{ pageNumber }}
+            </v-btn>
+            <v-btn
+                class="pagination-link"
+                :disabled="pagination.page === pagination.totalPages"
+                @click="changePage(pagination.page + 1)"
+            >
+                Next
             </v-btn>
         </div>
 
@@ -106,6 +126,7 @@ export default {
         handleDepartmentSaved() {
             this.fetchDepartments();
         },
+
         fetchDepartments() {
             const params = {
                 search: this.searchQuery,
@@ -132,7 +153,7 @@ export default {
         changePage(pageNumber) {
             this.pagination.page = pageNumber;
             this.paginatedDepartments = this.calculatePaginatedDepartments();
-        },
+        }
     },
 };
 </script>
@@ -224,4 +245,13 @@ export default {
 .pagination-link:hover {
     background-color: #f0f0f0;
 }
+#search{
+width:600px;
+padding:4px;
+border-radius:5px;
+margin-bottom: 40px;
+margin-left: 430px;
+margin-top: 40px;
+height: 45px;
+background: #fff;}
 </style>
