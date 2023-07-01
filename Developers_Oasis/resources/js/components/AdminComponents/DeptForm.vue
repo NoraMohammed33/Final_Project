@@ -50,7 +50,7 @@ export default {
                 formData.append("description", this.department_description);
 
                 axios
-                    .post("api/departments", formData, {
+                    .post("http://localhost:8000/api/departments", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data",
                         },

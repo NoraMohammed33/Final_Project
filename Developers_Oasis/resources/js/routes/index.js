@@ -23,6 +23,7 @@ import ExpertProfile from "../components/Profile/ExpertProfile.vue";
 import SuccessPaymentComponent from "../components/Payment/SuccessPaymentComponent.vue";
 import ErrorPaymentComponent from "../components/Payment/ErrorPaymentComponent.vue";
 import allDepartmentsTable from "../components/AdminComponents/AllDepartmentsTable.vue";
+import mainComponent from "../components/MainComponent.vue";
 const routes = [
 
     {
@@ -86,7 +87,7 @@ const routes = [
     },
     {
         path:'/admin/dashboard',
-        component: dashBoardComponent,
+        // component: mainComponent,
         children:[
             {
                 path: 'allposts',

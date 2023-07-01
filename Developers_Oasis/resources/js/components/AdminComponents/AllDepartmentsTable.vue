@@ -85,8 +85,6 @@ export default {
 data() {
     return {
 departments:[],
-        department_name: "",
-        department_description: "",
         errors: {},
     }
 },
