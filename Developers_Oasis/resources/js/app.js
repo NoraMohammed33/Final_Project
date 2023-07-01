@@ -95,6 +95,11 @@ app.component('expert-Profile',ExpertProfile);
 import UserProfile from "./components/Profile/UserProfile.vue";
 app.component('user-profile',UserProfile);
 
+import SuccessPaymentComponent from "./components/Payment/SuccessPaymentComponent.vue";
+app.component('success-payment', SuccessPaymentComponent);
+
+import ErrorPaymentComponent from "./components/Payment/ErrorPaymentComponent.vue";
+app.component('error-payment', ErrorPaymentComponent)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

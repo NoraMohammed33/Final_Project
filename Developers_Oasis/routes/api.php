@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\API\ContractController;
 use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\API\ExpertController;
 use App\Http\Controllers\API\AdminController;
@@ -29,6 +30,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return Auth::user();
 });
 //Route::post('/api/admin/login','AdminController@adminLogin');
+
+Route::post('/pay', [PaymentController::class, 'pay']);
+Route::get('/success', [PaymentController::class, 'success'])->name('success');
+Route::get('/error', [PaymentController::class, 'error']);
 
 
 //====================users========================
@@ -66,10 +71,6 @@ Route::get('/departments/{id}/explore', [DepartmentController::class, 'explore']
 //====================profile========================
 Route::get('/user/profile', [ProfileController::class, 'user']);
 Route::get('/expert/profile', [ProfileController::class, 'expert']);
-
-//====================users========================
-Route::apiResource('users', UserController::class);
-
 
 Route::get('/posts/{id}/explore', [PostController::class, 'explore']);
 Route::apiResource('service-ratings', ServiceRatingController::class);

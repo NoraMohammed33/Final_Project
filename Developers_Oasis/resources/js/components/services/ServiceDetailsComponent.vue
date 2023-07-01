@@ -12,7 +12,7 @@
                 <h1>{{ service.expert.user.name }}</h1>
                 <h1>{{ service.expert.bio}}</h1>
                 <div class="mt-auto">
-                        <button class="btn btn-primary" @click="paypalPayment">Buy Now</button>
+                        <button class="btn btn-primary" @click="paypalPayment">Pay Via PayPal</button>
                 </div>
             </div>
         </div>
@@ -75,9 +75,12 @@ export default {
     },
     methods:{
         paypalPayment() {
-            axios.get('/api/paypal/payment')
+            axios.post('http://localhost:8000/api/pay', {
+                amount:this.service.price,
+                service_id:this.serviceId
+            })
                 .then((response) => {
-                    console.log(response.data)
+                    window.location.href = response.data.redirect_url;
                 })
                 .catch((error) => {
                     console.log(error);
