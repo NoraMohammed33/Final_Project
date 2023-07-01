@@ -5,9 +5,7 @@
         <div class="d-flex justify-content-center mx-auto px-5">
             <div class="input-container">
                 <input
-                    type="text"
-                    class="input-field"
-                    placeholder="Search Services"
+                    type="text" class="form-control" placeholder="Search Service" id="search"
                     v-model="searchQuery"
                     @input="fetchAllServices"
                 />
@@ -308,4 +306,14 @@ i:hover{
 .d-flex.flex-wrap.justify-content-center.mx-auto.px-5 {
     /* Adjust the styles as needed */
 }
+#search{
+width:600px;
+padding:4px;
+margin-right: 500px;
+border-radius:5px;
+margin-bottom: 40px;
+margin-top: -50px;
+height: 45px;
+background: #fff;}
+
 </style>
