@@ -41,7 +41,7 @@ class ServiceRatingController extends Controller
         // Create a new rating record
         $rating = new ServiceRating();
         $rating->service_id = $validatedData['service_id'];
-        $rating->rating = $validatedData['rating'];
+        $rating->rating = $request->input('service_id');
         $rating->comment = $validatedData['comment'];
         $rating->user_id = Auth::id();
         $rating->save();

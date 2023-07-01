@@ -20,8 +20,8 @@ import DepartmentExpertsComponent from "../components/DepartmentComponents/Depar
 import ServiceDetailsComponent from "../components/services/ServiceDetailsComponent.vue";
 import UserProfile from "../components/Profile/UserProfile.vue";
 import ExpertProfile from "../components/Profile/ExpertProfile.vue";
-// import ServiceDetailsComponent from "../components/services/ServiceDetailsComponent.vue";
-
+import SuccessPaymentComponent from "../components/Payment/SuccessPaymentComponent.vue";
+import ErrorPaymentComponent from "../components/Payment/ErrorPaymentComponent.vue";
 const routes = [
 
     {
@@ -114,6 +114,14 @@ const routes = [
         path:'/departments',
         component:departmentlist
     },
+    {
+        path: '/success',
+        component: SuccessPaymentComponent
+    },
+    {
+        path: '/error',
+        component: ErrorPaymentComponent
+    }
 
 
 ]

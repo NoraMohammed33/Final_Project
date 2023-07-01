@@ -4,8 +4,7 @@
         <!-- <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent> -->
 
         <div class="input-container">
-            <input type="text" class="input-field" placeholder="Search departments" v-model="searchQuery" @input="fetchDepartments">
-            <i class="fas fa-search"></i>
+            <input v-model="searchQuery" @input="fetchDepartments"  type="text" class="form-control" placeholder="Search Department" id="search">
         </div>
 
         <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
@@ -246,4 +245,13 @@ export default {
 .pagination-link:hover {
     background-color: #f0f0f0;
 }
+#search{
+width:600px;
+padding:4px;
+border-radius:5px;
+margin-bottom: 40px;
+margin-left: 430px;
+margin-top: 40px;
+height: 45px;
+background: #fff;}
 </style>

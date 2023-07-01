@@ -5,13 +5,8 @@
 
     <div class="posts-container">
         <div>
-            <input
-                v-model="searchInput"
-                type="text"
-                placeholder="Search posts"
-                class="form-control"
-            />
-            <button @click="fetchPosts">Search</button>
+            <input  v-model="searchInput" type="text" class="form-control" placeholder="Search post" id="search">
+            <!-- <button @click="fetchPosts">Search</button> -->
         </div>
 
         <div class="post-list">
@@ -346,4 +341,14 @@ export default {
 .fa-trash {
   cursor: pointer;
 }
+#search{
+width:600px;
+margin-left:190px;
+padding:4px;
+border-radius:5px;
+margin-bottom: 40px;
+margin-top: 40px;
+height: 40px;
+background: #fff;}
+
 </style>

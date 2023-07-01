@@ -63,6 +63,7 @@ class ServiceController extends Controller
         $service->title = $request->input('title');
         $service->description = $request->input('description');
         $service->price = $request->input('price');
+        $service->dept_id = $request->input('dept_id');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -106,6 +107,7 @@ class ServiceController extends Controller
         $service->title = $request->input('title');
         $service->description = $request->input('description');
         $service->price = $request->input('price');
+        $service->dept_id = $request->input('dept_id');
         if ($request->hasFile('image')) {
             $imagePath = 'public/' . $service->image;
             Storage::delete($imagePath);

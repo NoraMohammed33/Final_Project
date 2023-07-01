@@ -24,6 +24,9 @@ const vuetify = createVuetify({
 })
 
 import PrimeVue from 'primevue/config';
+import Toast from 'vue-toastification';
+import "vue-toastification/dist/index.css";
+
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -92,6 +95,11 @@ app.component('expert-Profile',ExpertProfile);
 import UserProfile from "./components/Profile/UserProfile.vue";
 app.component('user-profile',UserProfile);
 
+import SuccessPaymentComponent from "./components/Payment/SuccessPaymentComponent.vue";
+app.component('success-payment', SuccessPaymentComponent);
+
+import ErrorPaymentComponent from "./components/Payment/ErrorPaymentComponent.vue";
+app.component('error-payment', ErrorPaymentComponent)
 import AllExpertsTable from "./components/AdminComponents/AllExpertsTable.vue";
 app.component('allexperts-table',AllExpertsTable);
 
@@ -116,4 +124,5 @@ app.use(router);
 app.use(VueAxios, axios);
 app.use(PrimeVue);
 app.use(vuetify);
+app.use(Toast);
 app.mount('#app');

@@ -7,17 +7,12 @@
             </router-link>
         </v-container>
         <v-row class="search-container justify-center">
-            <v-col cols="12" sm="6" md="4" lg="3" xl="2" class="text-center">
-                <v-text-field
-                    v-model="searchInput"
-                    outlined
-                    dense
-                    placeholder="Search experts"
-                ></v-text-field>
+            <v-col>
+                <input  v-model="searchInput" type="text" class="form-control" placeholder="Search Expert" id="search">
             </v-col>
-            <v-col cols="12" sm="6" md="4" lg="3" xl="2">
-                <v-btn color="primary" @click="fetchExperts">Search</v-btn>
-            </v-col>
+            <!-- <v-col>
+                <v-btn color="primary" @click="fetchExperts" id="buttun">Search</v-btn>
+            </v-col> -->
         </v-row>
 
         <div class="expert-card-container">
@@ -115,8 +110,17 @@ export default {
     width: calc(33.33% - 20px);
     margin: 10px;
 }
+#search{
+width:600px;
+margin-left:450px;
+padding:4px;
+border-radius:5px;
+margin-bottom: 40px;
+margin-top:-50px;
+height: 45px;
+background: #fff;}
 
-.search-container {
-    margin-bottom: 20px;
+#buttun{
+    margin-top:-80px;
 }
 </style>
