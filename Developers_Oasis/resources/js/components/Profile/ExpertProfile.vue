@@ -15,7 +15,18 @@
                         <h3>Services</h3>
                         <ul>
                             <li v-for="service in expert.services" :key="service.id">
-                                {{ service.title }} - ${{ service.price }}
+                               <p> {{ service.title }} - ${{ service.price }}</p>
+                                Rating:{{  }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contracts" v-if="contracts && contracts.length > 0">
+                        <h3>Contracts:</h3>
+                        <ul>
+                            <li v-for="contract in contracts" :key="contract.id">
+                                <p><strong>Service Title:</strong> {{ contract.service_id.title }}</p>
+                                <p><strong>User Name:</strong> {{ contract.service_id.user_id }}</p>
+                                <p><strong>Service Price:</strong> {{ contract.service_id.price }}$</p>
                             </li>
                         </ul>
                     </div>
@@ -37,10 +48,12 @@ export default {
         return {
             expert: null,
             error: false,
+            contracts: [],
         };
     },
     mounted() {
         this.fetchExpert();
+        this.fetchContracts();
     },
     methods: {
         fetchExpert() {
@@ -49,6 +62,17 @@ export default {
                 .get(`/api/experts/${expertId}`)
                 .then((response) => {
                     this.expert = response.data.expert;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.error = true;
+                });
+        },
+        fetchContracts() {
+            axios
+                .get("/api/contracts")
+                .then((response) => {
+                    this.contracts = response.data.data;
                 })
                 .catch((error) => {
                     console.log(error);
