@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ use App\Http\Controllers\ChatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 // Admin login route
 Route::get('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm']);
