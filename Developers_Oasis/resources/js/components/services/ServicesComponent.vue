@@ -32,13 +32,13 @@
                 <router-link :to="`/services/${service.id}`">
                     <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
                 </router-link>
-<!--                <div class="ms-auto text-light">-->
-<!--                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"-->
-<!--                       data-bs-toggle="modal"-->
-<!--                       data-bs-target="#update_modal">-->
-<!--                    </i>-->
-<!--                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>-->
-<!--                </div>-->
+                <div class="ms-auto text-light">
+                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"
+                       data-bs-toggle="modal"
+                       data-bs-target="#update_modal">
+                    </i>
+                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>
+                </div>
                 <div class="w-sm-100 w-md-auto">
                     <star-rating
                         v-model:rating="service.average_rating"
@@ -101,7 +101,6 @@
 
 </div>
 
-    </div>
 
 </template>
 
@@ -139,15 +138,15 @@ export default {
     //     this.fetchAllServices();
     // }, 500),
     methods: {
-        showSuccess(){
-            const { showSuccessToast } = showToast();
+        showSuccess() {
+            const {showSuccessToast} = showToast();
             showSuccessToast("Service Deleted Successfully");
         },
         showError() {
-            const { showErrorToast } = showToast();
+            const {showErrorToast} = showToast();
             showErrorToast("Service Not Deleted Successfully");
         },
-        handleServiceSaved(){
+        handleServiceSaved() {
             this.fetchAllServices()
         },
         fetchAllServices() {
@@ -156,7 +155,7 @@ export default {
             };
 
             axios
-                .get("api/services", { params })
+                .get("api/services", {params})
                 .then((response) => {
                     console.log(response.data);
                     this.services = response.data.services;
@@ -166,8 +165,8 @@ export default {
                 });
         },
 
-        },
-        updateService(){
+
+        updateService() {
             const requestData = {
                 title: this.service_title,
                 description: this.service_description,
@@ -177,21 +176,21 @@ export default {
             if (this.$refs.service_name.files[0]) {
                 requestData.image = this.$refs.service_name.files[0];
             }
-            this.errors={}
-            if(this.validateForm()) {
-                axios.put('api/services/'+this.update_serviceID, requestData)
-                .then(() => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Service updated successfully!'
-                    });
-                    const close = document.getElementById('dismissUpdate')
-                    close.click()
-                    this.fetchAllServices()
-                    this.emptyForm()
+            this.errors = {}
+            if (this.validateForm()) {
+                axios.put('api/services/' + this.update_serviceID, requestData)
+                    .then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Service updated successfully!'
+                        });
+                        const close = document.getElementById('dismissUpdate')
+                        close.click()
+                        this.fetchAllServices()
+                        this.emptyForm()
 
-                }).catch(error => {
+                    }).catch(error => {
                     console.log(error)
                 })
             }
@@ -216,7 +215,7 @@ export default {
         deleteItem(s_id) {
             axios.delete('api/services/' + s_id)
                 .then(() => {
-                   this.showSuccess()
+                    this.showSuccess()
                     this.services = this.services.filter(service => service.id !== s_id);
                 })
                 .catch((error) => {
@@ -224,13 +223,13 @@ export default {
                     console.error(error);
                 });
         },
-        openUpdateModal(service){
+        openUpdateModal(service) {
             this.service_title = service.title
             this.service_description = service.description
             this.service_price = service.price
-            this.imagePreview = 'storage/'+service.image
+            this.imagePreview = 'storage/' + service.image
             this.update_serviceID = service.id
-            this.dept_id=service.dept_id
+            this.dept_id = service.dept_id
         },
         previewImage(event) {
             const file = event.target.files[0];
@@ -264,7 +263,7 @@ export default {
             }
             return isValid;
         },
-        fetchAllDepartments(){
+        fetchAllDepartments() {
             axios
                 .get(`http://localhost:8000/api/departments`)
                 .then(response => {
@@ -274,7 +273,6 @@ export default {
                     console.log(error);
                 });
         },
-
     }
 }
 
