@@ -17,30 +17,50 @@ use App\Http\Resources\PostResource;
 use App\Http\Requests\StorePostRequest;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     $user = Auth::user();
+    //     $searchInput = $request->input('search');
+
+    //     if ($searchInput) {
+    //         $posts = Post::where('title', 'like', '%' . $searchInput . '%')
+    //             ->orWhere('body', 'like', '%' . $searchInput . '%')
+    //             ->get();
+    //     } else {
+    //      $posts = Post::all();
+
+    //     }
+
+    //     return response()->json([
+    //         "status" => 'success',
+    //         'message' => 'Posts fetched successfully.',
+    //         'posts' => $posts,
+    //         'loggeduser' => $user
+    //     ]);
+    // }
     public function index(Request $request)
-    {
-        $user = Auth::user();
-        $searchInput = $request->input('search');
+{
+    $user = Auth::user();
+    $searchInput = $request->input('search');
 
-        // Query posts with search input if provided, else retrieve all posts
-        if ($searchInput) {
-            $posts = Post::where('title', 'like', '%' . $searchInput . '%')
-                ->orWhere('body', 'like', '%' . $searchInput . '%')
-                ->get();
-        } else {
-            $posts = Post::all();
-        }
+    $postsQuery = $searchInput
+        ? Post::where('title', 'like', '%' . $searchInput . '%')
+            ->orWhere('body', 'like', '%' . $searchInput . '%')
+        : Post::query();
 
-        return response()->json([
-            "status" => 'success',
-            'message' => 'Posts fetched successfully.',
-            'posts' => $posts,
-            'loggeduser' => $user
-        ]);
-    }
+    $posts = $postsQuery->paginate(5); 
+
+    return response()->json([
+        "status" => 'success',
+        'message' => 'Posts fetched successfully.',
+        'posts' => $posts,
+        'loggeduser' => $user
+    ]);
+}
 
 
     public function store(StorePostRequest $request)
