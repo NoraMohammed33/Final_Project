@@ -36,7 +36,6 @@
           <div>
             <span class="small text-uppercase text-muted"></span>
             <div>Department: {{ expert.department.name }}</div>
-            <div>Bio: {{ expert.bio }}</div>
             <br>
             </div>
             <v-btn color="orange" @click="exploreExpert(expert)">Explore</v-btn>
