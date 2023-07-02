@@ -8,7 +8,7 @@
             <template v-for="department in paginatedDepartments" :key="department.id">
                 <v-card class="col-8 col-sm-5 col-md-4 col-lg-3 m-3 rounded-4">
                     <v-card-text>
-                        <h2 class="font-weight-bold text-orange mb-2">{{ department.name }}</h2>
+                        <h2 class="font-weight-bold text-orange mb-2 text-center">{{ department.name }}</h2>
                         <div class="text-grey">{{ department.description }}</div>
                     </v-card-text>
 
@@ -157,7 +157,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .input-container {
     position: relative;
@@ -177,13 +176,6 @@ export default {
     border-color: #4caf50;
 }
 
-.fa-search {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-    font-size: 18px;
-    color: #aaa;
-}
 
 .modal-header {
     color: #fff;
@@ -247,7 +239,7 @@ padding:4px;
 border-radius:5px;
 margin-bottom: 40px;
 margin-left: 430px;
-margin-top: 40px;
+margin-top: 45px;
 height: 45px;
 background: #fff;}
 </style>

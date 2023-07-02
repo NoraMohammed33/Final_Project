@@ -10,6 +10,7 @@
           class="form-control"
           placeholder="Search post"
           id="search"
+          @input="searchPosts"
         />
       </div>
       <div class="post-list">
@@ -171,33 +172,21 @@ export default {
       axios
         .get("/api/posts", {
           params: {
-            search: this.searchInput,
+            search: this.searchInput, // Include the search input parameter
             page: this.currentPage
           }
         })
         .then(response => {
           this.posts = response.data.posts;
           this.currentUser = response.data.loggeduser;
-
-          if (this.currentPage !== 1 && this.filteredPosts.length === 0) {
-            axios
-              .get("/api/posts", {
-                params: {
-                  search: this.searchInput,
-                  page: 1
-                }
-              })
-              .then(response => {
-                this.posts = response.data.posts;
-              })
-              .catch(error => {
-                console.log(error);
-              });
-          }
         })
         .catch(error => {
           console.log(error);
         });
+    },
+    searchPosts() {
+      this.currentPage = 1; // Reset the current page to 1
+      this.fetchPosts(); // Fetch posts with the updated search input
     },
 
     changePage(page) {

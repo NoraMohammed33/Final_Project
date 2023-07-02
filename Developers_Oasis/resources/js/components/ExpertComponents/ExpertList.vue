@@ -36,7 +36,6 @@
           <div>
             <span class="small text-uppercase text-muted"></span>
             <div>Department: {{ expert.department.name }}</div>
-            <div>Bio: {{ expert.bio }}</div>
             <br>
             </div>
             <v-btn color="orange" @click="exploreExpert(expert)">Explore</v-btn>
@@ -108,8 +107,9 @@ export default {
   background: #fff;
 }
 h3 {
+   margin-top: 12px;
   text-align: center;
-  color: rgb(165, 42, 101);
+  color: #fc9f0b;
 }
 .expert-list {
   display: flex;
