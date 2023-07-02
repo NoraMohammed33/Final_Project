@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
        //  \App\Models\Expert::factory(20)->create();
         //  \App\Models\Service::factory(10)->create();
         //  \App\Models\Contract::factory(20)->create();
-        // \App\Models\Post::factory(10)->create();
+         \App\Models\Post::factory(10)->create();
     //    \App\Models\Comment::factory(10)->create();
 //         \App\Models\Post::factory(10)->create();
 //        \App\Models\User::factory(20)->create();

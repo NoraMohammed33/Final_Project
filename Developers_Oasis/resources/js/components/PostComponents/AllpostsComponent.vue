@@ -4,13 +4,14 @@
     <!-- <AddPostComponent @post-saved="handlePostSaved"></AddPostComponent> -->
     <div>
       <div>
-        <input
-          v-model="searchInput"
-          type="text"
-          class="form-control"
-          placeholder="Search post"
-          id="search"
-        />
+          <input
+              v-model="searchInput"
+              type="text"
+              class="form-control"
+              placeholder="Search post"
+              id="search"
+              @input="searchPosts"
+          />
       </div>
       <div class="post-list">
         <div v-for="post in filteredPosts" :key="post.id" class="post-item">
@@ -167,38 +168,26 @@ export default {
     }
   },
   methods: {
-    fetchPosts() {
-      axios
-        .get("/api/posts", {
-          params: {
-            search: this.searchInput,
-            page: this.currentPage
-          }
-        })
-        .then(response => {
-          this.posts = response.data.posts;
-          this.currentUser = response.data.loggeduser;
-
-          if (this.currentPage !== 1 && this.filteredPosts.length === 0) {
-            axios
+      fetchPosts() {
+          axios
               .get("/api/posts", {
-                params: {
-                  search: this.searchInput,
-                  page: 1
-                }
+                  params: {
+                      search: this.searchInput, // Include the search input parameter
+                      page: this.currentPage
+                  }
               })
               .then(response => {
-                this.posts = response.data.posts;
+                  this.posts = response.data.posts;
+                  this.currentUser = response.data.loggeduser;
               })
               .catch(error => {
-                console.log(error);
+                  console.log(error);
               });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
+      },
+      searchPosts() {
+          this.currentPage = 1; // Reset the current page to 1
+          this.fetchPosts(); // Fetch posts with the updated search input
+      },
 
     changePage(page) {
       this.currentPage = page;
