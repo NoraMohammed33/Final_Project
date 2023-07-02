@@ -147,8 +147,8 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center ;
-        padding-top: 15rem;
-        padding-bottom: 5rem;
+        padding-top: 16rem;
+        padding-bottom: 10rem;
     }
     .home .content{
         text-align: center;
