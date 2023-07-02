@@ -1,59 +1,54 @@
 <template>
-  <div>
+  <div class="posts-container">
     <!-- Add Post Component -->
     <!-- <AddPostComponent @post-saved="handlePostSaved"></AddPostComponent> -->
-
-    <div class="posts-container">
-        <div>
-            <input  v-model="searchInput" type="text" class="form-control" placeholder="Search post" id="search">
-            <!-- <button @click="fetchPosts">Search</button> -->
+    <div>
+      <div>
+        <input
+          v-model="searchInput"
+          type="text"
+          class="form-control"
+          placeholder="Search post"
+          id="search"
+        />
+      </div>
+      <div class="post-list">
+        <div v-for="post in filteredPosts" :key="post.id" class="post-item">
+          <v-card class="post-card">
+            <v-card-title class="post-title">{{ post.title }}</v-card-title>
+            <v-card-text class="post-body">
+              <textarea v-model="post.body" class="post-textarea" rows="3" readonly></textarea>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn
+                id="explore"
+                color="blue"
+                class="border rounded-2"
+                @click="explorePost(post.id)"
+              >Explore</v-btn>
+              <div class="ms-auto">
+                <!-- Edit Post Icon -->
+                <i
+                  v-if="currentUser.id === post.user_id"
+                  class="fas fa-edit fs-4 text-warning"
+                  @click="openUpdateModal(post)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#update_modal"
+                ></i>
+                <!-- Delete Post Icon -->
+                <i
+                  v-if="currentUser.id === post.user_id"
+                  class="fas fa-trash fs-4 text-danger ms-4"
+                  @click="deletePost(post.id)"
+                ></i>
+              </div>
+            </v-card-actions>
+          </v-card>
         </div>
-
-        <div class="post-list">
-            <div v-for="post in filteredPosts" :key="post.id" class="post-item">
-                <v-card class="post-card">
-                    <v-card-title class="post-title">{{ post.title }}</v-card-title>
-                    <v-card-text class="post-body">
-              <textarea
-                  v-model="post.body"
-                  class="post-textarea"
-                  rows="3"
-                  readonly
-              ></textarea>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn
-                            id="explore"
-                            color="blue"
-                            class="border rounded-2"
-                            @click="explorePost(post.id)"
-                        >
-                            Explore
-                        </v-btn>
-                        <div class="ms-auto">
-                            <!-- Edit Post Icon -->
-                            <i
-                                v-if="currentUser.id === post.user_id"
-                                class="fas fa-edit fs-4 text-warning"
-                                @click="openUpdateModal(post)"
-                                data-bs-toggle="modal"
-                                data-bs-target="#update_modal"
-                            ></i>
-                            <!-- Delete Post Icon -->
-                            <i
-                                v-if="currentUser.id === post.user_id"
-                                class="fas fa-trash fs-4 text-danger ms-4"
-                                @click="deletePost(post.id)"
-                            ></i>
-                        </div>
-                    </v-card-actions>
-                </v-card>
-            </div>
-        </div>
+      </div>
     </div>
 
-
-      <!-- Update Post Modal -->
+    <!-- Update Post Modal -->
     <div
       class="modal fade"
       id="update_modal"
@@ -115,6 +110,20 @@
         </div>
       </div>
     </div>
+    <div class="pagination text-center">
+      <button
+        class="btn btn-primary mx-2"
+        v-if="posts.current_page > 1"
+        @click="changePage(posts.current_page - 1)"
+      >Previous</button>
+      <button
+        class="btn btn-primary"
+        v-if="posts.current_page < posts.last_page"
+        @click="changePage(posts.current_page + 1)"
+      >Next</button>
+      <br />
+      <br />
+    </div>
   </div>
 </template>
 
@@ -125,64 +134,91 @@ import AddPostComponent from "./AddPostComponent.vue";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 export default {
-    data() {
-        return {
-            posts: [],
-            post_title: "",
-            post_body: "",
-            update_postID: null,
-            errors: {},
-            postDetails: { title: "", body: "" },
-            currentUser: {},
-            searchInput: "", // Search input property
-        };
-    },
+  data() {
+    return {
+      posts: [],
+      post_title: "",
+      post_body: "",
+      update_postID: null,
+      errors: {},
+      postDetails: { title: "", body: "" },
+      currentUser: {},
+      searchInput: "",
+      currentPage: 1
+    };
+  },
   components: {
     AddPostComponent
   },
   mounted() {
-  this.fetchPosts();
-},
-        computed: {
-            // Computed property to filter posts based on search input
-            filteredPosts() {
-                if (!this.searchInput) {
-                    return this.posts;
-                }
-                const search = this.searchInput.toLowerCase();
-                return this.posts.filter(
-                    (post) =>
-                        post.title.toLowerCase().includes(search) ||
-                        post.body.toLowerCase().includes(search)
-                );
-            },
-        },
+    this.fetchPosts();
+  },
+  computed: {
+    filteredPosts() {
+      if (!this.searchInput) {
+        return this.posts.data;
+      }
+      const search = this.searchInput.toLowerCase();
+      return this.posts.data.filter(
+        post =>
+          post.title.toLowerCase().includes(search) ||
+          post.body.toLowerCase().includes(search)
+      );
+    }
+  },
   methods: {
-      fetchPosts() {
-          axios
-              .get("/api/posts", { params: { search: this.searchInput } }) // Pass search input as a parameter
-              .then((response) => {
-                  this.posts = response.data.posts;
-                  this.currentUser = response.data.loggeduser;
-              })
-              .catch((error) => {
-                  console.log(error);
-              });
-      },
-      handlePostSaved() {
-          this.fetchPosts();
-      },
-      openUpdateModal(post) {
-          this.errors = {};
-          this.update_postID = post.id;
-          this.post_title = post.title;
-          this.post_body = post.body;
-      },
-      updatePost() {
-          this.errors = {};
-          if (!this.post_title) {
-              this.errors.post_title = "Please enter a title.";
+    fetchPosts() {
+      axios
+        .get("/api/posts", {
+          params: {
+            search: this.searchInput,
+            page: this.currentPage
           }
+        })
+        .then(response => {
+          this.posts = response.data.posts;
+          this.currentUser = response.data.loggeduser;
+
+          if (this.currentPage !== 1 && this.filteredPosts.length === 0) {
+            axios
+              .get("/api/posts", {
+                params: {
+                  search: this.searchInput,
+                  page: 1
+                }
+              })
+              .then(response => {
+                this.posts = response.data.posts;
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
+    changePage(page) {
+      this.currentPage = page;
+      this.fetchPosts();
+    },
+
+    handlePostSaved() {
+      this.fetchPosts();
+    },
+    openUpdateModal(post) {
+      this.errors = {};
+      this.update_postID = post.id;
+      this.post_title = post.title;
+      this.post_body = post.body;
+    },
+    updatePost() {
+      this.errors = {};
+      if (!this.post_title) {
+        this.errors.post_title = "Please enter a title.";
+      }
       if (!this.post_body) {
         this.errors.post_body = "Please enter a post body.";
       }
@@ -201,8 +237,8 @@ export default {
               showConfirmButton: false,
               timer: 1500
             });
-            document.getElementById('dismissUpdate').click()
-              this.errors= {}
+            document.getElementById("dismissUpdate").click();
+            this.errors = {};
           })
           .catch(error => {
             console.log(error);
@@ -253,9 +289,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    },
-
-
+    }
   }
 };
 </script>
@@ -266,7 +300,7 @@ export default {
   width: 70%;
   margin-left: auto;
   margin-right: auto;
-  border:5px;
+  border: 5px;
 }
 
 .post-item {
@@ -341,14 +375,19 @@ export default {
 .fa-trash {
   cursor: pointer;
 }
-#search{
-width:600px;
-margin-left:190px;
-padding:4px;
-border-radius:5px;
-margin-bottom: 40px;
-margin-top: 40px;
-height: 40px;
-background: #fff;}
-
+#search {
+  width: 600px;
+  margin-left: 190px;
+  padding: 4px;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  height: 40px;
+  background: #fff;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 </style>
