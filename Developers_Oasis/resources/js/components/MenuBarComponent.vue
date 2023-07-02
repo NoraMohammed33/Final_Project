@@ -25,11 +25,11 @@
                 Departments
             </router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <router-link to="/addpost" class="nav-link">
                 Ask me
             </router-link>
-        </li>
+        </li> -->
         <li class="nav-item" v-if="user && !expert">
             <router-link :to="'/user/profile/' + user.id" class="nav-link">
                 Profile
@@ -70,7 +70,7 @@ axios
 </script>
 
 <style scoped>
-@media (max-width: 576px) {
+/* @media (max-width: 576px) {
     .navbar-nav {
         flex-direction: column;
         align-items: flex-start;
@@ -79,5 +79,13 @@ axios
     .nav-item {
         margin-bottom: 10px;
     }
+} */
+ul li .nav-link{
+    font-size: 1.1rem;
+    margin: 0 .4rem;
+    color: var(--black);
+}
+ul li .nav-link:hover{
+    color: var(--orange);
 }
 </style>
