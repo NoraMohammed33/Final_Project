@@ -1,8 +1,5 @@
 <template>
     <div>
-        <!-- Add Department Component -->
-        <!-- <AddDepartmentComponent @department-saved="handleDepartmentSaved"></AddDepartmentComponent> -->
-
         <div class="input-container">
             <input v-model="searchQuery" @input="fetchDepartments"  type="text" class="form-control" placeholder="Search Department" id="search">
         </div>
@@ -80,7 +77,7 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
-import AddDepartmentComponent from "./AddDepartmentComponent.vue";
+import AddDepartmentComponent from "../AdminComponents/DeptForm.vue";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 export default {
@@ -102,7 +99,7 @@ export default {
         };
     },
     components: {
-        AddDepartmentComponent,
+        // AddDepartmentComponent,
     },
     mounted() {
         this.fetchDepartments();
@@ -117,7 +114,7 @@ export default {
                     const experts = response.data.experts;
                     // Handle the department and experts data
                     this.experts = experts;
-                    this.$router.push({ path: `/departments/${department.id}` });
+                    this.$router.push({path: `/departments/${department.id}`});
                 })
                 .catch((error) => {
                     console.error(error);
@@ -135,25 +132,27 @@ export default {
             };
 
             axios
-                .get("/api/departments", { params })
+                .get("/api/departments", {params})
                 .then((response) => {
                     this.departments = response.data.data;
                     this.pagination.totalPages = response.data.last_page;
-                    this.paginatedDepartments = this.calculatePaginatedDepartments();
+                    this.updatePaginatedDepartments();
                 })
                 .catch((error) => {
                     console.log(error.response.data);
                 });
         },
-        calculatePaginatedDepartments() {
+
+        updatePaginatedDepartments() {
             const startIndex = (this.pagination.page - 1) * this.perPage;
             const endIndex = startIndex + this.perPage;
-            return this.departments.slice(startIndex, endIndex);
+            this.paginatedDepartments = this.departments.slice(startIndex, endIndex);
         },
+
         changePage(pageNumber) {
             this.pagination.page = pageNumber;
-            this.paginatedDepartments = this.calculatePaginatedDepartments();
-        }
+            this.updatePaginatedDepartments();
+        },
     },
 };
 </script>

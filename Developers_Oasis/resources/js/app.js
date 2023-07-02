@@ -100,11 +100,21 @@ app.component('success-payment', SuccessPaymentComponent);
 
 import ErrorPaymentComponent from "./components/Payment/ErrorPaymentComponent.vue";
 app.component('error-payment', ErrorPaymentComponent)
+
 import AllExpertsTable from "./components/AdminComponents/AllExpertsTable.vue";
 app.component('allexperts-table',AllExpertsTable);
 
 import ChatComponent from "./components/ChatComponents/ChatComponent.vue";
 app.component('chat-component', ChatComponent);
+
+import AllDepartmentsTable from "./components/AdminComponents/AllDepartmentsTable.vue";
+app.component('alldepartments-table',AllDepartmentsTable);
+
+import allPostsTable from "./components/AdminComponents/AllPostsTable.vue";
+app.component('allposts-table',allPostsTable);
+
+import AllServicesTable from "./components/AdminComponents/AllServicesTable.vue";
+app.component('allservices-table',AllServicesTable);
 
 /**
  * The following block of code may be used to automatically register your

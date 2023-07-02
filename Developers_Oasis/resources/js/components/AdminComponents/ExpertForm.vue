@@ -1,5 +1,5 @@
 <template>
-    <v-container class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
         <v-card  class="w-50">
             <v-card-title>Create User and Expert</v-card-title>
             <v-card-text>
@@ -24,7 +24,7 @@
                 </v-form>
             </v-card-text>
         </v-card>
-    </v-container>
+    </div>
 </template>
 <script>
 import axios from 'axios';

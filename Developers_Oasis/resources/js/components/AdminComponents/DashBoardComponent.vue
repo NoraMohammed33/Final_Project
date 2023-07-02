@@ -6,7 +6,7 @@
 
       <adminheader-component class="col-3"></adminheader-component>
 
-<router-view class="col-9 py-0"></router-view>
+<router-view class="col-4 py-5 mx-3"></router-view>
     </v-row>
 </v-container>
 

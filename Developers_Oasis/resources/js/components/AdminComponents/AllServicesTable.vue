@@ -1,14 +1,5 @@
 <template>
     <div>
-<div>
-
-    <v-col cols="auto" class="ms-auto" data-bs-toggle="modal" data-bs-target="#mymodal">
-        <v-btn color="green" density="comfortable">
-            <i class="fas fa-plus fs-5 me-1"></i>
-            Add New expert
-        </v-btn>
-    </v-col>
-</div>
     <v-row>
                     <table class="min-w-full">
                         <thead>
@@ -27,7 +18,7 @@
                     bg-gray-50
                   "
                             >
-                                Name
+                                title
                             </th>
                             <th
                                 class="
@@ -43,50 +34,27 @@
                     bg-gray-50
                   "
                             >
-                                department
+                                description
                             </th>
-                            <th
-                                class="
-                    px-6
-                    py-3
-                    text-xs
-                    font-medium
-                    leading-4
-                    tracking-wider
-                    text-left text-gray-500
-                    uppercase
-                    border-b border-gray-200
-                    bg-gray-50
-                  "
-                            >
-                                bio
-                            </th>
+
 
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                         </tr>
                         </thead>
 
                         <tbody class="bg-white">
-                        <tr v-for="i in experts" :key="i">
+                        <tr v-for="service in services" :key="service">
                             <td
                                 class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                             >
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 w-10 h-10">
-                                        <img
-                                            class="w-10 h-10 rounded-full"
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                        />
-                                    </div>
+
 
                                     <div class="ml-4">
                                         <div class="text-sm font-medium leading-5 text-gray-900">
-                                            {{ i.user.name }}
+                                            {{service.title}}
                                         </div>
-                                        <div class="text-sm leading-5 text-gray-500">
-                                            {{ i.user.email }}
-                                        </div>
+
                                     </div>
                                 </div>
                             </td>
@@ -107,23 +75,11 @@
                       bg-green-100
                       rounded-full
                     "
-                  >{{i.department.name}}</span
+                  >{{service.description}}</span
                   >
                             </td>
 
-                            <td
-                                class="
-                    px-6
-                    py-4
-                    text-sm
-                    leading-5
-                    text-gray-500
-                    border-b border-gray-200
-                    whitespace-nowrap
-                  "
-                            >
-                                {{ i.bio }}
-                            </td>
+
 
                             <td
                                 class="
@@ -152,19 +108,20 @@ import axios from "axios";
 export default {
 data() {
     return {
-experts:[]
+        services:[]
     };
 }
 ,
 mounted() {
-    this.fetchExperts();
+    this.fetchServices();
 },
     methods: {
-        fetchExperts() {
+        fetchServices() {
             axios
-                .get("http://localhost:8000/api/experts?include=department")
+                .get("http://localhost:8000/api/services")
                 .then((response) => {
-                    this.experts = response.data;
+                    this.services = response.data["services"];
+                    console.log(this.services)
                 })
                 .catch((error) => {
                     console.log(error);

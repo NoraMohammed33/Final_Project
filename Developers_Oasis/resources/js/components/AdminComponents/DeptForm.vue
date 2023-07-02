@@ -22,7 +22,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="dismiss" data-bs-dismiss="modal" class="btn btn-secondary text-light" @click="emptyForm">Cancel</button>
-                    <button type="button" class="btn btn-primary text-light" id="dismissBtn" @click="saveDepartment">Save Department</button>
+                    <button type="button" class="btn btn-primary text-light" id="dismissBtn" @click="saveDepartment()">Save Department</button>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@ export default {
                 formData.append("description", this.department_description);
 
                 axios
-                    .post("api/departments", formData, {
+                    .post("http://localhost:8000/api/departments", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data",
                         },
