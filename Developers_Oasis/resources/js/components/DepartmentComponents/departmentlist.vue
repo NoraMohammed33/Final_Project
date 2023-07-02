@@ -21,7 +21,7 @@
                         </div>
                     </v-card-actions>
 
-                    <div v-if="department.experts && department.experts.length > 0">
+                    <div v-if="department.experts && department.experts.length">
                         <h4 class="font-weight-bold mt-3">Experts</h4>
                         <div v-for="expert in department.experts" :key="expert.id">
                             <h5>{{ expert.user.name }}</h5>
@@ -156,9 +156,6 @@ export default {
     },
 };
 </script>
-
-
-
 
 
 <style scoped>

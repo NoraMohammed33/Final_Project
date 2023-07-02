@@ -49,7 +49,10 @@ import AllpostsComponent from "./components/PostComponents/AllpostsComponent.vue
 app.component('allposts-component',AllpostsComponent);
 
 import MenuBarComponent from "./components/MenuBarComponent.vue";
-app.component('menubar-component',MenuBarComponent);
+app.component('menubar-component', MenuBarComponent);
+
+import FooterComponent from "./components/FooterComponent.vue";
+app.component('footer-component', FooterComponent);
 
 import LoginComponent from "./components/AdminComponents/LoginComponent.vue";
 app.component('login-component',LoginComponent);

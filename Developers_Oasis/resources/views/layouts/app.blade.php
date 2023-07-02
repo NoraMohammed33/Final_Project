@@ -16,12 +16,12 @@
 
 <body>
     <div id="app">
-        <div class="header ">
+        <div class="header m-4 ">
             <nav class="navbar navbar-expand-md w-100 mynav">
                 <div class="container-fluid d-flex align-items-baseline ">
                     @unless (request()->is('login', 'register', 'password/*'))
                         <router-link to="/">
-                            <img class="logo mt-2" style="width:100px;height: 80px" src="{{ asset('images/logo_site.png') }}"
+                            <img class="logo mt-2" style="width:70px;height: 60px" src="{{ asset('images/logo_site.png') }}"
                                 class="img-fluid navbar-brand">
                         </router-link>
                     @endunless
@@ -82,6 +82,10 @@
         <main class="mt-1">
             @yield('content')
         </main>
+        @auth()
+            <!-- Left Side Of Navbar -->
+            <footer-component class="mx-auto"></footer-component>
+        @endauth
     </div>
 </body>
 <style>
