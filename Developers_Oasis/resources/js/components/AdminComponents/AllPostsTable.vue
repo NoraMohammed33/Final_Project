@@ -1,9 +1,6 @@
 <template>
     <div>
-        <v-row>
-            <DeptForm @department-saved="handleDepartmentSaved"></DeptForm>
 
-        </v-row>
         <v-row>
             <table class="min-w-full">
                 <thead>
@@ -48,7 +45,7 @@
                 </thead>
 
                 <tbody class="bg-white">
-                <tr v-for="post in posts" :key="post">
+                <tr v-for="post in posts.data" :key="post">
                     <td
                         class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                     >
@@ -95,9 +92,10 @@ export default {
     methods: {
         fetchPosts() {
             axios
-                .get("/api/posts")
+                .get("http://localhost:8000/api/posts")
                 .then((response) => {
                     this.posts = response.data["posts"];
+                    // console.log(this.posts.data);
                 })
                 .catch((error) => {
                     console.log(error);
