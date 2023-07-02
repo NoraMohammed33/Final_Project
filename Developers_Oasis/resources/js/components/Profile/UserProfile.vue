@@ -1,51 +1,4 @@
-    <!-- <div class="user-profile">
-        <div class="card" v-if="user">
-            <h2>{{ user.name }}</h2>
-            <div class="user-info">
-                <div class="user-image">
-                    <img :src="user.image" alt="User Image">
-                </div>
-                <div class="user-details">
-                    <p><strong>Email:</strong> {{ user.email }}</p>
-                </div>
-            </div> -->
-<!--            <div class="services" v-if="services && services.length > 0">-->
-<!--                <h3>Services:</h3>-->
-<!--                <ul>-->
-<!--                    <li v-for="service in services" :key="service.id">-->
-<!--                        <p><strong>Title:</strong> {{ service.title }}</p>-->
-<!--                        <p><strong>Description:</strong> {{ service.description }}</p>-->
-<!--                        <p><strong>Price:</strong> {{ service.price }}</p>-->
-<!--                        <p><strong>Rating:</strong> {{ getServiceRating(service.id) }}</p>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-            <!-- <div class="contracts" v-if="contracts && contracts.length > 0">
-                <h3>Contracts:</h3>
-                <ul>
-                    <li v-for="contract in contracts" :key="contract.id">
-                        <p><strong>Service Title:</strong> {{ contract.service_id.title }}</p>
-                        <p><strong>Expert Name:</strong> {{ contract.service_id.expert_id }}</p>
-                        <p><strong>Service Price:</strong> {{ contract.service_id.price }}$</p>
-                        <p><strong>Department Name:</strong> {{ contract.user_id }}</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="ratings" v-if="service_ratings && service_ratings.length > 0">
-                <h3>Ratings:</h3>
-                <ul>
-                    <li v-for="ratings in service_ratings" :key="ratings.id">
-                        <p><strong>Service Title:</strong> {{ service_ratings.service_id.title }}  {{ service_ratings.rating }}</p>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-        <div class="error-message" v-else>
-            Oops! Something went wrong. Please try again later.
-        </div>
-    </div> -->
-    <template>
+ <template>
   <div class="user-profile">
     <div v-if="user">
       <section class="h-100 gradient-custom-2">
@@ -68,21 +21,6 @@
                   </div>
                   <div class="ms-3" style="margin-top: 130px;">
                     <h5>{{ user.name }}</h5>
-                  </div>
-                </div>
-                <div class="p-4 text-black" style="background-color: #f8f9fa;">
-                  <div class="d-flex justify-content-end text-center py-1">
-                    <div class="mb-4 ms-2 pb-2">
-                      <button type="button" class="btn btn-outline-primary btn-floating">
-                        <i class="fab fa-facebook-f fa-lg"></i>
-                      </button>
-                      <button type="button" class="btn btn-outline-primary btn-floating">
-                        <i class="fab fa-twitter fa-lg"></i>
-                      </button>
-                      <button type="button" class="btn btn-outline-primary btn-floating">
-                        <i class="fab fa-skype fa-lg"></i>
-                      </button>
-                    </div>
                   </div>
                 </div>
                 <div class="card-body p-4 text-black">
@@ -108,10 +46,6 @@
                         <p>
                           <strong>Service Price:</strong>
                           {{ contract.service_id.price }}$
-                        </p>
-                        <p>
-                          <strong>Department Name:</strong>
-                          {{ contract.user_id }}
                         </p>
                       </li>
                     </ul>

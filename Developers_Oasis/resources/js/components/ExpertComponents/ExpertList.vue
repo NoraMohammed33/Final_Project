@@ -108,8 +108,9 @@ export default {
   background: #fff;
 }
 h3 {
+   margin-top: 12px;
   text-align: center;
-  color: rgb(165, 42, 101);
+  color: #fc9f0b;
 }
 .expert-list {
   display: flex;
