@@ -103,6 +103,9 @@ app.component('error-payment', ErrorPaymentComponent)
 import AllExpertsTable from "./components/AdminComponents/AllExpertsTable.vue";
 app.component('allexperts-table',AllExpertsTable);
 
+import ChatComponent from "./components/ChatComponents/ChatComponent.vue";
+app.component('chat-component', ChatComponent);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

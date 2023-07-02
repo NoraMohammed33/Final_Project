@@ -22,6 +22,7 @@ import UserProfile from "../components/Profile/UserProfile.vue";
 import ExpertProfile from "../components/Profile/ExpertProfile.vue";
 import SuccessPaymentComponent from "../components/Payment/SuccessPaymentComponent.vue";
 import ErrorPaymentComponent from "../components/Payment/ErrorPaymentComponent.vue";
+import ChatComponent from "../components/ChatComponents/ChatComponent.vue";
 const routes = [
 
     {
@@ -121,6 +122,10 @@ const routes = [
     {
         path: '/error',
         component: ErrorPaymentComponent
+    },
+    {
+        path: '/chat',
+        component: ChatComponent
     }
 
 

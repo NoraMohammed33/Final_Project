@@ -4,13 +4,13 @@ use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\ContractController;
 use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\API\ExpertController;
-use App\Http\Controllers\API\AdminController;
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\MessageController;
 use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\ServiceController;
 use App\Http\Controllers\API\ServiceRatingController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +35,9 @@ Route::post('/pay', [PaymentController::class, 'pay']);
 Route::get('/success', [PaymentController::class, 'success'])->name('success');
 Route::get('/error', [PaymentController::class, 'error']);
 
+
+Route::get('/chat',[MessageController::class, 'index'])->middleware('auth');
+Route::post('/send-message', [MessageController::class, 'sendMessage'])->middleware('auth');
 
 //====================users========================
 Route::apiResource('users', UserController::class);
