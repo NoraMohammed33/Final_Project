@@ -1,8 +1,8 @@
 <template>
   <div v-if="experts && experts.length > 0" class="text-center">
     <h3 style="margin-top:25px" class="text-center">
-      the most effective
-      <span style="color: coral">{{ experts[0].department.name }}</span> experts in the world
+        Explore our amazing
+      <span style="color: coral">{{ experts[0].department.name }}</span> experts 
     </h3>
     <br />
     <div class="container">
@@ -34,6 +34,10 @@
       </div>
     </div>
   </div>
+  <div v-else class="text-center">
+    sorry There are No experts in this Department
+  </div>
+
 </template>
 <script>
 export default {
@@ -70,7 +74,7 @@ export default {
     exploreExpert(expert) {
       this.$router.push({ path: `/expert/${expert.id}` });
     },
-    
+
   }
 };
 </script>
