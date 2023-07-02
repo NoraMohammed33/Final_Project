@@ -54,11 +54,12 @@ export default {
         fetchExpert() {
             const expertId = this.$route.params.id;
             axios
-                .get(`/api/experts/${expertId}`)
-                .then((response) => {
-                    this.expert = response.data;
+                .get(`/api/experts/${expertId}?include=user,department`)
+                .then(response => {
+                    console.log(response.data); // Check the response data in the browser console
+                    this.expert = response.data.expert;
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.log(error);
                     this.error = true;
                 });
