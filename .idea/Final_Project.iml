@@ -8,9 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/Developers_Oasis/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Developers_Oasis/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/Developers_Oasis/tests/Unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Developers_Oasis/spec" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/Developers_Oasis/vendor/dflydev/dot-access-data" />
