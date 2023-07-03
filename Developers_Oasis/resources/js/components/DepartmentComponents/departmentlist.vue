@@ -60,7 +60,6 @@
       <br />
     </div>
 
-
     <!-- Update Department Modal -->
     <div
       class="modal fade"
@@ -75,7 +74,7 @@
   </div>
 </template>
 
-<script>
+  <script>
 import axios from "axios";
 import Swal from "sweetalert2";
 import AddDepartmentComponent from "../AdminComponents/DeptForm.vue";
@@ -152,7 +151,7 @@ export default {
 };
 </script>
 
-<style scoped>
+  <style scoped>
 .input-container {
   position: relative;
   margin-bottom: 10px;
@@ -194,14 +193,14 @@ export default {
 }
 
 /* .btn-primary {
-  background-color: #4caf50;
-  color: #fff;
-} */
+    background-color: #4caf50;
+    color: #fff;
+  } */
 
 /* .btn-secondary {
-  background-color: #aaa;
-  color: #fff;
-} */
+    background-color: #aaa;
+    color: #fff;
+  } */
 
 .text-orange {
   color: orange;
@@ -226,5 +225,4 @@ export default {
   justify-content: center;
   margin-top: 20px;
 }
-
 </style>

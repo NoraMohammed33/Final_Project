@@ -21,7 +21,6 @@
                       class="img-fluid img-thumbnail mt-4 mb-2"
                       style="width: 150px; z-index: 1"
                     />
-                    <!-- <button type="button" class="btn btn-outline-dark" style="z-index: 1;" >Edit profile</button> -->
                   </div>
                   <div class="ms-3" style="margin-top: 130px;">
                     <h5>{{ expert.user.name }}</h5>
