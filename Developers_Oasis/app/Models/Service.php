@@ -19,14 +19,14 @@ class Service extends Model
 
     public function expert()
     {
-        return $this->belongsTo(Expert::class);
+        return $this->belongsTo(Expert::class,'expert_id');
     }
     public function ratings(){
         return $this->hasMany(ServiceRating::class);
     }
 
     public function department(){
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class,'dept_id');
     }
 
 

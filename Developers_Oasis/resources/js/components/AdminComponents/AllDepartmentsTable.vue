@@ -53,13 +53,14 @@
 
 
                         <tr v-for="dept in departments.data" :key="dept">
-                            <router-link :to="'/departments/'+dept.id">
                             <td
                                 class="px-6 py-4 "
                             >
+                            <router-link :to="'/departments/'+dept.id"
+                                         style="text-decoration:none" class="fs-4 fw-bold text-dark" >
                                {{dept.name}}
-                            </td>
                             </router-link>
+                            </td>
                             <td
                                 class="
                     px-6
@@ -75,7 +76,7 @@
 
                             <!-- Edit Department Icon -->
                             <i
-                                class="fas fa-edit fs-4 text-warning"
+                                class="fas fa-edit fs-4 text-warning mt-3"
                                 @click="openUpdateModal(dept)"
                                 data-bs-toggle="modal"
                                 data-bs-target="#update_modal"

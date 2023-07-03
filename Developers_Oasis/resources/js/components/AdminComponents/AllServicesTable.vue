@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <v-container>
     <v-row>
 
 
-                    <table class="min-w-full">
+                    <table class="min-w-full w-50">
                         <thead>
                         <tr>
                             <th
@@ -40,7 +40,9 @@
                             </th>
 
 
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                            <th class="px-6 py-3 border-b border-gray bg-gray w-50">department </th>
+                            <th class="px-6 py-3 border-b border-gray bg-gray w-50"> </th>
+
                         </tr>
                         </thead>
 
@@ -68,14 +70,7 @@
                             >
                   <span
                       class="
-                      inline-flex
-                      px-2
-                      text-xs
-                      font-semibold
-                      leading-5
-                      text-green-800
-                      bg-green-100
-                      rounded-full
+
                     "
                   >{{service.description}}</span
                   >
@@ -85,23 +80,17 @@
 
                             <td
                                 class="
-                    px-6
-                    py-4
-                    text-sm
-                    font-medium
-                    leading-5
-                    text-right
-                    border-b border-gray-200
-                    whitespace-nowrap
+                    text-center
+                    px-6 py-4 border-b border-gray-200 whitespace-nowrap
                   "
                             >
-
+{{service.department.name}}
                             </td>
 
 
 
-                            <td>
-                                <i class="fas fa-trash fs-4 text-danger ms-4 me-5" @click="deleteService(service.id)"></i>
+                            <td class="border-b border-gray-200 whitespace-nowrap">
+                                <i class="fas fa-trash fs-4 text-danger ms-4 me-5 " @click="deleteService(service.id)"></i>
                             </td>
 
 
@@ -110,7 +99,7 @@
                         </tbody>
                     </table>
     </v-row>
-    </div>
+    </v-container>
 </template>
 
 <script  >
@@ -120,7 +109,8 @@ import Swal from "sweetalert2";
 export default {
 data() {
     return {
-        services:[]
+        services:[],
+        expert:{}
     };
 }
 ,
@@ -130,10 +120,11 @@ mounted() {
     methods: {
         fetchServices() {
             axios
-                .get("http://localhost:8000/api/services")
+                .get("http://localhost:8000/api/services?include=expert")
                 .then((response) => {
-                    this.services = response.data["services"];
-                    console.log(this.services)
+                    this.services = response.data["services_admin"];
+                    this.expert= this.services.expert;
+                    console.log(this.expert)
                 })
                 .catch((error) => {
                     console.log(error);

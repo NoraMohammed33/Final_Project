@@ -33,6 +33,7 @@ class ServiceController extends Controller
         }
 
         $services = $query->get();
+        $services_admin = Service::with('expert','department')->get();
 
         $servicesWithAverageRating = $services->map(function ($service) {
             $averageRating = $service->ratings->avg('rating');
@@ -42,6 +43,7 @@ class ServiceController extends Controller
 
         return response()->json([
             'services' => $servicesWithAverageRating,
+            'services_admin'=>$services_admin
         ]);
     }
 
