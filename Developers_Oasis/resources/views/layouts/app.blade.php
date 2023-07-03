@@ -87,6 +87,7 @@
             <footer-component class="mx-auto mb-0 mt-5"></footer-component>
         @endauth
     </div>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 <style>
     .user-avatar {
