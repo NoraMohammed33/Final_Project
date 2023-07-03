@@ -76,7 +76,7 @@
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 w-10 h-10">
                                         <img
-                                            class="w-10 h-10 rounded-full"
+                                            class="w-25 h-10 rounded-full"
                                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                             alt=""
                                         />
@@ -86,9 +86,9 @@
                                         <div class="text-sm font-medium leading-5 text-gray-900">
                                             {{ i.user.name }}
                                         </div>
-                                        <div class="text-sm leading-5 text-gray-500">
+                                        <a class="text-sm leading-5 text-gray-500">
                                             {{ i.user.email }}
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </td>
@@ -141,15 +141,18 @@
                             >
 
                             </td>
-                            <td class="">
-                                <img style="width:20px"   src="../../../../public/images/edit-svgrepo-com.png"/>
-                            </td>
-                            <td>
-                                <img style="width:20px" src="../../../../public/images/delete-2-svgrepo-com.png"/>
-                            </td>
+
+                           <td>
+                            <i class="fas fa-trash fs-4 text-danger ms-4 me-5" @click="deleteExpert(i.id)"></i>
+                           </td>
+
                         </tr>
                         </tbody>
                     </table>
+
+
+
+
     </v-row>
 
     </v-container>
@@ -159,7 +162,9 @@
 <script  >
 import { ref } from "vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 import ExpertForm from './ExpertForm.vue'
+import "@fortawesome/fontawesome-free/css/all.css";
 export default {
 data() {
     return {
@@ -184,6 +189,48 @@ mounted() {
                     console.log(error);
                 });
         },
+        deleteExpert(expertID) {
+            Swal.fire({
+                icon: "warning",
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                showCancelButton: true,
+                confirmButtonColor: "#d9534f",
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios
+                        .delete("http://localhost:8000/api/experts/" + expertID)
+                        .then(() => {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success",
+                                text: "expert deleted successfully",
+                                confirmButtonColor: "#5cb85c",
+                            });
+                            this.fetchExperts();
+                        })
+                        .catch((error) => {
+                            console.log(error.response.data);
+                        });
+                }
+            });
+        },
+
+
+
+
+
+
 },
 };
 </script>
+
+<style scoped>
+i:hover{
+    scale: 1.2;
+    transition: 5ms;
+    cursor: pointer;
+}
+</style>
