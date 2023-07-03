@@ -43,17 +43,23 @@
 
 
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+
                         </tr>
                         </thead>
 
                         <tbody class="bg-white">
+
+
+
                         <tr v-for="dept in departments.data" :key="dept">
+                            <router-link :to="'/departments/'+dept.id">
                             <td
-                                class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
+                                class="px-6 py-4 "
                             >
                                {{dept.name}}
                             </td>
-
+                            </router-link>
                             <td
                                 class="
                     px-6
@@ -61,19 +67,30 @@
                     text-sm
                     leading-5
                     text-gray-500
-                    border-b border-gray-200
-                    whitespace-nowrap
+
                   "
                             >
                                 {{ dept.description }}
                             </td>
 
 
+                            <td class="">
+                                <img style="width:20px" src="../../../../public/images/edit-svgrepo-com.png"/>
+                            </td>
+                            <td>
+                                <img style="width:20px" src="../../../../public/images/delete-2-svgrepo-com.png"/>
+                            </td>
+
                         </tr>
                         </tbody>
                     </table>
     </v-row>
     </div>
+
+    <div>
+
+    </div>
+
 </template>
 
 <script  >
