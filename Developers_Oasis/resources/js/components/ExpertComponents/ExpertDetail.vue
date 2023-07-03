@@ -51,7 +51,6 @@
           <ul>
             <li v-for="service in expert.services" :key="service.id">
               <p>{{ service.title }} - ${{ service.price }}</p>
-              Rating: {{ service.rating }}
             </li>
           </ul>
         </div>
@@ -72,18 +71,6 @@
               <strong>Service Price:</strong>
               {{ contract.service.price }}$
             </p>
-          </li>
-        </ul>
-      </div>
-      <div class="ratings" v-if="expert.service_ratings && expert.service_ratings.length > 0">
-        <h2>services:</h2>
-        <ul>
-          <li v-for="rating in expert.service_ratings" :key="rating.id">
-            <p>
-              <strong>Service Title:</strong>
-              {{ rating.service.title }} - Service Rating{{ rating.rating }}
-            </p>
-            <h1>hebba</h1>
           </li>
         </ul>
       </div>

@@ -18,12 +18,14 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $users=User::all();
-        $services=Service::all();
-        $experts=Expert::all();
-        return ContractResource::collection(Contract::all());
+        $contracts = Contract::with('service.department', 'service.expert', 'service.ratings', 'user')->get();
 
+        return response()->json([
+            'services' => $contracts->pluck('service'),
+            'contracts' => $contracts,
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
