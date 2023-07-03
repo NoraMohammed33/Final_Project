@@ -22,6 +22,7 @@ import UserProfile from "../components/Profile/UserProfile.vue";
 import ExpertProfile from "../components/Profile/ExpertProfile.vue";
 import SuccessPaymentComponent from "../components/Payment/SuccessPaymentComponent.vue";
 import ErrorPaymentComponent from "../components/Payment/ErrorPaymentComponent.vue";
+import ChatComponent from "../components/ChatComponents/ChatComponent.vue";
 import allDepartmentsTable from "../components/AdminComponents/AllDepartmentsTable.vue";
 import allPostsTable from "../components/AdminComponents/allPostsTable.vue";
 import allServicesTable from "../components/AdminComponents/AllServicesTable.vue";
@@ -92,6 +93,10 @@ const routes = [
         // component: mainComponent,
         children:[
             {
+                path:'departments',
+                component:departmentlist,
+            },
+            {
                 path: 'allposts',
                 component: allPostsTable
             },
@@ -125,6 +130,10 @@ const routes = [
     {
         path: '/error',
         component: ErrorPaymentComponent
+    },
+    {
+        path: '/chat',
+        component: ChatComponent
     }
 
 

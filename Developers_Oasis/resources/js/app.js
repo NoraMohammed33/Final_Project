@@ -107,6 +107,9 @@ app.component('error-payment', ErrorPaymentComponent)
 import AllExpertsTable from "./components/AdminComponents/AllExpertsTable.vue";
 app.component('allexperts-table',AllExpertsTable);
 
+import ChatComponent from "./components/ChatComponents/ChatComponent.vue";
+app.component('chat-component', ChatComponent);
+
 import AllDepartmentsTable from "./components/AdminComponents/AllDepartmentsTable.vue";
 app.component('alldepartments-table',AllDepartmentsTable);
 
