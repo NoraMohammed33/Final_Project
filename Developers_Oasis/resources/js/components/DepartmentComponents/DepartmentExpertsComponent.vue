@@ -1,8 +1,8 @@
 <template>
   <div v-if="experts && experts.length > 0" class="text-center">
     <h3 style="margin-top:25px" class="text-center">
-        Explore our amazing
-      <span style="color: coral">{{ experts[0].department.name }}</span> experts 
+      Explore our amazing
+      <span style="color: coral">{{ experts[0].department.name }}</span> experts
     </h3>
     <br />
     <div class="container">
@@ -34,18 +34,15 @@
       </div>
     </div>
   </div>
-  <div v-else class="text-center">
-    sorry There are No experts in this Department
-  </div>
-
+  <div v-else class="text-center">Sorry, there are no experts in this department.</div>
 </template>
-<script>
+
+  <script>
 export default {
   data() {
     return {
       experts: [],
-      departments: [],
-      show: false
+      departments: []
     };
   },
   mounted() {
@@ -68,17 +65,17 @@ export default {
         })
         .catch(error => {
           console.error(error);
+          // Handle error and show appropriate message
+          this.experts = []; // Clear the experts array
         });
     },
 
     exploreExpert(expert) {
       this.$router.push({ path: `/expert/${expert.id}` });
-    },
-
+    }
   }
 };
 </script>
 
-<style scoped>
-
+  <style scoped>
 </style>

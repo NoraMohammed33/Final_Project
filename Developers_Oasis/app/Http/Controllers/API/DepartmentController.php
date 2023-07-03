@@ -21,20 +21,16 @@ class DepartmentController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->query('search');
-        $perPage = $request->query('limit', 5);
-        $query = Department::query();
+        $searchInput = $request->input('search');
 
-        if ($search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('description', 'like', '%' . $search . '%');
-        }
+        $departmentsQuery = $searchInput
+            ? Department::where('name', 'like', '%' . $searchInput . '%')
+            ->orWhere('description', 'like', '%' . $searchInput . '%')
+            : Department::query();
 
-        $departments = $query->paginate($perPage);
-
+         $departments= $departmentsQuery->paginate(6);
         return DepartmentResource::collection($departments);
     }
-
     public function store(Request $request)
     {
         $request->validate([

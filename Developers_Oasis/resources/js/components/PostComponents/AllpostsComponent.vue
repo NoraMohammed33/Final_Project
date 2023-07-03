@@ -118,7 +118,7 @@
         @click="changePage(posts.current_page - 1)"
       >Previous</button>
       <button
-        class="btn btn-primary"
+        class="btn btn-secondary"
         v-if="posts.current_page < posts.last_page"
         @click="changePage(posts.current_page + 1)"
       >Next</button>
@@ -172,7 +172,7 @@ export default {
       axios
         .get("/api/posts", {
           params: {
-            search: this.searchInput, // Include the search input parameter
+            search: this.searchInput,
             page: this.currentPage
           }
         })
@@ -185,8 +185,8 @@ export default {
         });
     },
     searchPosts() {
-      this.currentPage = 1; // Reset the current page to 1
-      this.fetchPosts(); // Fetch posts with the updated search input
+      this.currentPage = 1;
+      this.fetchPosts();
     },
 
     changePage(page) {
