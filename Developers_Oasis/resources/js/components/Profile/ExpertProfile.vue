@@ -1,6 +1,7 @@
 <template>
   <div class="expert-profile">
-    <template v-if="expert">
+      <AddServiceComponent></AddServiceComponent>
+      <template v-if="expert">
       <section class="h-100 gradient-custom-2">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -95,8 +96,12 @@
 
 <script>
 import axios from "axios";
+import AddServiceComponent from "@/components/services/AddServiceComponent.vue";
 
 export default {
+    components:{
+        AddServiceComponent,
+    },
   data() {
     return {
       expert: null,

@@ -35,14 +35,11 @@ class ServiceRatingController extends Controller
      */
     public function store(StoreServiceRatingRequest $request)
     {
-        // Validate the request data
-        $validatedData = $request->validated();
-
         // Create a new rating record
         $rating = new ServiceRating();
-        $rating->service_id = $validatedData['service_id'];
-        $rating->rating = $request->input('service_id');
-        $rating->comment = $validatedData['comment'];
+        $rating->service_id = $request->input('service_id');
+        $rating->rating = $request->input('rating');
+        $rating->comment = $request->input('comment');
         $rating->user_id = Auth::id();
         $rating->save();
 

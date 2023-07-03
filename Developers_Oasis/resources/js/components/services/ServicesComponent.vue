@@ -1,7 +1,5 @@
 <template>
     <div>
-        <AddServiceComponent @service-saved="handleServiceSaved"></AddServiceComponent>
-
         <div class="d-flex justify-content-center mx-auto px-5">
             <div class="input-container">
                 <input
@@ -31,13 +29,13 @@
                 <router-link :to="`/services/${service.id}`">
                     <v-btn id="explore" color="blue" class="border rounded-2">Explore</v-btn>
                 </router-link>
-                <div class="ms-auto text-light">
-                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"
-                       data-bs-toggle="modal"
-                       data-bs-target="#update_modal">
-                    </i>
-                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>
-                </div>
+<!--                <div class="ms-auto text-light">-->
+<!--                    <i class="fas fa-edit fs-4 text-warning" @click="openUpdateModal(service)"-->
+<!--                       data-bs-toggle="modal"-->
+<!--                       data-bs-target="#update_modal">-->
+<!--                    </i>-->
+<!--                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteService(service.id)"></i>-->
+<!--                </div>-->
                 <div class="w-sm-100 w-md-auto">
                     <star-rating
                         v-model:rating="service.average_rating"
