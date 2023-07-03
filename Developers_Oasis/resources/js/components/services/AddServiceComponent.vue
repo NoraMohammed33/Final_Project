@@ -85,7 +85,7 @@ export default {
                 formData.append('dept_id', this.dept_id);
                 formData.append('price', this.service_price);
                 formData.append('image', this.$refs.service_name.files[0]);
-                axios.post('api/services', formData, {
+                axios.post('/api/services', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
