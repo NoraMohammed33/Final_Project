@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\API\UserController;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ChatController;
@@ -25,6 +26,7 @@ Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, '
 
 Auth::routes();
 
+
 Route::get('/admin/dashboard',function (){
     if (Auth::user() && Auth::user()->isadmin){
         return view('homeAdmin');
@@ -37,6 +39,9 @@ Route::get('/admin/dashboard/{any}', function () {
     return view('homeAdmin');
 })->where('any', '.*');
 
+Route::get('/contacts',[\App\Http\Controllers\ContactsController::class,'getAllContacts']);
+Route::get('/conversation/{id}',[\App\Http\Controllers\ContactsController::class,'getMessagesFor']);
+Route::post('/conversation/send',[\App\Http\Controllers\ContactsController::class,'sendMessage']);
 
 Route::get('/{any}', function () {
     return view('welcome');
@@ -49,14 +54,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 
-Route::middleware(['auth:sanctum','verified'])->get('/chat',function (){
-    return view('welcome');
-})->name('chat');
-
-Route::middleware('auth:sanctum')->get('/chat/room',[ChatController::class,'rooms']);
-Route::middleware('auth:sanctum')->get('/chat/room/{roomId}/messages',[ChatController::class,'messages']);
-Route::middleware('auth:sanctum')->post('/chat/room/{roomId}/message',[ChatController::class,'newMessage']);
-
+//Route::middleware(['auth:sanctum','verified'])->get('/chat',function (){
+//    return view('welcome');
+//})->name('chat');
+//
+//Route::middleware('auth:sanctum')->get('/chat/room',[ChatController::class,'rooms'])->middleware('auth:sanctum');
+//Route::middleware('auth:sanctum')->get('/chat/room/{roomId}/messages',[ChatController::class,'messages']);
+//Route::middleware('auth:sanctum')->post('/chat/room/{roomId}/message',[ChatController::class,'newMessage']);
+//
 
 
 //Route::view('/admin/login','auth.loginAdmin');

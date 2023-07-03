@@ -36,8 +36,8 @@ Route::get('/success', [PaymentController::class, 'success'])->name('success');
 Route::get('/error', [PaymentController::class, 'error']);
 
 
-Route::get('/chat',[MessageController::class, 'index'])->middleware('auth');
-Route::post('/send-message', [MessageController::class, 'sendMessage'])->middleware('auth');
+Route::get('/messages',[MessageController::class, 'getMessages']);
+Route::post('/send-message', [MessageController::class, 'sendMessage']);
 
 //====================users========================
 Route::apiResource('users', UserController::class);
