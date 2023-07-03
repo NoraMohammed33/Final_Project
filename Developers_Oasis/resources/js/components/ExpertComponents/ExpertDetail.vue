@@ -35,6 +35,13 @@
           <div class="about-avatar">
             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title alt />
           </div>
+
+            <router-link :to="'/chat'">
+            <div class="btn btn-success mt-2">
+                chat <span class="text-warning">" {{ expert.user.name }} "</span>
+            </div>
+            </router-link>
+
         </div>
       </div>
       <div class="counter">

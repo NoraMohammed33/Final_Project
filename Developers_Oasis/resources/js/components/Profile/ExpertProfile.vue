@@ -5,6 +5,11 @@
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-lg-9 col-xl-7">
+                <router-link :to="'/chat'">
+                    <div class="btn btn-success mt-2">
+                        chat
+                    </div>
+                </router-link>
               <div class="card">
                 <div
                   class="rounded-top text-white d-flex flex-row"
