@@ -77,9 +77,16 @@
                                     <div class="flex-shrink-0 w-10 h-10">
                                         <img
                                             class="w-25 h-10 rounded-full"
+<<<<<<< HEAD
                                         :src="'/images/'+i.user.image"
+=======
+
+                                            :src="'/images/'+i.user.image"
+>>>>>>> ef92ed972a047c820c7e01622e9168241d5b1969
                                         alt=""
                                         />
+<!--                                        :src="user.image ? '/storage/' + user.image : '/images/users/default.jpg'"  alt="Generic placeholder image"-->
+
                                     </div>
 
                                     <div class="ml-4">

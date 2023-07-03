@@ -40,43 +40,36 @@
                     <h3 class="card header" >Department</h3>
                     <p>{{ expert.department.name }}</p>
                   </div>
-                  <div class="services-contracts-container d-flex">
-                    <div class="services-container">
-                      <h3 class="card header">Services</h3>
-                      <ul>
-                        <li v-for="service in expert.services" :key="service.id">
-                          <p>{{ service.title }} - ${{ service.price }}</p>
-                          Rating: {{ service.rating }}
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="contracts-container">
-                      <h3 class="card header">Contracts</h3>
-                      <ul>
-                        <li v-for="contract in contracts" :key="contract.id">
+                    <h3>Services:</h3>
+                  <ul>
+                    <li v-for="service in services" :key="service.id">
+                      <p>{{ service.title }} - ${{ service.price }}</p>
+                      Rating: {{ calculateAverageRating(service.ratings) }}
+                    </li>
+                  </ul>
+                    <h3>Contracts:</h3>
+                </div>
+
+
+                <div class="contracts" v-if="contracts && contracts.length > 0">
+                  <ul>
+                    <li v-for="contract in contracts" :key="contract.id">
+                      <div v-if ="contract.expert_id===expert.id" >
                           <p>
-                            <strong>Service Title:</strong>
-                            {{ contract.service_id.title }}
-                          </p>
-                          <p>
-                            <strong>Service Price:</strong>
-                            {{ contract.service_id.price }}$
-                          </p>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="ratings" v-if="service_ratings && service_ratings.length > 0">
-                    <h3>Ratings:</h3>
-                    <ul>
-                      <li v-for="rating in service_ratings" :key="rating.id">
-                        <p>
-                          <strong>Service Title:</strong>
-                          {{ rating.service.title }} - {{ rating.rating }}
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
+                        <strong>Service Title:</strong>
+                        {{ contract.service.title }}
+                      </p>
+                      <p>
+                        <strong>User Name:</strong>
+                        {{ contract.user.name }}
+                      </p>
+                      <p>
+                        <strong>Service Price:</strong>
+                        {{ contract.service.price }}$
+                      </p>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -94,16 +87,29 @@
 <script>
 import axios from "axios";
 import AddServiceComponent from "@/components/services/AddServiceComponent.vue";
+import rating from "primevue/rating/Rating.vue";
 
 export default {
+<<<<<<< HEAD
   components: {
     AddServiceComponent
   },
+=======
+    computed: {
+        rating() {
+            return rating
+        }
+    },
+    components:{
+        AddServiceComponent,
+    },
+>>>>>>> ef92ed972a047c820c7e01622e9168241d5b1969
   data() {
     return {
       expert: null,
       error: false,
-      contracts: []
+      contracts: [],
+        services:[]
     };
   },
   mounted() {
@@ -127,13 +133,38 @@ export default {
       axios
         .get("/api/contracts")
         .then(response => {
-          this.contracts = response.data.data;
+          this.contracts = response.data.contracts;
+            this.services = response.data.services;
+
         })
         .catch(error => {
           console.log(error);
           this.error = true;
         });
-    }
+    },
+      calculateAverageRating(ratings) {
+          if (ratings.length === 0) {
+              return 0; // Return 0 if there are no ratings
+          }
+
+          const sum = ratings.reduce((accumulator, rating) => {
+              const value = parseFloat(rating.rating); // Use 'rate' instead of 'value'
+              if (isNaN(value)) {
+                  return accumulator; // Skip invalid rating values
+              }
+              return accumulator + value;
+          }, 0);
+
+          const average = sum / ratings.length;
+
+          // Check if the result is NaN or the sum is zero and return "-" instead
+          if (isNaN(average) || sum === 0) {
+              return "-"; // Return "-" if the average is not calculable or the sum is zero
+          }
+
+          return average.toFixed(2);
+      },
+
   }
 };
 </script>
