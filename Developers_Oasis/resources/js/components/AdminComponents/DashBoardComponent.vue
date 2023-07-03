@@ -10,7 +10,7 @@
     </v-row>
 </v-container>
 
-    <footer class="text-center bg-black fixed-bottom">all copy rights saved</footer>
+<!--    <footer class="text-center bg-black fixed-bottom">all copy rights saved</footer>-->
 </template>
 <script>
 

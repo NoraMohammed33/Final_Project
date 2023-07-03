@@ -94,7 +94,7 @@ const routes = [
         children:[
             {
                 path:'departments',
-                component:departmentlist,
+                component:allDepartmentsTable,
             },
             {
                 path: 'allposts',
