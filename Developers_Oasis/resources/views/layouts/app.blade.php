@@ -84,7 +84,7 @@
         </main>
         @auth()
             <!-- Left Side Of Navbar -->
-            <footer-component class="mx-auto"></footer-component>
+            <footer-component class="mx-auto mb-0 mt-5"></footer-component>
         @endauth
     </div>
 </body>
