@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -71,11 +73,21 @@ class RegisterController extends Controller
     // }
     protected function create(array $data)
     {
+        $imagePath = null;
+
+        if (isset($data['image']) && is_string($data['image'])) {
+            $imagePath = 'users_images/' . time() . '_' . basename($data['image']);
+            Storage::disk('public')->move($data['image'], $imagePath);
+        } elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+            $image = $data['image'];
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs('users_images', $imageName, 'public');
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'image'=>$data['image']
+            'image' => $imagePath
         ]);
     }
 
