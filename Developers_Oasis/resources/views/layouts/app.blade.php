@@ -61,7 +61,8 @@
                                             <img src="{{ asset('storage/' . Auth::user()->image) }}" class="user-avatar"  alt="user"/>
                                         @else
                                             <img src="{{ asset('images/users/default.jpg') }}" class="user-avatar"  alt="user"/>
-                                        @endif                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        @endif
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
