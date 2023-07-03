@@ -67,6 +67,11 @@
                     </td>
 
 
+                    <td>
+                        <i class="fas fa-trash fs-4 text-danger ms-4 me-5" @click="deletePost(post.id)"></i>
+                    </td>
+
+
                 </tr>
                 </tbody>
             </table>
@@ -77,6 +82,8 @@
 <script  >
 import { ref } from "vue";
 import axios from "axios";
+import Swal from "sweetalert2";
+import "@fortawesome/fontawesome-free/css/all.css";
 export default {
 
     data() {
@@ -101,6 +108,44 @@ export default {
                     console.log(error);
                 });
         },
+
+
+        deletePost(postID) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "This action cannot be undone.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!"
+            }).then(result => {
+                if (result.isConfirmed) {
+                    axios
+                        .delete(`http://localhost:8000/api/posts/${postID}`)
+                        .then(response => {
+                            this.fetchPosts();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Post has been deleted successfully.",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+            });
+        },
     },
 };
 </script>
+<style scoped>
+i:hover{
+    scale: 1.2;
+    transition: 5ms;
+    cursor: pointer;
+}
+</style>
