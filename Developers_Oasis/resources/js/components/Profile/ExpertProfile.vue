@@ -90,11 +90,6 @@ import AddServiceComponent from "@/components/services/AddServiceComponent.vue";
 import rating from "primevue/rating/Rating.vue";
 
 export default {
-<<<<<<< HEAD
-  components: {
-    AddServiceComponent
-  },
-=======
     computed: {
         rating() {
             return rating
@@ -103,7 +98,6 @@ export default {
     components:{
         AddServiceComponent,
     },
->>>>>>> ef92ed972a047c820c7e01622e9168241d5b1969
   data() {
     return {
       expert: null,
