@@ -21,46 +21,25 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     $user = Auth::user();
-    //     $searchInput = $request->input('search');
-
-    //     if ($searchInput) {
-    //         $posts = Post::where('title', 'like', '%' . $searchInput . '%')
-    //             ->orWhere('body', 'like', '%' . $searchInput . '%')
-    //             ->get();
-    //     } else {
-    //      $posts = Post::all();
-
-    //     }
-
-    //     return response()->json([
-    //         "status" => 'success',
-    //         'message' => 'Posts fetched successfully.',
-    //         'posts' => $posts,
-    //         'loggeduser' => $user
-    //     ]);
-    // }
     public function index(Request $request)
-{
-    $user = Auth::user();
-    $searchInput = $request->input('search');
+    {
+        $user = Auth::user();
+        $searchInput = $request->input('search');
 
-    $postsQuery = $searchInput
-        ? Post::where('title', 'like', '%' . $searchInput . '%')
+        $postsQuery = $searchInput
+            ? Post::where('title', 'like', '%' . $searchInput . '%')
             ->orWhere('body', 'like', '%' . $searchInput . '%')
-        : Post::query();
+            : Post::query();
 
-    $posts = $postsQuery->paginate(5); 
+        $posts = $postsQuery->paginate(5);
 
-    return response()->json([
-        "status" => 'success',
-        'message' => 'Posts fetched successfully.',
-        'posts' => $posts,
-        'loggeduser' => $user
-    ]);
-}
+        return response()->json([
+            "status" => 'success',
+            'message' => 'Posts fetched successfully.',
+            'posts' => $posts,
+            'loggeduser' => $user
+        ]);
+    }
 
 
     public function store(StorePostRequest $request)

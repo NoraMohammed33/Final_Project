@@ -1,139 +1,134 @@
 <template>
-    <div class="expert-profile">
-        <template v-if="expert">
-            <div class="card">
-                <h2>{{ expert.user.name }}</h2>
-                <div class="expert-info">
-                    <div class="expert-image">
-                        <img :src="expert.user.image" alt="User Image">
-                    </div>
-                    <div class="expert-details">
-                        <p><strong>Email:</strong> {{ expert.user.email }}</p>
-                        <p><strong>Bio:</strong> {{ expert.bio }}</p>
-                        <h3>Department:</h3>
-                        <p>{{ expert.department.name }}</p>
-                        <h3>Services</h3>
-                        <ul>
-                            <li v-for="service in expert.services" :key="service.id">
-                               <p> {{ service.title }} - ${{ service.price }}</p>
-                                Rating:{{  }}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="contracts" v-if="contracts && contracts.length > 0">
-                        <h3>Contracts:</h3>
-                        <ul>
-                            <li v-for="contract in contracts" :key="contract.id">
-                                <p><strong>Service Title:</strong> {{ contract.service_id.title }}</p>
-                                <p><strong>User Name:</strong> {{ contract.service_id.user_id }}</p>
-                                <p><strong>Service Price:</strong> {{ contract.service_id.price }}$</p>
-                            </li>
-                        </ul>
-                    </div>
+  <div class="expert-profile">
+    <template v-if="expert">
+      <section class="h-100 gradient-custom-2">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-9 col-xl-7">
+              <div class="card">
+                <div
+                  class="rounded-top text-white d-flex flex-row"
+                  style="background-color: #000; height:200px;"
+                >
+                  <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                      alt="Generic placeholder image"
+                      class="img-fluid img-thumbnail mt-4 mb-2"
+                      style="width: 150px; z-index: 1"
+                    />
+                    <!-- <button type="button" class="btn btn-outline-dark" style="z-index: 1;" >Edit profile</button> -->
+                  </div>
+                  <div class="ms-3" style="margin-top: 130px;">
+                    <h5>{{ expert.user.name }}</h5>
+                  </div>
                 </div>
+                <div class="card-body p-4 text-black">
+                  <div class="mb-5">
+                    <p class="lead fw-normal mb-1">About</p>
+                    <p>
+                      <strong>Email:</strong>
+                      {{ expert.user.email }}
+                    </p>
+                    <p>
+                      <strong>Bio:</strong>
+                      {{ expert.bio }}
+                    </p>
+                    <h3>Department:</h3>
+                    <p>{{ expert.department.name }}</p>
+                  </div>
+                  <ul>
+                    <li v-for="service in expert.services" :key="service.id">
+                      <p>{{ service.title }} - ${{ service.price }}</p>
+                      Rating: {{ service.rating }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="contracts" v-if="contracts && contracts.length > 0">
+                  <h3>Contracts:</h3>
+                  <ul>
+                    <li v-for="contract in contracts" :key="contract.id">
+                      <p>
+                        <strong>Service Title:</strong>
+                        {{ contract.service.title }}
+                      </p>
+                      <p>
+                        <strong>User Name:</strong>
+                        {{ contract.service.user.name }}
+                      </p>
+                      <p>
+                        <strong>Service Price:</strong>
+                        {{ contract.service.price }}$
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="ratings" v-if="service_ratings && service_ratings.length > 0">
+                  <h3>Ratings:</h3>
+                  <ul>
+                    <li v-for="rating in service_ratings" :key="rating.id">
+                      <p>
+                        <strong>Service Title:</strong>
+                        {{ rating.service.title }} - {{ rating.rating }}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-        </template>
-        <template v-else>
-            <p v-if="error">Failed to fetch expert data.</p>
-            <p v-else>Loading expert profile...</p>
-        </template>
-    </div>
+          </div>
+        </div>
+      </section>
+    </template>
+    <template v-else>
+      <p v-if="error">Failed to fetch expert data.</p>
+      <p v-else>Loading expert profile...</p>
+    </template>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 
 export default {
-    data() {
-        return {
-            expert: null,
-            error: false,
-            contracts: [],
-        };
+  data() {
+    return {
+      expert: null,
+      error: false,
+      contracts: []
+    };
+  },
+  mounted() {
+    this.fetchExpert();
+    this.fetchContracts();
+  },
+  methods: {
+    fetchExpert() {
+      const expertId = this.$route.params.id;
+      axios
+        .get(`/api/experts/${expertId}`)
+        .then(response => {
+          this.expert = response.data.expert;
+        })
+        .catch(error => {
+          console.log(error);
+          this.error = true;
+        });
     },
-    mounted() {
-        this.fetchExpert();
-        this.fetchContracts();
-    },
-    methods: {
-        fetchExpert() {
-            const expertId = this.$route.params.id;
-            axios
-                .get(`/api/experts/${expertId}`)
-                .then((response) => {
-                    this.expert = response.data.expert;
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.error = true;
-                });
-        },
-        fetchContracts() {
-            axios
-                .get("/api/contracts")
-                .then((response) => {
-                    this.contracts = response.data.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.error = true;
-                });
-        },
-    },
+    fetchContracts() {
+      axios
+        .get("/api/contracts")
+        .then(response => {
+          this.contracts = response.data.data;
+        })
+        .catch(error => {
+          console.log(error);
+          this.error = true;
+        });
+    }
+  }
 };
 </script>
 
 <style scoped>
-.expert-profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.card {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.expert-info {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.expert-info .expert-image {
-    flex: 0 0 120px;
-    margin-right: 20px;
-}
-
-.expert-info .expert-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.expert-info .expert-details {
-    flex: 1;
-}
-
-.expert-details h3 {
-    margin-top: 10px;
-}
-
-@media (max-width: 480px) {
-    .expert-info .expert-image {
-        flex: 0 0 100%;
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .expert-info .expert-details {
-        flex: 1;
-    }
-}
 </style>

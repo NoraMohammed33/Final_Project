@@ -9,12 +9,11 @@
                     v-model="searchQuery"
                     @input="fetchAllServices"
                 />
-                <i class="fas fa-search"></i>
             </div>
         </div>
-        <div class="d-flex flex-wrap justify-content-center mx-auto px-5">
+        <div class="d-flex flex-wrap justify-content-center mt-5 px-5">
     <template v-for="service in services" :key="service.id">
-        <v-card class="col-9 col-sm-5 col-md-5 col-lg-4 col-xl-3 mx-3 rounded-3">
+        <v-card class="col-9 col-sm-5 col-md-5 col-lg-4 col-xl-3 mx-3 my-3 rounded-3">
             <div class="image-container">
                 <v-img class="img-service" cover :src="'storage/' + service.image" style="width: 100%; height: 140px;"></v-img>
             </div>
@@ -321,10 +320,9 @@ export default {
 #search{
 width:600px;
 padding:4px;
-margin-right: 500px;
+margin-right: 50px;
 border-radius:5px;
 margin-bottom: 40px;
-margin-top: -50px;
 height: 45px;
 background: #fff;}
 

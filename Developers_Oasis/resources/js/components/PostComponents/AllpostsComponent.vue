@@ -10,6 +10,7 @@
           class="form-control"
           placeholder="Search post"
           id="search"
+          @input="searchPosts"
         />
       </div>
       <div class="post-list">
@@ -117,7 +118,7 @@
         @click="changePage(posts.current_page - 1)"
       >Previous</button>
       <button
-        class="btn btn-primary"
+        class="btn btn-secondary"
         v-if="posts.current_page < posts.last_page"
         @click="changePage(posts.current_page + 1)"
       >Next</button>
@@ -178,26 +179,14 @@ export default {
         .then(response => {
           this.posts = response.data.posts;
           this.currentUser = response.data.loggeduser;
-
-          if (this.currentPage !== 1 && this.filteredPosts.length === 0) {
-            axios
-              .get("/api/posts", {
-                params: {
-                  search: this.searchInput,
-                  page: 1
-                }
-              })
-              .then(response => {
-                this.posts = response.data.posts;
-              })
-              .catch(error => {
-                console.log(error);
-              });
-          }
         })
         .catch(error => {
           console.log(error);
         });
+    },
+    searchPosts() {
+      this.currentPage = 1;
+      this.fetchPosts();
     },
 
     changePage(page) {

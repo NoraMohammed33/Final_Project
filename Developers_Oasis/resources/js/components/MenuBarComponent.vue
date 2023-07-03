@@ -84,8 +84,16 @@ ul li .nav-link{
     font-size: 1.1rem;
     margin: 0 .4rem;
     color: var(--black);
+    
 }
 ul li .nav-link:hover{
     color: var(--orange);
 }
 </style>
+
+
+
+
+
+
+

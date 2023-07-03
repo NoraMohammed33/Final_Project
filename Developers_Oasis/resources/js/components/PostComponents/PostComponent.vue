@@ -1,19 +1,18 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="card my-3" v-for="post in posts" :key="post.id">
-        <h5 class="card-header">{{ post.title }}</h5>
-        <div class="card-body">
-          <div class="mb-3">
-            <p>{{ post.body }}</p>
-          </div>
+      <div class="post-list">
+        <div v-for="post in posts" :key="post.id" class="post-item">
+          <v-card class="post-card">
+            <v-card-title class="post-title">{{ post.title }}</v-card-title>
+            <v-card-text class="post-body">
+              <textarea v-model="post.body" class="post-textarea" rows="3" readonly> </textarea>
+            </v-card-text>
+          </v-card>
         </div>
       </div>
     </div>
-    <div class="card mt-4">
-            <h5 class="card-header">Comments</h5>
-            <div class="card-body">
-              <form @submit.prevent="addNewComment()">
+    <form @submit.prevent="addNewComment()">
                 <div class="form-group">
                   <textarea
                     v-model="newCommentBody"
@@ -22,14 +21,17 @@
                     cols="15"
                     rows="4"
                     class="form-control"
-                    placeholder="Your comment here"
+                    placeholder="PLease Add Your comment here"
                   ></textarea>
                 </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary">Add Comment</button>
                 </div>
               </form>
-              <div>
+    <div class="card mt-4">
+            <div class="card-body">
+              <div >
+                <h3 class="card-header">Comments</h3>
                 <div class="card" v-for="comment in comments.data" :key="comment.id">
                   <div>
                     <div class="card-header"></div>
@@ -229,4 +231,44 @@ export default {
 
 
 <style scoped>
+.container {
+  margin-top: 30px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px;
+}
+
+.post-item {
+  margin-bottom: 20px;
+}
+
+.post-card {
+  width: 100%;
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.post-title {
+  background-color: #f8f9fa;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.post-body {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+.post-textarea {
+  width: 100%;
+  border: none;
+  resize: none;
+  font-size: 14px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+}
 </style>
