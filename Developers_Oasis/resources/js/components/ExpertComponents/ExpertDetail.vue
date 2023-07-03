@@ -33,11 +33,13 @@
         </div>
         <div class="col-lg-6">
           <div class="about-avatar">
-            <img :src="'/storage/' + expert.user.image" title alt />
+            <img width="300"
+              class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"   :src="'/storage/' + expert.user.image" title alt />
           </div>
+          <br >
 
             <router-link :to="'/chat'">
-            <div class="btn btn-success mt-2">
+            <div class="btn btn-success mx-15">
                 chat <span class="text-warning">" {{ expert.user.name }} "</span>
             </div>
             </router-link>
