@@ -45,20 +45,20 @@
     </div>
 
     <!-- Pagination -->
-<div class="pagination-container text-center">
-  <button
-    class="btn btn-primary mx-2"
-    v-if="departments.current_page > 1"
-    @click="changePage(departments.current_page - 1)"
-  >Previous</button>
-  <button
-    class="btn btn-primary"
-    v-if="departments.current_page < departments.last_page"
-    @click="changePage(departments.current_page + 1)"
-  >Next</button>
-  <br />
-  <br />
-</div>
+    <div class="pagination-container text-center">
+      <button
+        class="btn btn-primary mx-2"
+        v-if="departments.current_page > 1"
+        @click="changePage(departments.current_page - 1)"
+      >Previous</button>
+      <button
+        class="btn btn-primary"
+        v-if="departments.current_page < departments.last_page"
+        @click="changePage(departments.current_page + 1)"
+      >Next</button>
+      <br />
+      <br />
+    </div>
 
 
     <!-- Update Department Modal -->
