@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex justify-content-center">
-        <v-card  class="w-50">
+        <v-card  class="w-100">
             <v-card-title>Create User and Expert</v-card-title>
             <v-card-text>
                 <v-form @submit.prevent="createUser">
@@ -9,6 +9,13 @@
                     <v-text-field v-model="user.password" label="Password" type="password" required></v-text-field>
 <!--                    <v-select v-model="expert.dept_id" :items="departments" label="Department" required>-->
 <!--                    </v-select>-->
+                    <input type="file" ref="service_name" class="form-control my-3 w-100" name="service_image" @change="previewImage">
+
+                    <div class="d-flex justify-content-center p-1">
+                        <img v-if="user.imagePreview" :src="user.imagePreview" alt="Image Preview" class="img-fluid rounded-2" style="width: 70%;height: 210px">
+                    </div>
+
+
                     <label>department</label>
                     <select class="form-control mb-2" v-model="user.dept_id" >
 
@@ -38,6 +45,7 @@ export default {
                 email: '',
                 password: '',
                 // user_id:'',
+                imagePreview: '',
                 dept_id: '',
                 bio: '',
             },
@@ -84,6 +92,18 @@ export default {
             .catch(error => {
                 console.log(error);
             });
-    }
+    },
+
+
+        previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.imagePreview = reader.result;
+            };
+            reader.readAsDataURL(file);
+        },
+
+
 };
 </script>

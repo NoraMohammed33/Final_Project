@@ -28,7 +28,7 @@
                             class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
                     <div class="expert-info">
                         <h4 class="expert-name">{{ expert.user.name }}</h4>
-                        <p> {{ expert.bio }}</p>
+                        <p class="bio"> {{ expert.bio }}</p>
                     </div>
                 </div>
             </div>
@@ -233,6 +233,7 @@ export default {
     .departments div template:hover{
         box-shadow: 5px 15px 25px #eeeeee;
     }
+    
 
 </style>
 
