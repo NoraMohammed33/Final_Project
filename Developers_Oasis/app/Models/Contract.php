@@ -16,8 +16,9 @@ class Contract extends Model
         'charge_id',
     ];
 
-    public function users(){
-        $this->hasMany(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
     public function service()
     {

@@ -26,7 +26,7 @@
             <!-- <v-img class="align-end text-white" height="200" :src="'public/images/' + expert.user.image" cover>
                 </v-img> -->
             <img
-              src="https://bootstrapious.com/i/snippets/sn-team/teacher-2.jpg"
+                :src="'/storage/' + expert.user.image"
               alt
               width="150"
               class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"

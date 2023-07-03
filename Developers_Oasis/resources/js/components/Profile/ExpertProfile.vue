@@ -17,7 +17,7 @@
                 >
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                     <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                        :src="'/storage/' + expert.user.image"
                       alt="Generic placeholder image"
                       class="img-fluid img-thumbnail mt-4 mb-2"
                       style="width: 150px; z-index: 1"
@@ -42,28 +42,29 @@
                     <h3>Department:</h3>
                     <p>{{ expert.department.name }}</p>
                   </div>
+                    <h3>Services:</h3>
                   <ul>
                     <li v-for="service in expert.services" :key="service.id">
                       <p>{{ service.title }} - ${{ service.price }}</p>
                       Rating: {{ service.rating }}
                     </li>
                   </ul>
+                    <h3>Contracts:</h3>
                 </div>
                 <div class="contracts" v-if="contracts && contracts.length > 0">
-                  <h3>Contracts:</h3>
                   <ul>
                     <li v-for="contract in contracts" :key="contract.id">
                       <p>
                         <strong>Service Title:</strong>
-                        {{ contract.service.title }}
+                        {{ contract.service_id.title }}
                       </p>
-                      <p>
-                        <strong>User Name:</strong>
-                        {{ contract.service.user.name }}
-                      </p>
+<!--                      <p>-->
+<!--                        <strong>User Name:</strong>-->
+<!--                        {{ contract.service_id.user.name }}-->
+<!--                      </p>-->
                       <p>
                         <strong>Service Price:</strong>
-                        {{ contract.service.price }}$
+                        {{ contract.service_id.price }}$
                       </p>
                     </li>
                   </ul>

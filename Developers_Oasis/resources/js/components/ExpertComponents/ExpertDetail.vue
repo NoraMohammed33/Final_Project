@@ -33,7 +33,7 @@
         </div>
         <div class="col-lg-6">
           <div class="about-avatar">
-            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title alt />
+            <img :src="'/storage/' + expert.user.image" title alt />
           </div>
 
             <router-link :to="'/chat'">

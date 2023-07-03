@@ -22,6 +22,7 @@ class ContractController extends Controller
         $services=Service::all();
         $experts=Expert::all();
         return ContractResource::collection(Contract::all());
+
     }
 
     /**
