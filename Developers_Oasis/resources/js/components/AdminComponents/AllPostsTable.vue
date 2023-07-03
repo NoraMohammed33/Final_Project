@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <v-container>
 
         <v-row>
-            <table class="min-w-full">
+            <table class="w-75">
                 <thead>
                 <tr>
                     <th
                         class="
-                        w-100
+
                     px-6
                     py-3
                     text-xs
@@ -40,12 +40,31 @@
                     </th>
 
 
-                    <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                    <th class="px-6 py-3 bg-gray   px-6
+                    py-3
+                    text-xs
+                    font-medium
+                    leading-4
+                    tracking-wider
+                    text-left text-gray-500
+                    uppercase
+                    border-b border-gray-200
+                    bg-gray-50">created by</th>
+                    <th class="px-6 py-3 bg-gray   px-6
+                    py-3
+                    text-xs
+                    font-medium
+                    leading-4
+                    tracking-wider
+                    text-left text-gray-500
+                    uppercase
+                    border-b border-gray-200
+                    bg-gray-50">department</th>
                 </tr>
                 </thead>
 
                 <tbody class="bg-white">
-                <tr v-for="post in posts.data" :key="post">
+                <tr v-for="post in posts" :key="post">
                     <td
                         class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                     >
@@ -67,16 +86,20 @@
                     </td>
 
 
-                    <td>
-                        <i class="fas fa-trash fs-4 text-danger ms-4 me-5" @click="deletePost(post.id)"></i>
+<!--                    <td>-->
+<!--                        <i class="fas fa-trash fs-4 text-danger ms-4 me-5" @click="deletePost(post.id)"></i>-->
+<!--                    </td>-->
+                    <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                        {{post.user.name}}
                     </td>
-
-
+                    <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                        {{post.department.name}}
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </v-row>
-    </div>
+    </v-container>
 </template>
 
 <script  >
@@ -101,8 +124,8 @@ export default {
             axios
                 .get("http://localhost:8000/api/posts")
                 .then((response) => {
-                    this.posts = response.data["posts"];
-                    // console.log(this.posts.data);
+                    this.posts = response.data["posts_admin"];
+                    console.log(response.data);
                 })
                 .catch((error) => {
                     console.log(error);

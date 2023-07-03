@@ -32,11 +32,13 @@ class PostController extends Controller
             : Post::query();
 
         $posts = $postsQuery->paginate(5);
+        $posts_admin= Post::with('user','department')->get();
 
         return response()->json([
             "status" => 'success',
             'message' => 'Posts fetched successfully.',
             'posts' => $posts,
+            'posts_admin'=>$posts_admin,
             'loggeduser' => $user
         ]);
     }
