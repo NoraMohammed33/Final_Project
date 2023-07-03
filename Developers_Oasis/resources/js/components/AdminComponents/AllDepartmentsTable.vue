@@ -1,11 +1,13 @@
 <template>
-    <div>
-<v-row>
+    <v-container>
+        <v-row>
+
     <DeptForm @department-saved="handleDepartmentSaved"></DeptForm>
 
-</v-row>
+        </v-row>
+
     <v-row>
-                    <table class="min-w-full">
+                    <table class="min-w-full w-100">
                         <thead>
                         <tr>
                             <th
@@ -18,7 +20,6 @@
                     tracking-wider
                     text-left text-gray-500
                     uppercase
-                    border-b border-gray-200
                     bg-gray-50
                   "
                             >
@@ -34,7 +35,6 @@
                     tracking-wider
                     text-left text-gray-500
                     uppercase
-                    border-b border-gray-200
                     bg-gray-50
                   "
                             >
@@ -42,8 +42,8 @@
                             </th>
 
 
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                            <th class="px-6 py-3  bg-gray-50"></th>
+                            <th class="px-6 py-3  bg-gray-50"></th>
 
                         </tr>
                         </thead>
@@ -74,18 +74,13 @@
                             </td>
 
 
-                            <td class="">
-                                <img style="width:20px" src="../../../../public/images/edit-svgrepo-com.png"/>
-                            </td>
-                            <td>
-                                <img style="width:20px" src="../../../../public/images/delete-2-svgrepo-com.png"/>
-                            </td>
-
+                            <i class="fas fa-edit fs-4 text-warning"></i>
+                            <i class="fas fa-trash fs-4 text-danger ms-4 me-5" @click="deleteDepartment(dept.id)"></i>
                         </tr>
                         </tbody>
                     </table>
     </v-row>
-    </div>
+    </v-container>
 
     <div>
 
@@ -96,7 +91,9 @@
 <script  >
 import { ref } from "vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 import DeptForm from "./DeptForm.vue";
+import "@fortawesome/fontawesome-free/css/all.css";
 export default {
 
 data() {
@@ -121,7 +118,34 @@ mounted() {
                     console.log(error);
                 });
         },
-
+        deleteDepartment(departmentID) {
+            Swal.fire({
+                icon: "warning",
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                showCancelButton: true,
+                confirmButtonColor: "#d9534f",
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios
+                        .delete("http://localhost:8000/api/departments/" + departmentID)
+                        .then(() => {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success",
+                                text: "Department deleted successfully",
+                                confirmButtonColor: "#5cb85c",
+                            });
+                            this.fetchAllDepartments();
+                        })
+                        .catch((error) => {
+                            console.log(error.response.data);
+                        });
+                }
+            });
+        },
         handleDepartmentSaved() {
             this.fetchDepartments();
         },

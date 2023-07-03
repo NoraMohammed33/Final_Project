@@ -1,15 +1,15 @@
 <template>
-    <div>
-<div>
+    <v-container>
+        <v-row>
 
-    <v-col cols="auto" class="ms-auto" data-bs-toggle="modal" data-bs-target="#mymodal">
-        <v-btn color="green" density="comfortable">
-            <i class="fas fa-plus fs-5 me-1"></i>
-            Add New expert
-        </v-btn>
-    </v-col>
-</div>
-    <v-row>
+        <router-link :to="'/admin/dashboard/addexpert'" class="mb-3">
+            <v-btn color="green">
+                add new expert
+            </v-btn>
+        </router-link>
+        </v-row>
+
+        <v-row>
                     <table class="min-w-full">
                         <thead>
                         <tr>
@@ -63,6 +63,8 @@
                             </th>
 
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+
                         </tr>
                         </thead>
 
@@ -139,22 +141,34 @@
                             >
 
                             </td>
+                            <td class="">
+                                <img style="width:20px"   src="../../../../public/images/edit-svgrepo-com.png"/>
+                            </td>
+                            <td>
+                                <img style="width:20px" src="../../../../public/images/delete-2-svgrepo-com.png"/>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
     </v-row>
-    </div>
+
+    </v-container>
+
 </template>
 
 <script  >
 import { ref } from "vue";
 import axios from "axios";
+import ExpertForm from './ExpertForm.vue'
 export default {
 data() {
     return {
 experts:[]
     };
-}
+},
+    components:{
+    ExpertForm
+    }
 ,
 mounted() {
     this.fetchExperts();

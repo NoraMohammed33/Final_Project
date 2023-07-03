@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex justify-content-center">
-        <v-card  class="w-50">
+        <v-card  class="w-100">
             <v-card-title>Create User and Expert</v-card-title>
             <v-card-text>
                 <v-form @submit.prevent="createUser">
