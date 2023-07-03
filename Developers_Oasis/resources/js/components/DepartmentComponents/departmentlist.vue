@@ -49,13 +49,10 @@
       <button
         class="btn btn-primary mx-2"
         v-if="departments.current_page > 1"
-        @click="changePage(departments.current_page - 1)"
-      >Previous</button>
-      <button
-        class="btn btn-primary"
+        @click="changePage(departments.current_page - 1)">Previous</button>
+      <button class="btn btn-primary"
         v-if="departments.current_page < departments.last_page"
-        @click="changePage(departments.current_page + 1)"
-      >Next</button>
+        @click="changePage(departments.current_page + 1)" >Next</button>
       <br />
       <br />
     </div>

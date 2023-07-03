@@ -29,21 +29,20 @@
                     class="form-control"
                     placeholder="PLease Add Your comment here"
                   ></textarea> -->
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-8 col-lg-6">
+        <div class="row d-flex">
+          <div class="">
             <div class="card shadow-0 border" style="background-color: #f0f2f5">
               <div class="card-body p-4">
-                <div class="form-outline mb-4">
+                <div class="form-outline m-2 d-flex ">
                   <input
                     type="text"
                     v-model="newCommentBody"
                     id="addANote"
                     class="form-control"
-                    placeholder="Type comment..."
-                  />
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                      Add Comment
+                    placeholder="Type comment..."/>
+                  <div class="form-group ">
+                    <button type="submit" class="btn btn-info btn-rounded mx-2" >
+                      Add 
                     </button>
                   </div>
                   <!-- <label class="form-label" for="addANote">+ Add a note</label> -->
@@ -57,12 +56,8 @@
                     <p>{{ comment.body }}</p>
                     <div class="d-flex justify-content-between">
                       <div class="d-flex flex-row align-items-center">
-                        <img
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                          alt="avatar"
-                          width="25"
-                          height="25"
-                        />
+                            <v-img v-if="comment.user_id.image" class="img-service rounded-5" :src="'/storage/' + comment.user_id.image" style="width: 50%; height: 50px;"></v-img>
+                            <v-img v-else class="img-service" :src="'/storage/users_images/default.jpg'" style="width: 50%; height: 50px;"></v-img>
                         <p class="small mb-0 ms-2">
                           {{ comment.user_id.name }}
                         </p>
