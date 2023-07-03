@@ -57,7 +57,11 @@
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }}
                                         </a>
-                                        <image src="{{ asset('images/users/default.jpg') }}" class="user-avatar" />
+                                        @if (Auth::check() && Auth::user()->image)
+                                            <img src="{{ asset('storage/' . Auth::user()->image) }}" class="user-avatar"  alt="user"/>
+                                        @else
+                                            <img src="{{ asset('images/users/default.jpg') }}" class="user-avatar"  alt="user"/>
+                                        @endif
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
