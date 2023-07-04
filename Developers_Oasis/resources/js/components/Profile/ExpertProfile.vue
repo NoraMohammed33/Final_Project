@@ -38,40 +38,41 @@
                       {{ expert.bio }}
                     </p>
                     <h3 class="card header">Department</h3>
-                    <p>{{ expert.department.name }}</p>
+                    <h4>the Department is <span style="color: coral; margin">{{ expert.department.name }} </span> </h4>
                   </div>
                   <div class="services-contracts-wrapper">
-                    <div class="services-wrapper">
-                      <h3 class="card header">Services</h3>
-                      <ul>
-                        <li v-for="service in services" :key="service.id">
-                          <p>{{ service.title }} - ${{ service.price }}</p>
-                          Rating: {{ calculateAverageRating(service.ratings) }}
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="contracts-wrapper">
-                      <h3 class="card header">Contracts</h3>
-                      <ul>
-                        <li v-for="contract in contracts" :key="contract.id">
-                          <div v-if="contract.expert_id===expert.id">
-                            <p>
-                              <strong>Service Title</strong>
-                              {{ contract.service.title }}
-                            </p>
-                            <p>
-                              <strong>User Name</strong>
-                              {{ contract.user.name }}
-                            </p>
-                            <p>
-                              <strong>Service Price</strong>
-                              {{ contract.service.price }}$
-                            </p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+  <div class="services-wrapper">
+    <div class="card">
+      <div class="card-header">Services</div>
+      <div class="card-body">
+        <ul>
+          <li v-for="service in services" :key="service.id">
+            <p>{{ service.title }} - ${{ service.price }}</p>
+            Rating: {{ calculateAverageRating(service.ratings) }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="contracts-wrapper">
+    <div class="card">
+      <div class="card-header">Contracts</div>
+      <div class="card-body" >
+        <ul>
+          <li v-for="contract in contracts" :key="contract.id">
+            <div v-if="contract.expert_id === expert.id">
+            <p><strong>Service Title:</strong> {{ contract.service.title }}</p>
+            <p><strong>User Name:</strong> {{ contract.user.name }}</p>
+            <p><strong>Service Price:</strong> {{ contract.service.price }}$</p>
+          </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
                 </div>
               </div>
             </div>
