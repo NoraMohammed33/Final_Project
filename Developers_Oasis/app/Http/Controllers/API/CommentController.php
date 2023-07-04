@@ -18,8 +18,7 @@ class CommentController extends Controller
 
     public function index()
     {
-
-        return CommentResource::collection(Comment::all());
+   return CommentResource::collection(Comment::all());
     }
 
     public function store(StoreCommentRequest $request)
@@ -76,8 +75,16 @@ class CommentController extends Controller
     //========show cmments for spesific posts=======================
     public function commentsForPost($postId)
     {
+        $user = Auth::user();
         $comments = Comment::where('post_id', $postId)->get();
         return CommentResource::collection($comments);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Comments fetched successfully.',
+        //     'comments' => $comments,
+        //     'loggeduser' => $user,
+        // ]);
+
     }
 }
 //===================================================================
