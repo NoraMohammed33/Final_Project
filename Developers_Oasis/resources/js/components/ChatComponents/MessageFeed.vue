@@ -8,6 +8,10 @@
             </li>
         </ul>
 
+        <div v-else class="text-center text-capitalize">
+            <h3 class="my-auto">Your chat goes here</h3>
+        </div>
+
     </div>
 </template>
 

@@ -35,7 +35,6 @@ Route::post('/pay', [PaymentController::class, 'pay']);
 Route::get('/success', [PaymentController::class, 'success'])->name('success');
 Route::get('/error', [PaymentController::class, 'error']);
 
-
 Route::get('/messages',[MessageController::class, 'getMessages']);
 Route::post('/send-message', [MessageController::class, 'sendMessage']);
 

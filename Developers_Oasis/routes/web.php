@@ -1,12 +1,10 @@
 <?php
 
 
-use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\API\UserController;
-use Illuminate\Support\Facades\Broadcast;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\ChatController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +16,11 @@ use App\Http\Controllers\ChatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
 // Admin login route
 Route::get('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'showAdminLoginForm']);
 Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin'])->name('admin.login');
+Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('google.callback');
 
 Auth::routes();
 
@@ -42,6 +40,8 @@ Route::get('/admin/dashboard/{any}', function () {
 Route::get('/contacts',[\App\Http\Controllers\ContactsController::class,'getAllContacts']);
 Route::get('/conversation/{id}',[\App\Http\Controllers\ContactsController::class,'getMessagesFor']);
 Route::post('/conversation/send',[\App\Http\Controllers\ContactsController::class,'sendMessage']);
+
+
 
 Route::get('/{any}', function () {
     return view('welcome');

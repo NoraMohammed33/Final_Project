@@ -44,6 +44,10 @@
                         <span style="font-size: 1rem; font-weight: bold">Created by:</span>
                         {{ comment.user_id.name }}
                       </div>
+                        <div class="image-container">
+                            <v-img :src="(comment.user_id.image && comment.user_id.image.startsWith('https')) ? comment.user_id.image : (comment.user_id.image ?'/storage/' + comment.user_id.image : '/images/users/default.jpg')" style="width: 10%; height: 40px;"></v-img>
+                        </div>
+
                     </div>
                   </div>
 

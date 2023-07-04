@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
-            $table->boolean('isadmin')->default(false);
-            $table->string('image')->nullable();
-
+            $table->string('social_id')->nullable();
+            $table->string('social_type')->nullable();
         });
     }
 
@@ -25,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+
         });
     }
 };

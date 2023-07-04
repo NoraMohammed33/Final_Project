@@ -11,12 +11,10 @@
                   style="background-color: #000; height:200px;"
                 >
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                    <img
-                        :src="user.image ? '/storage/' + user.image : '/images/users/default.jpg'"                     alt="Generic placeholder image"
-                      class="img-fluid img-thumbnail mt-4 mb-2"
-                      style="width: 150px; z-index: 1"
-                    />
-                    <!-- <button type="button" class="btn btn-outline-dark" style="z-index: 1;" >Edit profile</button> -->
+                      <img :src="user.image && user.image.startsWith('https') ? user.image : (user.image ? '/storage/' + user.image : '/images/users/default.jpg')" alt="Generic placeholder image"
+                           class="img-fluid img-thumbnail mt-4 mb-2"
+                           style="width: 150px; z-index: 1">
+                      <!-- <button type="button" class="btn btn-outline-dark" style="z-index: 1;" >Edit profile</button> -->
                   </div>
                   <div class="ms-3" style="margin-top: 130px;">
                     <h5>{{ user.name }}</h5>

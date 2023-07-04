@@ -24,7 +24,7 @@
             <h1 class="heading">Our <span>Experts</span></h1>
             <div class="all_experts">
                 <div class="expert" v-for="expert in filteredExperts" :key="expert.id">
-                    <img :src="'/storage/' + expert.user.image" alt="" width="150"
+                    <img :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')" alt="" width="150"
                             class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
                     <div class="expert-info">
                         <h4 class="expert-name">{{ expert.user.name }}</h4>

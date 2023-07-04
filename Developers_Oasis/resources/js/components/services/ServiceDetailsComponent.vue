@@ -16,7 +16,7 @@
                 <h5 class="text-center py-2 border-b border-t mt-5">About Expert</h5>
                 <div class="row justify-content-evenly align-items-baseline">
                     <img
-                        :src="'/storage/' + service.expert.user.image"
+                        :src="(service.expert.user.image && service.expert.user.image.startsWith('https')) ? service.expert.user.image : (service.expert.user.image ?'/storage/' + service.expert.user.image : '/images/users/default.jpg')"
                         alt="Generic placeholder image"
                         class="img-fluid img-thumbnail mt-4 mb-2 col-2"
                         style="width: 150px; z-index: 1"

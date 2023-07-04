@@ -33,13 +33,13 @@
         </div>
         <div class="col-lg-6">
           <div class="about-avatar">
-            <img :src="'/storage/' + expert.user.image" title alt />
+            <img :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')" />
           </div>
 
             <router-link :to="'/chat'">
-            <div class="btn btn-success mt-2">
-                chat <span class="text-warning">" {{ expert.user.name }} "</span>
-            </div>
+                <v-btn class="bg-blue mt-2 ms-auto">
+                    <i class="fa-brands fa-facebook-messenger"></i> Send Message
+                </v-btn>
             </router-link>
 
         </div>

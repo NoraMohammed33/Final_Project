@@ -6,27 +6,26 @@
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-lg-9 col-xl-7">
-                <router-link :to="'/chat'">
-                    <div class="btn btn-success mt-2">
-                        chat
-                    </div>
-                </router-link>
               <div class="card">
                 <div
                   class="rounded-top text-white d-flex flex-row"
                   style="background-color: #000; height:200px;"
                 >
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                    <img
-                        :src="'/storage/' + expert.user.image"
-                      alt="Generic placeholder image"
-                      class="img-fluid img-thumbnail mt-4 mb-2"
-                      style="width: 150px; z-index: 1"
-                    />
+                      <img :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')"
+                           alt="Generic placeholder image"
+                           class="img-fluid img-thumbnail mt-4 mb-2"
+                           style="width: 150px; z-index: 1"
+                      />
                     <!-- <button type="button" class="btn btn-outline-dark" style="z-index: 1;" >Edit profile</button> -->
                   </div>
                   <div class="ms-3" style="margin-top: 130px;">
                     <h5>{{ expert.user.name }}</h5>
+                      <router-link :to="'/chat'">
+                          <v-btn class="bg-blue mt-2 ms-auto">
+                              <i class="fa-brands fa-facebook-messenger"></i> Send Message
+                          </v-btn>
+                      </router-link>
                   </div>
                 </div>
                 <div class="card-body p-4 text-black">
