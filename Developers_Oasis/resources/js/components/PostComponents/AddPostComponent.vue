@@ -1,6 +1,6 @@
 <template>
-    <form @submit.prevent="addPost" class="container">
-        <div class="col-lg-7 col-md-8 col-sm-10" id="c">
+    <form @submit.prevent="addPost" class="container ">
+        <div class="col-lg-7 col-md-8 col-sm-10 rounded-5" id="c">
             <div class="row">
                 <div class="col-md-6">
                     <h3 class="text-left" id="h">Add New Post</h3>
@@ -49,16 +49,16 @@ import axios from "axios";
 export default {
   data() {
     return {
-      departments: [],
-      newPost: {
+        departments: [],
+        newPost: {
         title: "",
         body: "",
         dep_id: ""
-      }
+    }
     };
-  },
-  methods: {
-      addPost() {
+    },
+    methods: {
+        addPost() {
           axios
               .post("http://localhost:8000/api/posts/", this.newPost)
               .then(response => {
@@ -108,8 +108,8 @@ export default {
 }
 
 #c {
-    box-shadow: -1px 1px 60px 10px black;
-    background: rgb(0, 0, 0, 0.4);
+    /* box-shadow: -1px 1px 60px 10px black; */
+    background: rgba(42, 52, 56, 0.4);
     text-align: center;
     display: inline-block;
     vertical-align: middle;

@@ -39,9 +39,9 @@
                     v-model="newCommentBody"
                     id="addANote"
                     class="form-control"
-                    placeholder="Type comment..."/>
+                    placeholder="Type comment..." style="height:60px"/>
                   <div class="form-group ">
-                    <button type="submit" class="btn btn-info btn-rounded mx-2" >
+                    <button type="submit" class="btn btn-info btn-rounded mx-2 mt-3" >
                       Add 
                     </button>
                   </div>
@@ -63,8 +63,6 @@
                         </p>
                       </div>
                       <div class="d-flex flex-row align-items-center">
-                        <!-- <i class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                                <p class="small text-muted mb-0">3</p> -->
                         <div class="ms-auto">
                           <!-- Edit Post Icon -->
                           <i
@@ -78,6 +76,8 @@
                             class="fas fa-trash fs-4 text-danger ms-4"
                             @click="deleteComment(comment.id)"
                           ></i>
+                          <i class="far fa-thumbs-up mx-5 fs-4 text-black" style="margin-top: -0.16rem;"></i>
+                          <span class="text-muted mb-0">3</span>
                         </div>
                         <div
                           class="modal fade"
