@@ -8,11 +8,16 @@
                 <img :src="'/storage/'+service.image" class="w-100 rounded-3">
             </div>
             <div class="col-md-4 text-center border rounded-3 mt-5 mt-md-0 shadow-lg mx-auto">
+                <h5 class="text-center py-2 border-b">Service Details</h5>
+                <h4 class="text-start">{{service.title}}</h4>
+                <p class="text-start ">{{service.description}}</p>
+                <h4 class="text-start ">{{service.price}} USD</h4>
+
                 <h5 class="text-center py-2 border-b border-t mt-5">About Expert</h5>
                 <div class="d-flex justify-content-around align-items-baseline">
                     <div>
                         <img
-                            :src="'/storage/' + service.expert.user.image"
+                            :src="(service.expert.user.image && service.expert.user.image.startsWith('https')) ? service.expert.user.image : (service.expert.user.image ?'/storage/' + service.expert.user.image : '/images/users/default.jpg')"
                             alt="Generic placeholder image"
                             class="img-fluid img-thumbnail mt-5 mb-2 col-2"
                             style="width: 150px; z-index: 1"/>
@@ -29,7 +34,7 @@
                 <div class="w-100 "><br><br><br>
                     <v-btn class="mt-5  bg-orange w-75 fs-4 text-white pay" @click="paypalPayment"><i class="fa-brands fs-2 mx-1 text-blue-darken-4 fa-paypal"></i>PayPal Payment</v-btn>
                 </div>
-                
+
             </div>
         </div>
         <div v-if="service.hasRated && service.loggedUser.id !== service.expert.user.id" class="text-center fs-4 mx-auto text-light rounded-3 w-50 bg-success mt-5">
@@ -57,7 +62,7 @@
             <h4>Ratings and Comments</h4>
             <ul>
                 <li v-for="rating in service.ratings"  class="border  p-3 rounded-3 shadow-lg">
-                    <div> 
+                    <div>
                         <star-rating
                             v-model:rating="rating.rating"
                             :star-size="24"

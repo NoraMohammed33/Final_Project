@@ -66,12 +66,19 @@
                         <div class="text-center mt-5">
                             Don't have an account? <a class=" text-decoration-none" href="/register">Sign Up</a>
                         </div>
-                        <div class="text-center mt-5">
-                            <a href="/" class="btn">Go home page</a>
-                        </div>
                     </form>
+                    <hr>
+                    <div class="d-flex justify-content-center align-items-center mt-4 mx-auto">
+                        <a href="{{ url('auth/google') }}" class="btn">
+                            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
+                        </a>
+                    </div>
+                    <div class="text-center mt-5">
+                        <a href="/" class="btn">Go home page</a>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div class="d-none d-md-block col-md-7">
             <img src="{{ asset('images/login2.png') }}" class="img-fluid" alt="Illustration">

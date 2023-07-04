@@ -6,9 +6,6 @@
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-lg-9 col-xl-7">
-              <router-link :to="'/chat'">
-                <div class="btn btn-success mt-2">chat</div>
-              </router-link>
               <div class="card">
                 <div
                   class="rounded-top text-white d-flex flex-row"
@@ -16,7 +13,7 @@
                 >
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                     <img
-                      :src="'/storage/' + expert.user.image"
+                        :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')"
                       alt="Generic placeholder image"
                       class="img-fluid img-thumbnail mt-4 mb-2"
                       style="width: 150px; z-index: 1"
@@ -24,6 +21,11 @@
                   </div>
                   <div class="ms-3" style="margin-top: 130px;">
                     <h5>{{ expert.user.name }}</h5>
+                      <router-link :to="'/chat'">
+                          <v-btn class="bg-blue mt-2 ms-auto">
+                              <i class="fa-brands fa-facebook-messenger"></i> Send Message
+                          </v-btn>
+                      </router-link>
                   </div>
                 </div>
                 <div class="card-body p-4 text-black">
@@ -38,7 +40,7 @@
                       {{ expert.bio }}
                     </p>
                     <h3 class="card header">Department</h3>
-                    <h4>the Department is <span style="color: coral; margin">{{ expert.department.name }} </span> </h4>
+                    <h4>the Department is <span style="color: coral;">{{ expert.department.name }} </span> </h4>
                   </div>
                   <div class="services-contracts-wrapper">
   <div class="services-wrapper">

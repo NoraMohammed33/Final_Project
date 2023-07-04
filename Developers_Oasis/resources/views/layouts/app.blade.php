@@ -1,4 +1,7 @@
-<!doctype html>
+@php
+    use Illuminate\Support\Str;
+@endphp
+    <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -57,8 +60,13 @@
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }}
                                         </a>
-                                        @if (Auth::check() && Auth::user()->image)
-                                            <img src="{{ asset('storage/' . Auth::user()->image) }}" class="user-avatar"  alt="user"/>
+
+                                    @if (Auth::check() && Auth::user()->image)
+                                            @if(Str::startsWith(Auth::user()->image, 'users_images'))
+                                                <img src="{{ asset('storage/' . Auth::user()->image) }}" class="user-avatar"  alt="user"/>
+                                                @elseif(Str::startsWith(Auth::user()->image, 'https'))
+                                                    <img src="{{Auth::user()->image}}" class="user-avatar"  alt="user"/>
+                                            @endif
                                         @else
                                             <img src="{{ asset('images/users/default.jpg') }}" class="user-avatar"  alt="user"/>
                                         @endif

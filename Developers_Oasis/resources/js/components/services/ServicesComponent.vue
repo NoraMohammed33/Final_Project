@@ -50,6 +50,7 @@
                     <span class="text-light font-weight-bold me-1">({{ service.contracts_count }})</span>
                 </div>
                 </div>
+
             </v-card-actions>
         </v-card>
     </template>

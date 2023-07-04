@@ -10,7 +10,7 @@
         <div class="col-md-4" v-for="expert in experts" :key="expert.id">
           <div class="bg-white rounded shadow-sm py-5 px-10" style="width: 300px;">
             <img
-                :src="'/storage/' + expert.user.image"
+                :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')"
               alt
               width="150"
               class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"

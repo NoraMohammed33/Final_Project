@@ -26,7 +26,7 @@
             <!-- <v-img class="align-end text-white" height="200" :src="'public/images/' + expert.user.image" cover>
                 </v-img> -->
             <img
-                :src="'/storage/' + expert.user.image"
+                :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')"
               alt
               width="150"
               class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"

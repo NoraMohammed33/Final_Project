@@ -36,7 +36,7 @@
             <img
               width="300"
               class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
-              :src="'/storage/' + expert.user.image"
+              :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')"
               title
               alt
             />

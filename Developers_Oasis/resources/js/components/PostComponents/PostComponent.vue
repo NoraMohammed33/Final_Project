@@ -49,7 +49,7 @@
                         <v-img
                           v-if="comment.user_id.image"
                           class="img-service rounded-5"
-                          :src="'/storage/' + comment.user_id.image"
+                          :src="(comment.user_id.image && comment.user_id.image.startsWith('https')) ? comment.user_id.image : (comment.user_id.image ?'/storage/' + comment.user_id.image : '/images/users/default.jpg')"
                           style="width: 50%; height: 50px;"
                         ></v-img>
                         <v-img
@@ -138,6 +138,7 @@
   <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+
 
 export default {
   data() {
