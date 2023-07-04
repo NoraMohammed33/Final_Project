@@ -1,6 +1,7 @@
 <template>
-    <form @submit.prevent="addPost" class="container">
-        <div class="col-lg-7 col-md-8 col-sm-10" id="c">
+    <div class="con">
+    <form @submit.prevent="addPost" class="container ">
+        <div class="col-lg-7 col-md-8 col-sm-10 rounded-5" id="c">
             <div class="row">
                 <div class="col-md-6">
                     <h3 class="text-left" id="h">Add New Post</h3>
@@ -37,11 +38,12 @@
             <hr />
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-center">
-                    <button class="btn btn-info" id="button" type="submit">Add Your Post</button>
+                    <button class="btn  btn-rounded" id="button" type="submit">Add Your Post</button>
                 </div>
             </div>
         </div>
     </form>
+    </div>
 </template>
   <script>
 import axios from "axios";
@@ -49,16 +51,16 @@ import axios from "axios";
 export default {
   data() {
     return {
-      departments: [],
-      newPost: {
+        departments: [],
+        newPost: {
         title: "",
         body: "",
         dep_id: ""
-      }
+    }
     };
-  },
-  methods: {
-      addPost() {
+    },
+    methods: {
+        addPost() {
           axios
               .post("http://localhost:8000/api/posts/", this.newPost)
               .then(response => {
@@ -95,11 +97,14 @@ export default {
 </script>
 
 <style scoped>
+.con{
+        background: url(../Z3BcMC.jpg);
+
+}
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 #h {
@@ -108,8 +113,8 @@ export default {
 }
 
 #c {
-    box-shadow: -1px 1px 60px 10px black;
-    background: rgb(0, 0, 0, 0.4);
+    /* box-shadow: -1px 1px 60px 10px black; */
+    background: rgba(42, 52, 56, 0.4);
     text-align: center;
     display: inline-block;
     vertical-align: middle;
@@ -145,10 +150,14 @@ export default {
 }
 
 #button {
-    width: 100%;
+    /* width: 100%; */
     height: 40px;
     padding-right: 9px;
     cursor: pointer;
     margin-top: 10px;
+    background: rgb(152, 191, 211);
+}
+#button:hover{
+    scale: 1.1;
 }
 </style>

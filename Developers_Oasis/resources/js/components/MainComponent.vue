@@ -4,7 +4,7 @@
             <div class="content">
                 <h3>Welcome to <span>Developers</span> World</h3>
                 <p>Solve your coding challenges with us </p>
-                <router-link to="/addpost" class="btn">ask now</router-link>
+                <router-link to="/addpost" class="btn">Ask now</router-link>
             </div>
         </section>
 
@@ -28,7 +28,7 @@
                             class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
                     <div class="expert-info">
                         <h4 class="expert-name">{{ expert.user.name }}</h4>
-                        <p> {{ expert.bio }}</p>
+                        <p class="bio"> {{ expert.bio }}</p>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <template v-for="department in departments.data" :key="department.id">
                     <v-card class="col-8 col-sm-5 col-md-4 col-lg-3 m-3 rounded-4">
                         <v-card-text>
-                            <h2 class="font-weight-bold mb-2">{{ department.name }}</h2>
+                            <h2 class="font-weight-bold mb-2 text-orange text-center">{{ department.name }}</h2>
                             <div class="text-grey">{{ department.description }}</div>
                         </v-card-text>
                     </v-card>
@@ -233,6 +233,7 @@ export default {
     .departments div template:hover{
         box-shadow: 5px 15px 25px #eeeeee;
     }
+    
 
 </style>
 

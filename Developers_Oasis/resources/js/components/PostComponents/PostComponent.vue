@@ -6,15 +6,15 @@
           <v-card class="post-card">
             <v-card-title class="post-title">{{ post.title }}</v-card-title>
             <v-card-text class="post-body">
-              <textarea v-model="post.body" class="post-textarea" rows="3" readonly> </textarea>
+              <textarea v-model="post.body" class="post-textarea" rows="3" readonly></textarea>
             </v-card-text>
           </v-card>
         </div>
       </div>
     </div>
     <form @submit.prevent="addNewComment()">
-                <div class="form-group">
-                  <textarea
+      <div class="form-group">
+        <!-- <textarea
                     v-model="newCommentBody"
                     name="body"
                     id="body"
@@ -22,57 +22,104 @@
                     rows="4"
                     class="form-control"
                     placeholder="PLease Add Your comment here"
-                  ></textarea>
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Add Comment</button>
-                </div>
-              </form>
-    <div class="card mt-4">
-            <div class="card-body">
-              <div >
-                <h3 class="card-header">Comments</h3>
-                <div class="card" v-for="comment in comments.data" :key="comment.id">
-                  <div>
-                    <div class="card-header"></div>
-                    <div class="card-body">
-                      <div>
-                        <span style="font-size: 1.2rem; font-weight: bold">Comment:</span>
-                        {{ comment.body }}
-                      </div>
-                      <div>
-                        <span style="font-size: 1rem; font-weight: bold">Created by:</span>
-                        {{ comment.user_id.name }}
-                      </div>
-                        <div class="image-container">
-                            <v-img :src="(comment.user_id.image && comment.user_id.image.startsWith('https')) ? comment.user_id.image : (comment.user_id.image ?'/storage/' + comment.user_id.image : '/images/users/default.jpg')" style="width: 10%; height: 40px;"></v-img>
-                        </div>
-
-                    </div>
+        ></textarea>-->
+        <div class="row d-flex">
+          <div class>
+            <div class="card shadow-0 border" style="background-color: #f0f2f5">
+              <div class="card-body p-4">
+                <div class="form-outline m-2 d-flex">
+                  <input
+                    type="text"
+                    v-model="newCommentBody"
+                    id="addANote"
+                    class="form-control"
+                    placeholder="Type comment..."
+                    style="height:60px"
+                  />
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-info btn-rounded mx-2 mt-3">Add</button>
                   </div>
-
-                  <div class="ms-auto">
-                    <!-- Edit Post Icon -->
-                    <i
-                      class="fas fa-edit fs-4 text-warning"
-                      @click="openUpdateModal(comment)"
-                      data-bs-toggle="modal"
-                      data-bs-target="#update_modal"
-                    ></i>
-                    <!-- Delete Post Icon -->
-                    <i class="fas fa-trash fs-4 text-danger ms-4" @click="deleteComment(comment.id)"></i>
-                  </div>
-                  <div class="modal fade" id="update_modal" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-dialog-centered mod" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header bg-warning">
-                          <h3 class="modal-title text-center w-100 fw-bold">Update comment</h3>
+                  <!-- <label class="form-label" for="addANote">+ Add a note</label> -->
+                </div>
+                <div class="card mb-4" v-for="comment in comments.data" :key="comment.id">
+                  <div class="card-body">
+                    <p>{{ comment.body }}</p>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex flex-row align-items-center">
+                        <v-img
+                          v-if="comment.user_id.image"
+                          class="img-service rounded-5"
+                          :src="(comment.user_id.image && comment.user_id.image.startsWith('https')) ? comment.user_id.image : (comment.user_id.image ?'/storage/' + comment.user_id.image : '/images/users/default.jpg')"
+                          style="width: 50%; height: 50px;"
+                        ></v-img>
+                        <v-img
+                          v-else
+                          class="img-service"
+                          :src="'/storage/users_images/default.jpg'"
+                          style="width: 50%; height: 50px;"
+                        ></v-img>
+                        <p class="small mb-0 ms-2">{{ comment.user_id.name }}</p>
+                      </div>
+                      <div class="d-flex flex-row align-items-center">
+                        <div class="ms-auto">
+                          <!-- Edit Post Icon -->
+                          <i
+                            class="fas fa-edit fs-4 text-warning"
+                            @click="openUpdateModal(comment)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#update_modal"
+                          ></i>
+                          <!-- Delete Post Icon -->
+                          <i
+                            class="fas fa-trash fs-4 text-danger ms-4"
+                            @click="deleteComment(comment.id)"
+                          ></i>
+                          <i
+                            class="far fa-thumbs-up mx-5 fs-4 text-black"
+                            style="margin-top: -0.16rem;"
+                          ></i>
+                          <span class="text-muted mb-0">3</span>
                         </div>
-                        <textarea type="text" v-model="comment_body" class="form-control my-3" maxlength="200" name="post_title" placeholder="comment Body"></textarea>
-                          <div v-if="errors.comment_body"  class="text-danger" >{{ errors.comment_body }}</div>
-                          <div class="modal-footer">
-                          <button type="button" id="dismissUpdate" data-bs-dismiss="modal" class="btn btn-secondary text-light">Cancel</button>
-                          <button type="button" class="btn btn-primary text-light" @click="updateComment()">Update comment</button>
+                        <div
+                          class="modal fade"
+                          id="update_modal"
+                          data-bs-backdrop="static"
+                          data-bs-keyboard="false"
+                          tabindex="-1"
+                          role="dialog"
+                        >
+                          <div class="modal-dialog modal-dialog-centered mod" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header bg-warning">
+                                <h3 class="modal-title text-center w-100 fw-bold">Update comment</h3>
+                              </div>
+                              <textarea
+                                type="text"
+                                v-model="comment_body"
+                                class="form-control my-3"
+                                maxlength="200"
+                                name="post_title"
+                                placeholder="comment Body"
+                              ></textarea>
+                              <div
+                                v-if="errors.comment_body"
+                                class="text-danger"
+                              >{{ errors.comment_body }}</div>
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  id="dismissUpdate"
+                                  data-bs-dismiss="modal"
+                                  class="btn btn-secondary text-light"
+                                >Cancel</button>
+                                <button
+                                  type="button"
+                                  class="btn btn-primary text-light"
+                                  @click="updateComment()"
+                                >Update comment</button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -81,6 +128,10 @@
               </div>
             </div>
           </div>
+        </div>
+        <hr class="comment-divider" />
+      </div>
+    </form>
   </div>
 </template>
 
@@ -100,7 +151,7 @@ export default {
       errors: {},
       comment_body: "",
       commentDetails: { body: "" },
-      post_id: this.$route.params.id,
+      post_id: this.$route.params.id
     };
   },
   created() {
@@ -137,21 +188,21 @@ export default {
       };
 
       if (this.newCommentBody === "") {
-          Swal.fire({
-              icon: 'warning',
-              title: 'forbidden',
-              text: 'Comment mustn\'t be empty!'
-          });
+        Swal.fire({
+          icon: "warning",
+          title: "forbidden",
+          text: "Comment mustn't be empty!"
+        });
         return false;
       }
       axios
         .post(`http://localhost:8000/api/posts/${this.post_id}/comments`, data)
         .then(res => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Comment added successfully!'
-            });
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Comment added successfully!"
+          });
           this.newCommentBody = "";
         })
         .catch(() => {
@@ -165,21 +216,24 @@ export default {
       }, 1000);
     },
     openUpdateModal(comment) {
-        this.errors={}
+      this.errors = {};
       this.update_commentID = comment.id;
       this.comment_body = comment.body;
     },
     updateComment() {
-        const requestData = {
-            body:this.comment_body
-        };
+      const requestData = {
+        body: this.comment_body
+      };
       this.errors = {};
       if (!this.comment_body) {
         this.errors.comment_body = "Please enter a comment body.";
       }
       if (Object.keys(this.errors).length === 0) {
         axios
-          .put(`http://localhost:8000/api/posts/${this.post_id}/comments/${this.update_commentID}`,requestData )
+          .put(
+            `http://localhost:8000/api/posts/${this.post_id}/comments/${this.update_commentID}`,
+            requestData
+          )
           .then(response => {
             Swal.fire({
               title: "Success!",
@@ -188,10 +242,9 @@ export default {
               showConfirmButton: false,
               timer: 1500
             });
-            document.getElementById('dismissUpdate').click()
-              this.fetchComments();
-              this.errors={}
-
+            document.getElementById("dismissUpdate").click();
+            this.fetchComments();
+            this.errors = {};
           })
           .catch(error => {
             console.log(error);
@@ -210,18 +263,22 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           axios
-         .delete(`http://localhost:8000/api/posts/${this.post_id}/comments/${commentID}`)
-         .then(() => {
-                 Swal.fire({
-                     icon: 'success',
-                     title: 'Success',
-                     text: 'Service deleted successfully!',
-                 });
-                 this.comments = this.comments.filter(comment => comment.id !== commentID);
-             })
-                 .catch((error) => {
-                     console.error(error);
-                 });
+            .delete(
+              `http://localhost:8000/api/posts/${this.post_id}/comments/${commentID}`
+            )
+            .then(() => {
+              Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Service deleted successfully!"
+              });
+              this.comments = this.comments.filter(
+                comment => comment.id !== commentID
+              );
+            })
+            .catch(error => {
+              console.error(error);
+            });
         }
       });
     }

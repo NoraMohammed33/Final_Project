@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 //    ]
 //);
      //   \App\Models\User::factory(20)->create();
-       \App\Models\Department::factory(10)->create();
+    //    \App\Models\Department::factory(10)->create();
         // \App\Models\Expert::factory(10)->create();
 
 
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Post::factory(15)->create();
         // \App\Models\Comment::factory(15)->create();
 //         \App\Models\Post::factory(15)->create();
-        // \App\Models\Message::factory(150)->create();
+         \App\Models\Message::factory(150)->create();
 
         //   Post::factory()->count(20)->create();
         //   Comment::factory()->count(20)->create();

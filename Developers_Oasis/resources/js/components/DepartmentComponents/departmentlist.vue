@@ -45,21 +45,17 @@
     </div>
 
     <!-- Pagination -->
-<div class="pagination-container text-center">
-  <button
-    class="btn btn-primary mx-2"
-    v-if="departments.current_page > 1"
-    @click="changePage(departments.current_page - 1)"
-  >Previous</button>
-  <button
-    class="btn btn-primary"
-    v-if="departments.current_page < departments.last_page"
-    @click="changePage(departments.current_page + 1)"
-  >Next</button>
-  <br />
-  <br />
-</div>
-
+    <div class="pagination-container text-center">
+      <button
+        class="btn btn-primary mx-2"
+        v-if="departments.current_page > 1"
+        @click="changePage(departments.current_page - 1)">Previous</button>
+      <button class="btn btn-primary"
+        v-if="departments.current_page < departments.last_page"
+        @click="changePage(departments.current_page + 1)" >Next</button>
+      <br />
+      <br />
+    </div>
 
     <!-- Update Department Modal -->
     <div
@@ -75,7 +71,7 @@
   </div>
 </template>
 
-<script>
+  <script>
 import axios from "axios";
 import Swal from "sweetalert2";
 import AddDepartmentComponent from "../AdminComponents/DeptForm.vue";
@@ -152,7 +148,7 @@ export default {
 };
 </script>
 
-<style scoped>
+  <style scoped>
 .input-container {
   position: relative;
   margin-bottom: 10px;
@@ -194,14 +190,14 @@ export default {
 }
 
 /* .btn-primary {
-  background-color: #4caf50;
-  color: #fff;
-} */
+    background-color: #4caf50;
+    color: #fff;
+  } */
 
 /* .btn-secondary {
-  background-color: #aaa;
-  color: #fff;
-} */
+    background-color: #aaa;
+    color: #fff;
+  } */
 
 .text-orange {
   color: orange;
@@ -226,5 +222,4 @@ export default {
   justify-content: center;
   margin-top: 20px;
 }
-
 </style>

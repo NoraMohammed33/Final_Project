@@ -1,7 +1,7 @@
 <template>
   <div class="expert-profile">
-      <AddServiceComponent></AddServiceComponent>
-      <template v-if="expert">
+    <AddServiceComponent></AddServiceComponent>
+    <template v-if="expert">
       <section class="h-100 gradient-custom-2">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -12,12 +12,12 @@
                   style="background-color: #000; height:200px;"
                 >
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                      <img :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')"
-                           alt="Generic placeholder image"
-                           class="img-fluid img-thumbnail mt-4 mb-2"
-                           style="width: 150px; z-index: 1"
-                      />
-                    <!-- <button type="button" class="btn btn-outline-dark" style="z-index: 1;" >Edit profile</button> -->
+                    <img
+                        :src="(expert.user.image && expert.user.image.startsWith('https')) ? expert.user.image : (expert.user.image ?'/storage/' + expert.user.image : '/images/users/default.jpg')"
+                      alt="Generic placeholder image"
+                      class="img-fluid img-thumbnail mt-4 mb-2"
+                      style="width: 150px; z-index: 1"
+                    />
                   </div>
                   <div class="ms-3" style="margin-top: 130px;">
                     <h5>{{ expert.user.name }}</h5>
@@ -39,46 +39,42 @@
                       <strong>Bio:</strong>
                       {{ expert.bio }}
                     </p>
-                    <h3>Department:</h3>
-                    <p>{{ expert.department.name }}</p>
+                    <h3 class="card header">Department</h3>
+                    <h4>the Department is <span style="color: coral;">{{ expert.department.name }} </span> </h4>
                   </div>
-                    <h3>Services:</h3>
-                  <ul>
-                    <li v-for="service in expert.services" :key="service.id">
-                      <p>{{ service.title }} - ${{ service.price }}</p>
-                      Rating: {{ service.rating }}
-                    </li>
-                  </ul>
-                    <h3>Contracts:</h3>
-                </div>
-                <div class="contracts" v-if="contracts && contracts.length > 0">
-                  <ul>
-                    <li v-for="contract in contracts" :key="contract.id">
-                      <p>
-                        <strong>Service Title:</strong>
-                        {{ contract.service_id.title }}
-                      </p>
-<!--                      <p>-->
-<!--                        <strong>User Name:</strong>-->
-<!--                        {{ contract.service_id.user.name }}-->
-<!--                      </p>-->
-                      <p>
-                        <strong>Service Price:</strong>
-                        {{ contract.service_id.price }}$
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="ratings" v-if="service_ratings && service_ratings.length > 0">
-                  <h3>Ratings:</h3>
-                  <ul>
-                    <li v-for="rating in service_ratings" :key="rating.id">
-                      <p>
-                        <strong>Service Title:</strong>
-                        {{ rating.service.title }} - {{ rating.rating }}
-                      </p>
-                    </li>
-                  </ul>
+                  <div class="services-contracts-wrapper">
+  <div class="services-wrapper">
+    <div class="card">
+      <div class="card-header">Services</div>
+      <div class="card-body">
+        <ul>
+          <li v-for="service in services" :key="service.id">
+            <p>{{ service.title }} - ${{ service.price }}</p>
+            Rating: {{ calculateAverageRating(service.ratings) }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="contracts-wrapper">
+    <div class="card">
+      <div class="card-header">Contracts</div>
+      <div class="card-body" >
+        <ul>
+          <li v-for="contract in contracts" :key="contract.id">
+            <div v-if="contract.expert_id === expert.id">
+            <p><strong>Service Title:</strong> {{ contract.service.title }}</p>
+            <p><strong>User Name:</strong> {{ contract.user.name }}</p>
+            <p><strong>Service Price:</strong> {{ contract.service.price }}$</p>
+          </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
                 </div>
               </div>
             </div>
@@ -93,19 +89,26 @@
   </div>
 </template>
 
-<script>
+  <script>
 import axios from "axios";
 import AddServiceComponent from "@/components/services/AddServiceComponent.vue";
+import rating from "primevue/rating/Rating.vue";
 
 export default {
-    components:{
-        AddServiceComponent,
-    },
+  computed: {
+    rating() {
+      return rating;
+    }
+  },
+  components: {
+    AddServiceComponent
+  },
   data() {
     return {
       expert: null,
       error: false,
-      contracts: []
+      contracts: [],
+      services: []
     };
   },
   mounted() {
@@ -129,16 +132,53 @@ export default {
       axios
         .get("/api/contracts")
         .then(response => {
-          this.contracts = response.data.data;
+          this.contracts = response.data.contracts;
+          this.services = response.data.services;
         })
         .catch(error => {
           console.log(error);
           this.error = true;
         });
+    },
+    calculateAverageRating(ratings) {
+      if (ratings.length === 0) {
+        return 0; // Return 0 if there are no ratings
+      }
+
+      const sum = ratings.reduce((accumulator, rating) => {
+        const value = parseFloat(rating.rating); // Use 'rate' instead of 'value'
+        if (isNaN(value)) {
+          return accumulator; // Skip invalid rating values
+        }
+        return accumulator + value;
+      }, 0);
+
+      const average = sum / ratings.length;
+
+      // Check if the result is NaN or the sum is zero and return "-" instead
+      if (isNaN(average) || sum === 0) {
+        return "-"; // Return "-" if the average is not calculable or the sum is zero
+      }
+
+      return average.toFixed(2);
     }
   }
 };
 </script>
 
 <style scoped>
+.services-contracts-wrapper {
+  display: flex;
+}
+
+.services-wrapper {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.contracts-wrapper {
+  flex: 1;
+  padding-left: 20px;
+}
 </style>
+

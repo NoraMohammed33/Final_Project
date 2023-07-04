@@ -28,33 +28,31 @@
                       {{ user.email }}
                     </p>
                   </div>
+                    <h3>Services:</h3>
+                    <ul>
+                        <li v-for="service in services" :key="service.id">
+                            <p>{{ service.title }} - ${{ service.price }}</p>
+                            Rating: {{ getRatingValues(service.ratings) }}
+                        </li>
+                    </ul>
                   <div class="contracts" v-if="contracts && contracts.length > 0">
                     <h3>Contracts:</h3>
                     <ul>
                       <li v-for="contract in contracts" :key="contract.id">
                         <p>
                           <strong>Service Title:</strong>
-                          {{ contract.service_id.title }}
-                        </p>
-                        <p>
-                          <strong>Expert Name:</strong>
-                          {{ contract.service_id.expert_id }}
+                          {{ contract.service.title }}
                         </p>
                         <p>
                           <strong>Service Price:</strong>
-                          {{ contract.service_id.price }}$
+                          {{ contract.service.price }}$
                         </p>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="ratings" v-if="service_ratings && service_ratings.length > 0">
-                    <h3>Ratings:</h3>
-                    <ul>
-                      <li v-for="ratings in service_ratings" :key="ratings.id">
-                        <p>
-                          <strong>Service Title:</strong>
-                          {{ service_ratings.service_id.title }} {{ service_ratings.rating }}
-                        </p>
+                          <p>
+                              <strong>Expert Name:</strong>
+                              {{ contract.service.expert.user_id.name }}</p>
+                          <p>
+                          <strong>Department:</strong>
+                          {{ contract.service.department }}</p>
                       </li>
                     </ul>
                   </div>
@@ -83,7 +81,7 @@ export default {
   mounted() {
     this.fetchUser();
     this.fetchContracts();
-    this.fetchServices(); // Call the method to fetch services
+    // this.fetchServices(); // Call the method to fetch services
   },
   methods: {
     fetchUser() {
@@ -101,24 +99,32 @@ export default {
       axios
         .get("/api/contracts")
         .then(response => {
-          this.contracts = response.data.data;
+            this.contracts = response.data.contracts;
+            this.services = response.data.services;
         })
         .catch(error => {
           console.log(error);
           this.error = true;
         });
     },
-    fetchServices() {
-      axios
-        .get("/api/services")
-        .then(response => {
-          this.services = response.data.data;
-        })
-        .catch(error => {
-          console.log(error);
-          this.error = true;
-        });
-    },
+    // fetchServices() {
+    //   axios
+    //     .get("/api/services")
+    //     .then(response => {
+    //       this.services = response.data.data;
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //       this.error = true;
+    //     });
+    // },
+      getRatingValues(ratings) {
+    const ratingValues = ratings.map((rating) => {
+        return rating.rating; // Change to 'rating' to access the rating value
+    });
+
+    return ratingValues;
+},
     getContractDetails(contractId) {
       const contract = this.contracts.find(c => c.id === contractId);
       return contract ? contract.charge_id : "N/A";

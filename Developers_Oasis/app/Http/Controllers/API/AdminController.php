@@ -23,10 +23,10 @@ class AdminController extends Controller
         ]);
 
         if (auth()->attempt($credentials)) {
-            return "a";
+            return "authenticated";
         }
 
-        return "z";
+        return "not auth";
     }
     /**
      * Store a newly created resource in storage.

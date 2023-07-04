@@ -10,25 +10,6 @@ use App\Models\User;
 
 class ExpertController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     $user = Auth::user();
-    //     $searchInput = $request->input('search');
-
-    //     $postsQuery = $searchInput
-    //         ? Post::where('title', 'like', '%' . $searchInput . '%')
-    //         ->orWhere('body', 'like', '%' . $searchInput . '%')
-    //         : Post::query();
-
-    //     $posts = $postsQuery->paginate(5);
-
-    //     return response()->json([
-    //         "status" => 'success',
-    //         'message' => 'Posts fetched successfully.',
-    //         'posts' => $posts,
-    //         'loggeduser' => $user
-    //     ]);
-    // }
 public function index(): JsonResponse
 {
 $experts = Expert::with('department', 'user', 'services')->get();

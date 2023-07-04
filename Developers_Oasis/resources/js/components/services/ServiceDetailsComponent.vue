@@ -1,9 +1,9 @@
 <template>
-    <div class="container">
+    <div class="container ">
         <div v-if="successMessage" class="alert alert-success">
             {{ successMessage }}
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" >
             <div class="col-md-6">
                 <img :src="'/storage/'+service.image" class="w-100 rounded-3">
             </div>
@@ -14,22 +14,26 @@
                 <h4 class="text-start ">{{service.price}} USD</h4>
 
                 <h5 class="text-center py-2 border-b border-t mt-5">About Expert</h5>
-                <div class="row justify-content-evenly align-items-baseline">
-                    <img
-                        :src="(service.expert.user.image && service.expert.user.image.startsWith('https')) ? service.expert.user.image : (service.expert.user.image ?'/storage/' + service.expert.user.image : '/images/users/default.jpg')"
-                        alt="Generic placeholder image"
-                        class="img-fluid img-thumbnail mt-4 mb-2 col-2"
-                        style="width: 150px; z-index: 1"
-                    />
-                    <div class="col-5">
-                        <h4>{{ service.expert.user.name }}</h4>
-                        <p>{{ service.expert.bio}}</p>
+                <div class="d-flex justify-content-around align-items-baseline">
+                    <div>
+                        <img
+                            :src="(service.expert.user.image && service.expert.user.image.startsWith('https')) ? service.expert.user.image : (service.expert.user.image ?'/storage/' + service.expert.user.image : '/images/users/default.jpg')"
+                            alt="Generic placeholder image"
+                            class="img-fluid img-thumbnail mt-5 mb-2 col-2"
+                            style="width: 150px; z-index: 1"/>
                     </div>
-                    <div class="w-100">
-                        <v-btn class="mt-5 bg-orange w-100 fs-4 text-white " @click="paypalPayment"><i class="fa-brands fs-2 mx-1 text-blue-darken-4 fa-paypal"></i>PayPal Payment</v-btn>
+                    <div class="w-50  " >
+                        <h4>{{ service.expert.user.name }}</h4>
+                        <p class="mb-5">{{ service.expert.bio}}</p>
                     </div>
                 </div>
-
+                <h5 class="text-center py-2 border-b">Service Details</h5>
+                <h4 class="text-start">{{service.title}}</h4>
+                <p class="text-start ">{{service.description}}</p>
+                <h4 class="text-start ">{{service.price}} USD</h4>
+                <div class="w-100 "><br><br><br>
+                    <v-btn class="mt-5  bg-orange w-75 fs-4 text-white pay" @click="paypalPayment"><i class="fa-brands fs-2 mx-1 text-blue-darken-4 fa-paypal"></i>PayPal Payment</v-btn>
+                </div>
 
             </div>
         </div>
@@ -54,17 +58,19 @@
                 <v-btn type="submit" :disabled="rating === 0" class="bg-success text-white">Submit your feedback</v-btn>
             </form>
         </div>
-        <div v-if="service.ratings.length>0" class="mt-5">
+        <div v-if="service.ratings.length>0" class="">
             <h4>Ratings and Comments</h4>
             <ul>
-                <li v-for="rating in service.ratings" class="border mt-5 p-3 rounded-3 shadow-lg">
-                    <div> <star-rating
-                        v-model:rating="rating.rating"
-                        :star-size="24"
-                        :active-color="'#ffd055'"
-                        :inactive-color="'#d8d8d8'"
-                        read-only="true"
-                    ></star-rating></div>
+                <li v-for="rating in service.ratings"  class="border  p-3 rounded-3 shadow-lg">
+                    <div>
+                        <star-rating
+                            v-model:rating="rating.rating"
+                            :star-size="24"
+                            :active-color="'#ffd055'"
+                            :inactive-color="'#d8d8d8'"
+                            read-only="true">
+                        </star-rating>
+                    </div>
                     <div v-if="rating.comment" class="my-1"><strong>Comment:</strong> {{ rating.comment }}</div>
                     <div><strong>User:</strong> {{ rating.user.name }}</div>
                 </li>
@@ -151,6 +157,9 @@ export default {
 <style scoped>
 li{
     list-style-type:none;
+}
+.pay:hover{
+    scale: 1.1;
 }
 
 </style>
